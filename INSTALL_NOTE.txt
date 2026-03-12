@@ -1,0 +1,7 @@
+PAKET INI ADALAH STARTER APP CI3.
+
+Agar benar-benar running:
+1. Siapkan CodeIgniter 3 standar.
+2. Timpa folder application/ dan assets/ menggunakan isi zip ini.
+3. Import SQL dari folder database/.
+4. Atur base_url dan database.
