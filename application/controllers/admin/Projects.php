@@ -7,7 +7,7 @@ class Projects extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
-        $this->load->model(array('Project_model', 'Order_model', 'Template_model'));
+        $this->load->model(array('Project_model', 'Order_model', 'Template_model', 'Product_type_model'));
     }
 
     public function index()
@@ -22,6 +22,7 @@ class Projects extends MY_Controller
         $data = $this->admin_data('Tambah Project');
         $data['orders'] = $this->Order_model->all();
         $data['templates'] = $this->Template_model->all();
+        $data['product_types'] = $this->Product_type_model->active();
         $this->load->view('admin/projects/form', $data);
     }
 
@@ -66,6 +67,7 @@ class Projects extends MY_Controller
         $data['project'] = $this->Project_model->find($id);
         $data['orders'] = $this->Order_model->all();
         $data['templates'] = $this->Template_model->all();
+        $data['product_types'] = $this->Product_type_model->active();
         $this->load->view('admin/projects/form', $data);
     }
 

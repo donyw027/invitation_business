@@ -7,7 +7,7 @@ class Orders extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
-        $this->load->model(array('Order_model', 'Customer_model', 'Template_model'));
+        $this->load->model(array('Order_model', 'Customer_model', 'Template_model', 'Product_type_model'));
     }
 
     public function index()
@@ -22,6 +22,7 @@ class Orders extends MY_Controller
         $data = $this->admin_data('Tambah Order');
         $data['customers'] = $this->Customer_model->all();
         $data['templates'] = $this->Template_model->all();
+        $data['product_types'] = $this->Product_type_model->active();
         $this->load->view('admin/orders/form', $data);
     }
 
@@ -46,6 +47,7 @@ class Orders extends MY_Controller
         $data['order'] = $this->Order_model->find($id);
         $data['customers'] = $this->Customer_model->all();
         $data['templates'] = $this->Template_model->all();
+        $data['product_types'] = $this->Product_type_model->active();
         $this->load->view('admin/orders/form', $data);
     }
 

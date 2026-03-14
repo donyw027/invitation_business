@@ -9,7 +9,8 @@
         body { background:#f5f7fb; }
         .sidebar { min-height:100vh; background:#111827; }
         .sidebar a { color:#cbd5e1; text-decoration:none; display:block; padding:12px 16px; border-radius:10px; }
-        .sidebar a:hover, .sidebar a.active { background:#1f2937; color:#fff; }
+        .sidebar a:hover { background:#1f2937; color:#fff; }
+        .sidebar .group { color:#94a3b8; font-size:12px; text-transform:uppercase; padding:16px 16px 6px; letter-spacing:.08em; }
         .card-stat { border:0; border-radius:20px; box-shadow:0 10px 25px rgba(15,23,42,.06); }
         .table-card { border:0; border-radius:20px; overflow:hidden; box-shadow:0 10px 25px rgba(15,23,42,.06); }
     </style>
@@ -18,13 +19,19 @@
 <div class="container-fluid">
     <div class="row">
         <aside class="col-lg-2 p-3 sidebar">
-            <h4 class="text-white mb-4">InviteBiz</h4>
+            <h4 class="text-white mb-4">InviteBiz V3</h4>
+            <div class="group">Main</div>
             <a href="<?= site_url('admin/dashboard'); ?>">Dashboard</a>
             <a href="<?= site_url('admin/customers'); ?>">Customers</a>
             <a href="<?= site_url('admin/orders'); ?>">Orders</a>
             <a href="<?= site_url('admin/projects'); ?>">Projects</a>
-            <a href="<?= site_url('admin/templates'); ?>">Templates</a>
             <a href="<?= site_url('admin/projects'); ?>">Guest Tools</a>
+            <div class="group">Master</div>
+            <a href="<?= site_url('admin/product-types'); ?>">Product Types</a>
+            <a href="<?= site_url('admin/packages'); ?>">Packages</a>
+            <a href="<?= site_url('admin/templates'); ?>">Templates</a>
+            <a href="<?= site_url('admin/settings'); ?>">Settings</a>
+            <div class="group">Session</div>
             <a href="<?= site_url('admin/logout'); ?>">Logout</a>
         </aside>
         <main class="col-lg-10 p-4">

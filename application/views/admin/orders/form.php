@@ -16,8 +16,9 @@
                     <label class="form-label">Product Type</label>
                     <?php $pv = isset($order) ? $order->product_type : 'wedding'; ?>
                     <select name="product_type" class="form-select">
-                        <option value="wedding" <?= $pv == 'wedding' ? 'selected' : ''; ?>>Wedding Invitation</option>
-                        <option value="greeting_card" <?= $pv == 'greeting_card' ? 'selected' : ''; ?>>Greeting Card</option>
+                        <?php foreach($product_types as $pt): ?>
+                            <option value="<?= html_escape($pt->code); ?>" <?= $pv == $pt->code ? 'selected' : ''; ?>><?= html_escape($pt->name); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-3">

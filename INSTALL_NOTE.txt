@@ -1,7 +1,6 @@
-PAKET INI ADALAH STARTER APP CI3.
+PAKET INI ADALAH STARTER APP CI3 V3.
 
-Agar benar-benar running:
-1. Siapkan CodeIgniter 3 standar.
+1. Siapkan instalasi CodeIgniter 3 standar.
 2. Timpa folder application/ dan assets/ menggunakan isi zip ini.
-3. Import SQL dari folder database/.
+3. Import SQL dari folder database/ file ci3_invitation_business_v3.sql.
 4. Atur base_url dan database.

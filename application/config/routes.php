@@ -10,6 +10,29 @@ $route['admin/login'] = 'admin/auth/login';
 $route['admin/logout'] = 'admin/auth/logout';
 $route['admin/dashboard'] = 'admin/dashboard/index';
 
+$route['admin/product-types'] = 'admin/product_types/index';
+$route['admin/product-types/create'] = 'admin/product_types/create';
+$route['admin/product-types/store'] = 'admin/product_types/store';
+$route['admin/product-types/edit/(:num)'] = 'admin/product_types/edit/$1';
+$route['admin/product-types/update/(:num)'] = 'admin/product_types/update/$1';
+$route['admin/product-types/delete/(:num)'] = 'admin/product_types/delete/$1';
+
+$route['admin/packages'] = 'admin/packages/index';
+$route['admin/packages/create'] = 'admin/packages/create';
+$route['admin/packages/store'] = 'admin/packages/store';
+$route['admin/packages/edit/(:num)'] = 'admin/packages/edit/$1';
+$route['admin/packages/update/(:num)'] = 'admin/packages/update/$1';
+$route['admin/packages/delete/(:num)'] = 'admin/packages/delete/$1';
+
+$route['admin/templates'] = 'admin/templates/index';
+$route['admin/templates/create'] = 'admin/templates/create';
+$route['admin/templates/store'] = 'admin/templates/store';
+$route['admin/templates/edit/(:num)'] = 'admin/templates/edit/$1';
+$route['admin/templates/update/(:num)'] = 'admin/templates/update/$1';
+$route['admin/templates/delete/(:num)'] = 'admin/templates/delete/$1';
+
+$route['admin/settings'] = 'admin/settings/index';
+
 $route['admin/customers'] = 'admin/customers/index';
 $route['admin/customers/create'] = 'admin/customers/create';
 $route['admin/customers/store'] = 'admin/customers/store';
@@ -32,9 +55,6 @@ $route['admin/projects/update/(:num)'] = 'admin/projects/update/$1';
 $route['admin/projects/publish/(:num)'] = 'admin/projects/publish/$1';
 $route['admin/projects/unpublish/(:num)'] = 'admin/projects/unpublish/$1';
 $route['admin/projects/delete/(:num)'] = 'admin/projects/delete/$1';
-
-$route['admin/templates'] = 'admin/templates/index';
-
 
 $route['admin/guests/index/(:num)'] = 'admin/guests/index/$1';
 $route['admin/guests/store/(:num)'] = 'admin/guests/store/$1';

@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;
+-- CI3 Invitation Business Starter SQL
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -89,6 +89,7 @@ CREATE TABLE `projects` (
   KEY `template_id` (`template_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
 CREATE TABLE `guests` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `project_id` int unsigned NOT NULL,
@@ -143,24 +144,10 @@ INSERT INTO `orders` (`id`, `customer_id`, `product_type`, `package_name`, `temp
 (1, 1, 'wedding', 'Premium', 1, 'paid', 'in_progress', 'Order wedding sample', NOW()),
 (2, 2, 'greeting_card', 'Basic', 3, 'paid', 'completed', 'Order greeting card sample', NOW());
 
-INSERT INTO `projects` (
-  `id`, `order_id`, `product_type`, `template_id`, `slug`, `title`, `subtitle`, `cover_text`,
-  `hero_image`, `music_url`, `event_date`, `event_time`, `location_name`, `location_address`,
-  `map_embed`, `description`, `sender_name`, `receiver_name`, `message_title`, `message_body`,
-  `rsvp_enabled`, `wish_enabled`, `gift_enabled`, `gift_info`, `status`, `created_at`, `updated_at`
-) VALUES
-(1, 1, 'wedding', 1, 'amel-budi', 'Amel & Budi', 'The Wedding Celebration', 'Kepada Yth. Bapak/Ibu/Saudara/i',
-'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80',
-'', '2026-07-12', '10:00 WIB', 'Gedung Serbaguna Bahagia', 'Jl. Mawar No. 88, Sidoarjo',
-'', 'Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.',
-'', '', 'Wedding Invitation', '', 1, 1, 1, 'BCA 123456789 a.n. Amel Budi', 'published', NOW(), NOW()),
+INSERT INTO `projects` (`id`, `order_id`, `product_type`, `template_id`, `slug`, `title`, `subtitle`, `cover_text`, `hero_image`, `music_url`, `event_date`, `event_time`, `location_name`, `location_address`, `map_embed`, `description`, `sender_name`, `receiver_name`, `message_title`, `message_body`, `rsvp_enabled`, `wish_enabled`, `gift_enabled`, `gift_info`, `status`, `created_at`) VALUES
+(1, 1, 'wedding', 1, 'amel-budi', 'Amel & Budi', 'The Wedding Celebration', 'Kepada Yth. Bapak/Ibu/Saudara/i', 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80', '', '2026-07-12', '10:00 WIB', 'Gedung Serbaguna Bahagia', 'Jl. Mawar No. 88, Sidoarjo', '', 'Dengan penuh kebahagiaan kami mengundang Anda untuk hadir di hari istimewa kami.', '', '', 'Wedding Invitation', '', 1, 1, 1, 'BCA 123456789 a.n. Amel Budi', 'published', NOW()),
+(2, 2, 'greeting_card', 3, 'happy-birthday-bella', 'Happy Birthday Bella', 'A Little Surprise For You', 'Untuk seseorang yang spesial', 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1400&q=80', '', NULL, '', '', '', '', 'Semoga hari-harimu selalu penuh kebahagiaan, kesehatan, dan kejutan manis.', 'AKT Team', 'Bella', 'Best Wishes', 'Selamat ulang tahun. Semoga semua hal baik datang menghampirimu tahun ini.', 0, 0, 0, '', 'published', NOW());
 
-(2, 2, 'greeting_card', 3, 'happy-birthday-bella', 'Happy Birthday Bella', 'A Little Surprise For You', 'Untuk seseorang yang spesial',
-'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1400&q=80',
-'', NULL, '', '', '', '',
-'Semoga hari-harimu selalu penuh kebahagiaan, kesehatan, dan kejutan manis.',
-'AKT Team', 'Bella', 'Best Wishes', 'Selamat ulang tahun. Semoga semua hal baik datang menghampirimu tahun ini.',
-0, 0, 0, '', 'published', NOW(), NOW());
 
 INSERT INTO `guests` (`project_id`, `guest_name`, `phone`, `category`, `slug`, `is_opened`, `opened_at`, `created_at`) VALUES
 (1, 'Albert', '6281234567890', 'Keluarga', 'albert', 1, NOW(), NOW()),
@@ -175,21 +162,20 @@ INSERT INTO `wishes` (`project_id`, `guest_name`, `message`, `is_approved`, `cre
 (1, 'Fahri', 'Happy wedding, lancar sampai hari H.', 1, NOW());
 
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_customer_fk` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_customer_fk` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orders_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL;
 
 ALTER TABLE `projects`
-  ADD CONSTRAINT `projects_order_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `projects_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `projects_order_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `projects_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL;
 
 ALTER TABLE `guests`
-  ADD CONSTRAINT `guests_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `guests_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `rsvps`
-  ADD CONSTRAINT `rsvps_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rsvps_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `wishes`
-  ADD CONSTRAINT `wishes_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `wishes_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE;
 
 COMMIT;
-SET FOREIGN_KEY_CHECKS=1;

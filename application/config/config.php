@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// $config['base_url'] = 'http://localhost/ci3_invitation_business_v3/';
 $config['base_url'] = '';
 $config['index_page'] = '';
 $config['uri_protocol'] = 'REQUEST_URI';

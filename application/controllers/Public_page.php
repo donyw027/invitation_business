@@ -6,12 +6,25 @@ class Public_page extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Project_model', 'Wish_model', 'Rsvp_model', 'Guest_model'));
+        $this->load->model(array('Project_model', 'Wish_model', 'Rsvp_model', 'Guest_model', 'Template_model', 'Package_model', 'Product_type_model', 'Setting_model'));
     }
 
     public function home()
     {
+        $product_types = $this->Product_type_model->active();
+        $package_groups = array();
+        $template_groups = array();
+        foreach ($product_types as $type) {
+            $package_groups[$type->code] = $this->Package_model->by_product($type->code);
+            $template_groups[$type->code] = $this->Template_model->active_by_product($type->code);
+        }
+
         $data['page_title'] = 'Undangan Digital & Greeting Card';
+        $data['product_types'] = $product_types;
+        $data['package_groups'] = $package_groups;
+        $data['template_groups'] = $template_groups;
+        $data['wa_number'] = $this->Setting_model->get('wa_number', '6281234567890');
+        $data['brand_name'] = $this->Setting_model->get('brand_name', 'InviteBiz');
         $this->load->view('frontend/home', $data);
     }
 
