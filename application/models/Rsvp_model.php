@@ -17,6 +17,14 @@ class Rsvp_model extends CI_Model
 
     public function latest($limit = 8)
     {
-        return $this->db->order_by('id', 'DESC')->limit($limit)->get($this->table)->result();
+        return $this->db
+            ->select('rsvps.*, projects.title as project_title')
+            ->join('projects', 'projects.id = rsvps.project_id', 'left')
+            ->order_by('rsvps.id', 'DESC')->limit($limit)->get($this->table)->result();
+    }
+
+    public function total_attendees()
+    {
+        return (int) ($this->db->select_sum('guest_total')->get($this->table)->row()->guest_total ?? 0);
     }
 }

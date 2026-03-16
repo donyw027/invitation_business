@@ -8,7 +8,7 @@
 
     <style>
         body { background:#fffaf7; color:#3f2d2d; }
-        .hero { min-height:85vh; display:flex; align-items:center; background:linear-gradient(rgba(72,45,45,.45), rgba(72,45,45,.45)), url('<?= html_escape($project->hero_image); ?>') center/cover; color:#fff; }
+        .hero { min-height:85vh; display:flex; align-items:center; background:linear-gradient(rgba(72,45,45,.45), rgba(72,45,45,.45)), url('<?= asset_or_url($project->hero_image); ?>') center/cover; color:#fff; }
         .section { padding:70px 0; }
         .glass { background:rgba(255,255,255,.15); backdrop-filter: blur(6px); border-radius:22px; }
         .card-soft { border:0; border-radius:22px; box-shadow:0 12px 30px rgba(31,41,55,.08); }
@@ -53,6 +53,17 @@
         </div>
     </div>
 </section>
+
+<?php if (!empty($galleries)): ?>
+<section class="section bg-white">
+    <div class="container">
+        <h3 class="mb-4">Gallery</h3>
+        <div class="row g-3">
+            <?php foreach($galleries as $g): ?><div class="col-md-4"><div class="card card-soft"><img src="<?= asset_or_url($g->image_path); ?>" class="img-fluid rounded-top"><?php if(!empty($g->caption)): ?><div class="card-body"><small><?= html_escape($g->caption); ?></small></div><?php endif; ?></div></div><?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php if ($project->rsvp_enabled): ?>
 <section class="section bg-white">

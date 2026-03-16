@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Customer_model extends CI_Model
+class Project_gallery_model extends CI_Model
 {
-    protected $table = 'customers';
+    protected $table = 'project_galleries';
 
-    public function all()
+    public function by_project($project_id)
     {
-        return $this->db->order_by('id', 'DESC')->get($this->table)->result();
+        return $this->db->where('project_id', $project_id)->order_by('sort_order', 'ASC')->order_by('id', 'ASC')->get($this->table)->result();
     }
 
     public function find($id)
@@ -29,10 +29,5 @@ class Customer_model extends CI_Model
     public function delete($id)
     {
         return $this->db->delete($this->table, array('id' => $id));
-    }
-
-    public function count_all()
-    {
-        return $this->db->count_all($this->table);
     }
 }

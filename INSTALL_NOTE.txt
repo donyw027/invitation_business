@@ -1,6 +1,16 @@
-PAKET INI ADALAH STARTER APP CI3 V3.
+INSTALL NOTE V4.4
 
-1. Siapkan instalasi CodeIgniter 3 standar.
-2. Timpa folder application/ dan assets/ menggunakan isi zip ini.
-3. Import SQL dari folder database/ file ci3_invitation_business_v3.sql.
-4. Atur base_url dan database.
+1. Import database/ci3_invitation_business_v4_4.sql
+2. Atur application/config/database.php
+3. Atur base_url pada application/config/config.php
+4. Pastikan folder upload writable:
+   uploads/templates
+   uploads/projects
+   uploads/projects/gallery
+   uploads/users
+   uploads/payments
+5. Login admin: admin / admin123
+
+Catatan:
+- PDF generator yang disertakan adalah versi sederhana berbasis text, cocok untuk invoice ringkas.
+- Export XLSX membutuhkan ekstensi PHP ZipArchive aktif di server.

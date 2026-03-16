@@ -7,7 +7,8 @@ class Customers extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
-        $this->load->model('Customer_model');
+        $this->require_access('customers');
+        $this->load->model(array('Customer_model', 'Activity_log_model'));
     }
 
     public function index()
@@ -25,12 +26,17 @@ class Customers extends MY_Controller
 
     public function store()
     {
-        $this->Customer_model->insert(array(
+        $id = $this->Customer_model->insert(array(
             'name' => trim($this->input->post('name', TRUE)),
             'phone' => trim($this->input->post('phone', TRUE)),
+            'email' => trim($this->input->post('email', TRUE)),
+            'source' => trim($this->input->post('source', TRUE)),
+            'address' => trim($this->input->post('address', TRUE)),
             'notes' => trim($this->input->post('notes', TRUE)),
             'created_at' => date('Y-m-d H:i:s')
         ));
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'customers','action' => 'create','description' => 'Membuat customer #' . $id,'created_at' => date('Y-m-d H:i:s')));
+        $this->set_flash('success', 'Customer berhasil ditambahkan.');
         redirect('admin/customers');
     }
 
@@ -38,6 +44,7 @@ class Customers extends MY_Controller
     {
         $data = $this->admin_data('Edit Customer');
         $data['customer'] = $this->Customer_model->find($id);
+        if (!$data['customer']) show_404();
         $this->load->view('admin/customers/form', $data);
     }
 
@@ -46,14 +53,21 @@ class Customers extends MY_Controller
         $this->Customer_model->update($id, array(
             'name' => trim($this->input->post('name', TRUE)),
             'phone' => trim($this->input->post('phone', TRUE)),
+            'email' => trim($this->input->post('email', TRUE)),
+            'source' => trim($this->input->post('source', TRUE)),
+            'address' => trim($this->input->post('address', TRUE)),
             'notes' => trim($this->input->post('notes', TRUE))
         ));
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'customers','action' => 'update','description' => 'Mengubah customer #' . (int)$id,'created_at' => date('Y-m-d H:i:s')));
+        $this->set_flash('success', 'Customer berhasil diupdate.');
         redirect('admin/customers');
     }
 
     public function delete($id)
     {
         $this->Customer_model->delete($id);
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'customers','action' => 'delete','description' => 'Menghapus customer #' . (int)$id,'created_at' => date('Y-m-d H:i:s')));
+        $this->set_flash('success', 'Customer berhasil dihapus.');
         redirect('admin/customers');
     }
 }

@@ -49,4 +49,18 @@ class Template_model extends CI_Model
     {
         return $this->db->delete($this->table, array('id' => $id));
     }
+
+    public function clone_from($id)
+    {
+        $row = $this->find($id);
+        if (!$row) {
+            return 0;
+        }
+        $data = (array) $row;
+        unset($data['id']);
+        $data['name'] = $row->name . ' Copy';
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
 }

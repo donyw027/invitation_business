@@ -30,6 +30,11 @@ class Guest_model extends CI_Model
         return $this->db->get_where($this->table, array('project_id' => $project_id, 'slug' => $slug))->row();
     }
 
+    public function find_by_phone($project_id, $phone)
+    {
+        return $this->db->get_where($this->table, array('project_id' => $project_id, 'phone' => $phone))->row();
+    }
+
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
@@ -78,5 +83,10 @@ class Guest_model extends CI_Model
     public function count_all()
     {
         return $this->db->count_all($this->table);
+    }
+
+    public function count_opened()
+    {
+        return $this->db->where('is_opened', 1)->count_all_results($this->table);
     }
 }

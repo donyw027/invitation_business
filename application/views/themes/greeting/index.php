@@ -9,7 +9,7 @@
     <style>
         body { min-height:100vh; background:radial-gradient(circle at top,#ffe7f0,#f8fafc 60%); color:#1f2937; display:flex; align-items:center; }
         .card-wrap { max-width:760px; margin:40px auto; border-radius:34px; border:0; box-shadow:0 24px 70px rgba(15,23,42,.12); overflow:hidden; }
-        .cover { min-height:280px; background:url('<?= html_escape($project->hero_image); ?>') center/cover; }
+        .cover { min-height:280px; background:url('<?= asset_or_url($project->hero_image); ?>') center/cover; }
     </style>
 </head>
 <body>

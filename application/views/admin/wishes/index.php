@@ -1,0 +1,6 @@
+<?php $this->load->view('admin/layout/header'); ?>
+<div class="card table-card"><div class="card-header bg-white"><strong>Moderasi Ucapan</strong></div><div class="table-responsive"><table class="table mb-0"><thead><tr><th>Nama</th><th>Project</th><th>Pesan</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
+<?php foreach($wishes as $row): ?><tr><td><?= html_escape($row->guest_name); ?><br><small class="text-muted"><?= html_escape($row->created_at); ?></small></td><td><?= html_escape($row->project_title); ?></td><td><?= html_escape($row->message); ?></td><td><span class="badge text-bg-<?= badge_status($row->status); ?>"><?= html_escape(status_label($row->status)); ?></span></td><td><a href="<?= site_url('admin/wishes/approve/'.$row->id); ?>" class="btn btn-sm btn-outline-success">Approve</a> <a href="<?= site_url('admin/wishes/pending/'.$row->id); ?>" class="btn btn-sm btn-outline-warning">Pending</a> <a href="<?= site_url('admin/wishes/reject/'.$row->id); ?>" class="btn btn-sm btn-outline-danger">Reject</a></td></tr><?php endforeach; ?>
+<?php if(empty($wishes)): ?><tr><td colspan="5" class="text-center text-muted">Belum ada ucapan.</td></tr><?php endif; ?>
+</tbody></table></div></div>
+<?php $this->load->view('admin/layout/footer'); ?>

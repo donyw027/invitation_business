@@ -14,9 +14,27 @@ class Wish_model extends CI_Model
     {
         return $this->db
             ->where('project_id', $project_id)
-            ->where('is_approved', 1)
+            ->where('status', 'approved')
             ->order_by('id', 'DESC')
             ->limit($limit)
+            ->get($this->table)
+            ->result();
+    }
+
+    public function latest($limit = 8)
+    {
+        return $this->db
+            ->select('wishes.*, projects.title as project_title')
+            ->join('projects', 'projects.id = wishes.project_id', 'left')
+            ->order_by('wishes.id', 'DESC')->limit($limit)->get($this->table)->result();
+    }
+
+    public function all()
+    {
+        return $this->db
+            ->select('wishes.*, projects.title as project_title')
+            ->join('projects', 'projects.id = wishes.project_id', 'left')
+            ->order_by('wishes.id', 'DESC')
             ->get($this->table)
             ->result();
     }
@@ -26,8 +44,18 @@ class Wish_model extends CI_Model
         return $this->db->count_all($this->table);
     }
 
-    public function latest($limit = 8)
+    public function count_pending()
     {
-        return $this->db->order_by('id', 'DESC')->limit($limit)->get($this->table)->result();
+        return $this->db->where('status', 'pending')->count_all_results($this->table);
+    }
+
+    public function find($id)
+    {
+        return $this->db->get_where($this->table, array('id' => $id))->row();
+    }
+
+    public function update($id, $data)
+    {
+        return $this->db->where('id', $id)->update($this->table, $data);
     }
 }

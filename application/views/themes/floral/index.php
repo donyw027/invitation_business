@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-lg-6">
-                <img src="<?= html_escape($project->hero_image); ?>" class="img-fluid rounded-5 shadow-sm">
+                <img src="<?= asset_or_url($project->hero_image); ?>" class="img-fluid rounded-5 shadow-sm">
             </div>
             <div class="col-lg-6">
                 <div class="block p-4">

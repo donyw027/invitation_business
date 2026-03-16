@@ -8,10 +8,11 @@ class Project_model extends CI_Model
     public function all()
     {
         return $this->db
-            ->select('projects.*, customers.name as customer_name, templates.name as template_name')
+            ->select('projects.*, customers.name as customer_name, templates.name as template_name, users.name as assigned_user_name')
             ->join('orders', 'orders.id = projects.order_id', 'left')
             ->join('customers', 'customers.id = orders.customer_id', 'left')
             ->join('templates', 'templates.id = projects.template_id', 'left')
+            ->join('users', 'users.id = projects.assigned_user_id', 'left')
             ->order_by('projects.id', 'DESC')
             ->get($this->table)
             ->result();
@@ -20,11 +21,6 @@ class Project_model extends CI_Model
     public function find($id)
     {
         return $this->db->get_where($this->table, array('id' => $id))->row();
-    }
-
-    public function find_by_slug($slug)
-    {
-        return $this->db->get_where($this->table, array('slug' => $slug))->row();
     }
 
     public function detail_by_slug($slug)
@@ -64,4 +60,24 @@ class Project_model extends CI_Model
     {
         return $this->db->where('status', 'published')->count_all_results($this->table);
     }
+
+    public function count_by_status($status)
+    {
+        return $this->db->where('status', $status)->count_all_results($this->table);
+    }
+
+    public function slug_exists($slug, $ignore_id = 0)
+    {
+        $this->db->where('slug', $slug);
+        if ($ignore_id) {
+            $this->db->where('id !=', (int) $ignore_id);
+        }
+        return $this->db->count_all_results($this->table) > 0;
+    }
+
+    public function status_summary()
+    {
+        return $this->db->select('status, COUNT(*) as total')->group_by('status')->get($this->table)->result();
+    }
+
 }

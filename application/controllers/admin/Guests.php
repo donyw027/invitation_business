@@ -7,8 +7,9 @@ class Guests extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
+        $this->require_access('guests');
         $this->load->model(array('Guest_model', 'Project_model'));
-        $this->load->library('simple_excel_reader');
+        $this->load->library(array('simple_excel_reader', 'simple_xlsx_writer'));
     }
 
     public function index($project_id = null)
@@ -25,11 +26,13 @@ class Guests extends MY_Controller
         $data = $this->admin_data('Guests - ' . $project->title);
         $data['project'] = $project;
         $data['guests'] = $this->Guest_model->by_project($project_id);
+        $data['wa_bulk_message'] = $this->build_bulk_wa_message($project, $data['guests']);
         $this->load->view('admin/guests/index', $data);
     }
 
     public function store($project_id)
     {
+        $this->require_access('guests', 'create');
         $project = $this->Project_model->find($project_id);
         if (!$project) {
             show_404();
@@ -52,8 +55,26 @@ class Guests extends MY_Controller
         redirect('admin/guests/index/' . $project_id);
     }
 
+    public function export_csv($project_id)
+    {
+        $this->require_access('guests', 'export');
+        $project = $this->Project_model->find($project_id);
+        if (!$project) show_404();
+        $rows = $this->Guest_model->by_project($project_id);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="guest-list-' . $project_id . '.csv"');
+        $out = fopen('php://output', 'w');
+        fputcsv($out, array('guest_name','phone','category','status_opened','opened_at','link_personal'));
+        foreach ($rows as $row) {
+            fputcsv($out, array($row->guest_name, $row->phone, $row->category, $row->is_opened ? 'opened' : 'not_opened', $row->opened_at, guest_project_url($project, $row)));
+        }
+        fclose($out);
+        exit;
+    }
+
     public function delete($id)
     {
+        $this->require_access('guests', 'delete');
         $guest = $this->Guest_model->find($id);
         if (!$guest) {
             show_404();
@@ -65,17 +86,22 @@ class Guests extends MY_Controller
 
     public function import_template($project_id)
     {
+        $this->require_access('guests', 'export');
         $filename = 'guest-import-template-project-' . (int) $project_id . '.csv';
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
-        echo "nama_tamu,phone,kategori\n";
-        echo "Albert,6281234567890,Keluarga\n";
-        echo "Bapak Ahmad,,VIP\n";
+        echo "nama_tamu,phone,kategori
+";
+        echo "Albert,6281234567890,Keluarga
+";
+        echo "Bapak Ahmad,,VIP
+";
         exit;
     }
 
     public function import($project_id)
     {
+        $this->require_access('guests', 'import');
         $project = $this->Project_model->find($project_id);
         if (!$project) {
             show_404();

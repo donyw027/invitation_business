@@ -77,7 +77,8 @@
                                         <p class="mt-3"><?= nl2br(html_escape($p->description)); ?></p>
                                         <ul>
                                             <?php foreach (preg_split('/
-||
+|
+|
 /', trim((string)$p->features)) as $f): ?>
                                                 <?php if (trim($f) !== ''): ?><li><?= html_escape(trim($f)); ?></li><?php endif; ?>
                                             <?php endforeach; ?>

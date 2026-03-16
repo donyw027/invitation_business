@@ -7,6 +7,7 @@ class Product_types extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
+        $this->require_access('product_types');
         $this->load->model('Product_type_model');
     }
 

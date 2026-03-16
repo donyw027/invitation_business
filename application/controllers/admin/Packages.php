@@ -7,6 +7,7 @@ class Packages extends MY_Controller
     {
         parent::__construct();
         $this->admin_guard();
+        $this->require_access('packages');
         $this->load->model(array('Package_model', 'Product_type_model'));
     }
 

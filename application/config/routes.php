@@ -9,6 +9,7 @@ $route['admin'] = 'admin/auth/login';
 $route['admin/login'] = 'admin/auth/login';
 $route['admin/logout'] = 'admin/auth/logout';
 $route['admin/dashboard'] = 'admin/dashboard/index';
+$route['admin/reports'] = 'admin/reports/index';
 
 $route['admin/product-types'] = 'admin/product_types/index';
 $route['admin/product-types/create'] = 'admin/product_types/create';
@@ -32,6 +33,13 @@ $route['admin/templates/update/(:num)'] = 'admin/templates/update/$1';
 $route['admin/templates/delete/(:num)'] = 'admin/templates/delete/$1';
 
 $route['admin/settings'] = 'admin/settings/index';
+
+$route['admin/users'] = 'admin/users/index';
+$route['admin/users/create'] = 'admin/users/create';
+$route['admin/users/store'] = 'admin/users/store';
+$route['admin/users/edit/(:num)'] = 'admin/users/edit/$1';
+$route['admin/users/update/(:num)'] = 'admin/users/update/$1';
+$route['admin/users/delete/(:num)'] = 'admin/users/delete/$1';
 
 $route['admin/customers'] = 'admin/customers/index';
 $route['admin/customers/create'] = 'admin/customers/create';
@@ -62,6 +70,11 @@ $route['admin/guests/import/(:num)'] = 'admin/guests/import/$1';
 $route['admin/guests/import_template/(:num)'] = 'admin/guests/import_template/$1';
 $route['admin/guests/delete/(:num)'] = 'admin/guests/delete/$1';
 
+$route['admin/wishes'] = 'admin/wishes/index';
+$route['admin/wishes/approve/(:num)'] = 'admin/wishes/approve/$1';
+$route['admin/wishes/reject/(:num)'] = 'admin/wishes/reject/$1';
+$route['admin/wishes/pending/(:num)'] = 'admin/wishes/pending/$1';
+
 $route['rsvp/store'] = 'public_page/store_rsvp';
 $route['wish/store'] = 'public_page/store_wish';
 
@@ -69,3 +82,23 @@ $route['preview/(:any)'] = 'public_page/preview/$1';
 $route['i/(:any)/(:any)'] = 'public_page/view/$1/$2';
 $route['i/(:any)'] = 'public_page/view/$1';
 $route['card/(:any)'] = 'public_page/view/$1';
+
+
+$route['admin/templates/clone/(:num)'] = 'admin/templates/clone_item/$1';
+$route['admin/orders/invoice/(:num)'] = 'admin/orders/invoice/$1';
+$route['admin/projects/add-gallery/(:num)'] = 'admin/projects/add_gallery/$1';
+$route['admin/projects/delete-gallery/(:num)'] = 'admin/projects/delete_gallery/$1';
+$route['admin/guests/export/(:num)'] = 'admin/guests/export_csv/$1';
+$route['admin/reports/export-orders'] = 'admin/reports/export_orders';
+$route['admin/reports/export-projects'] = 'admin/reports/export_projects';
+
+$route['admin/projects/add-timeline/(:num)'] = 'admin/projects/add_timeline/$1';
+$route['admin/projects/delete-timeline/(:num)'] = 'admin/projects/delete_timeline/$1';
+
+
+$route['admin/orders/invoice-pdf/(:num)'] = 'admin/orders/invoice_pdf/$1';
+$route['admin/reports/export-orders-xlsx'] = 'admin/reports/export_orders_xlsx';
+$route['admin/reports/export-projects-xlsx'] = 'admin/reports/export_projects_xlsx';
+$route['admin/guests/export-xlsx/(:num)'] = 'admin/guests/export_xlsx/$1';
+$route['admin/projects/approve-timeline/(:num)'] = 'admin/projects/approve_timeline/$1';
+$route['admin/projects/reject-timeline/(:num)'] = 'admin/projects/reject_timeline/$1';
