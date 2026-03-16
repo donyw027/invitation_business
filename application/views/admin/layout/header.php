@@ -6,7 +6,7 @@
     <title><?= isset($page_title) ? $page_title : 'Admin'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+    <!-- <style>
         body {
             background: #f5f7fb;
         }
@@ -58,6 +58,160 @@
             background: #334155;
             display: inline-block;
         }
+    </style> -->
+
+    <style>
+        :root {
+            --blue: #2f80c3;
+            --blue-dark: #1f5f97;
+            --blue-soft: #eef8ff;
+
+            --pink: #0073ffff;
+            --pink-soft: #374bffff;
+
+            --yellow: #f3c94b;
+            --yellow-soft: #fff9df;
+
+            --navy: #0f2233;
+
+            --text: #2b3e50;
+            --muted: #6b7f93;
+
+            --line: #dce8f3;
+
+            --shadow: 0 10px 25px rgba(0, 0, 0, .06);
+        }
+
+        body {
+            background: linear-gradient(180deg, #f8fbff 0%, #fffdf8 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0f2233 0%, #2f80c3 60%, #0000a1ff 100%);
+            padding-top: 20px;
+        }
+
+        .sidebar h4 {
+            font-weight: 800;
+        }
+
+        .sidebar a {
+            color: #e2e8f0;
+            text-decoration: none;
+            display: block;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: .25s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+        }
+
+        .sidebar .group {
+            color: #cbd5e1;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 16px 16px 6px;
+            letter-spacing: .08em;
+        }
+
+        .sidebar .brand-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #334155;
+        }
+
+        /* HEADER */
+
+        main h2 {
+            font-weight: 800;
+            color: var(--blue-dark);
+        }
+
+        main small {
+            color: var(--muted);
+        }
+
+        /* BUTTON */
+
+        .btn-outline-secondary {
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--pink));
+            border: 0;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--blue-dark), #c93d7e);
+        }
+
+        /* CARD */
+
+        .card-stat {
+            border: 0;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+
+        .table-card {
+            border: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+
+        /* TABLE */
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead {
+            background: var(--blue-soft);
+        }
+
+        .table thead th {
+            border-bottom: 0;
+            font-weight: 700;
+            color: var(--blue-dark);
+        }
+
+        /* ALERT */
+
+        .alert {
+            border-radius: 14px;
+        }
+
+        /* CARD HOVER */
+
+        .card-stat:hover,
+        .table-card:hover {
+            transform: translateY(-2px);
+            transition: .2s;
+        }
+
+        /* SCROLLBAR */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -69,7 +223,7 @@
                     <?php $photo = !empty($current_admin->photo) ? asset_or_url($current_admin->photo) : 'https://ui-avatars.com/api/?name=' . rawurlencode($admin_name ?? 'Admin') . '&background=1f2937&color=fff'; ?>
                     <img src="<?= $photo; ?>" class="brand-avatar" alt="admin">
                     <div>
-                        <h4 class="text-white mb-0">InviteBiz Ops</h4>
+                        <h4 class="text-white mb-0">MySimple X Jastip</h4>
                         <small class="text-secondary"><?= html_escape($current_admin->role ?? 'admin'); ?></small>
                     </div>
                 </div>
