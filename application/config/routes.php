@@ -1,7 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['default_controller'] = 'public_page/home';
+$route['cara_order'] = 'public_page/cara_order';
+$route['faq'] = 'public_page/faq';
+$route['kontak'] = 'public_page/kontak';
+$route['review'] = 'public_page/review';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

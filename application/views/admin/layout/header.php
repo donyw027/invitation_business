@@ -66,8 +66,9 @@
             --blue-dark: #1f5f97;
             --blue-soft: #eef8ff;
 
-            --pink: #0073ffff;
-            --pink-soft: #374bffff;
+            --pink: #ff6fae;
+            --pink-dark: #e45495;
+            --pink-soft: #fff1f7;
 
             --yellow: #f3c94b;
             --yellow-soft: #fff9df;
@@ -76,22 +77,26 @@
 
             --text: #2b3e50;
             --muted: #6b7f93;
-
             --line: #dce8f3;
 
-            --shadow: 0 10px 25px rgba(0, 0, 0, .06);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+            --shadow-soft: 0 20px 45px rgba(31, 41, 55, 0.08);
+            --radius-lg: 30px;
+            --radius-md: 24px;
+            --radius-sm: 16px;
         }
 
         body {
             background: linear-gradient(180deg, #f8fbff 0%, #fffdf8 100%);
             font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
         }
 
-        /* SIDEBAR */
+        /* ================= SIDEBAR ================= */
 
         .sidebar {
             min-height: 100vh;
-            background: linear-gradient(180deg, #0f2233 0%, #2f80c3 60%, #0000a1ff 100%);
+            background: linear-gradient(180deg, #0f2233 0%, #2f80c3 60%, #4f46e5 100%);
             padding-top: 20px;
         }
 
@@ -105,11 +110,11 @@
             display: block;
             padding: 12px 16px;
             border-radius: 12px;
-            transition: .25s;
+            transition: 0.25s ease;
         }
 
         .sidebar a:hover {
-            background: rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
         }
 
@@ -118,7 +123,7 @@
             font-size: 11px;
             text-transform: uppercase;
             padding: 16px 16px 6px;
-            letter-spacing: .08em;
+            letter-spacing: 0.08em;
         }
 
         .sidebar .brand-avatar {
@@ -129,7 +134,7 @@
             background: #334155;
         }
 
-        /* HEADER */
+        /* ================= HEADER ================= */
 
         main h2 {
             font-weight: 800;
@@ -140,39 +145,62 @@
             color: var(--muted);
         }
 
-        /* BUTTON */
+        /* ================= BUTTON ================= */
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--pink));
+            border: 0;
+            border-radius: 14px;
+            transition: 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--blue-dark), var(--pink-dark));
+        }
 
         .btn-outline-secondary {
             border-radius: 12px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--blue), var(--pink));
-            border: 0;
+        .btn-soft {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.88);
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+            transition: 0.25s ease;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--blue-dark), #c93d7e);
-        }
-
-        /* CARD */
-
-        .card-stat {
-            border: 0;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
+        .btn-soft:hover {
+            transform: translateY(-1px);
             background: #fff;
+            color: var(--blue-dark);
         }
 
+        /* ================= CARD ================= */
+
+        .card-stat,
         .table-card {
             border: 0;
             border-radius: 20px;
-            overflow: hidden;
             box-shadow: var(--shadow);
             background: #fff;
+            transition: 0.2s ease;
         }
 
-        /* TABLE */
+        .card-stat:hover,
+        .table-card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ================= TABLE ================= */
 
         .table {
             margin-bottom: 0;
@@ -188,21 +216,13 @@
             color: var(--blue-dark);
         }
 
-        /* ALERT */
+        /* ================= ALERT ================= */
 
         .alert {
             border-radius: 14px;
         }
 
-        /* CARD HOVER */
-
-        .card-stat:hover,
-        .table-card:hover {
-            transform: translateY(-2px);
-            transition: .2s;
-        }
-
-        /* SCROLLBAR */
+        /* ================= SCROLLBAR ================= */
 
         ::-webkit-scrollbar {
             width: 8px;
@@ -211,6 +231,201 @@
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 10px;
+        }
+
+        /* ================= SPOTLIGHT SECTION ================= */
+
+        .spotlight-card {
+            position: relative;
+            height: 100%;
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow: var(--shadow-soft);
+            backdrop-filter: blur(10px);
+        }
+
+        .spotlight-gift {
+            background:
+                radial-gradient(circle at top left, rgba(255, 214, 230, 0.95), transparent 42%),
+                linear-gradient(135deg, #fff7fb 0%, #fffdf7 100%);
+        }
+
+        .spotlight-jastip {
+            background:
+                radial-gradient(circle at top right, rgba(255, 236, 179, 0.95), transparent 42%),
+                linear-gradient(135deg, #fffef8 0%, #fff7fb 100%);
+        }
+
+        .spotlight-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .soft-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            color: #334155;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .spotlight-copy h3 {
+            font-size: 28px;
+            line-height: 1.3;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .spotlight-copy p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #6b7280;
+            margin-bottom: 24px;
+            max-width: 95%;
+        }
+
+        /* ================= SHOWCASE GRID ================= */
+
+        .showcase-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .gift-grid {
+            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-areas:
+                "large small1"
+                "large small2";
+        }
+
+        .jastip-grid {
+            grid-template-columns: 0.9fr 1.1fr;
+            grid-template-areas:
+                "small1 large"
+                "small2 large";
+        }
+
+        .gift-grid .large,
+        .jastip-grid .large {
+            grid-area: large;
+            min-height: 360px;
+        }
+
+        .gift-grid .small:nth-child(2),
+        .jastip-grid .small:nth-child(1) {
+            grid-area: small1;
+        }
+
+        .gift-grid .small:nth-child(3),
+        .jastip-grid .small:nth-child(2) {
+            grid-area: small2;
+        }
+
+        /* ================= MOCK CARD ================= */
+
+        .mock-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            min-height: 170px;
+        }
+
+        .mock-card img {
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            object-fit: cover;
+            display: block;
+        }
+
+        .mock-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.34), rgba(15, 23, 42, 0.05));
+        }
+
+        .mock-card span {
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            z-index: 2;
+            display: inline-flex;
+            width: fit-content;
+            max-width: calc(100% - 28px);
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1f2937;
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 991.98px) {
+            .spotlight-copy h3 {
+                font-size: 24px;
+            }
+
+            .gift-grid,
+            .jastip-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gift-grid .large,
+            .jastip-grid .large {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .spotlight-card {
+                padding: 20px;
+                border-radius: 24px;
+            }
+
+            .spotlight-copy h3 {
+                font-size: 21px;
+            }
+
+            .spotlight-copy p {
+                font-size: 14px;
+                max-width: 100%;
+            }
+
+            .gift-grid,
+            .jastip-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "large"
+                    "small1"
+                    "small2";
+            }
+
+            .gift-grid .large,
+            .jastip-grid .large,
+            .mock-card {
+                min-height: 220px;
+            }
         }
     </style>
 </head>
@@ -223,7 +438,7 @@
                     <?php $photo = !empty($current_admin->photo) ? asset_or_url($current_admin->photo) : 'https://ui-avatars.com/api/?name=' . rawurlencode($admin_name ?? 'Admin') . '&background=1f2937&color=fff'; ?>
                     <img src="<?= $photo; ?>" class="brand-avatar" alt="admin">
                     <div>
-                        <h4 class="text-white mb-0">MySimple X Jastip</h4>
+                        <h4 class="text-white mb-0">Dashboard</h4>
                         <small class="text-secondary"><?= html_escape($current_admin->role ?? 'admin'); ?></small>
                     </div>
                 </div>
