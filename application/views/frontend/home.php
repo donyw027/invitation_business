@@ -3,17 +3,17 @@
         <div class="hero-glass-wrap">
             <div class="row align-items-center g-4 g-lg-5">
                 <div class="col-lg-7">
-                    <div class="hero-badge">aesthetic service, useful template, easy order ✨</div>
+                    <div class="hero-badge">Aesthetic Gift, Useful Template, Easy Order ✨</div>
 
                     <h1>
-                        Gift berkesan,<br>
-                        Jastip praktis,<br>
+                        Lebih dari Sekedar Jasa,Kami <br>
+                        Menghadirkan Bahagia<br>
                     </h1>
 
                     <p>
-                        <strong>MySimpleGift</strong> buat gift yang manis dan personal,
-                        <strong>JastipinIndahAja</strong> buat titip beli yang simple,
-                        plus <strong>spreadsheet template</strong> yang rapi, useful, dan siap pakai.
+                        <strong>MySimpleGift</strong> buat hadiah hangat dan bermakna,
+                        <strong>JastipIndahAja</strong> buat titip belanja praktis anti ribet,
+                        plus <strong>Spreadsheet Template</strong> yang memudahkan pengelolaan data.
                     </p>
 
                     <div class="d-flex flex-wrap gap-3 mt-4">
@@ -22,16 +22,16 @@
                     </div>
 
                     <div class="hero-points hero-points-v2">
-                        <div class="hero-point">🎁 Gift estetik</div>
-                        <div class="hero-point">💌 Digital & greeting</div>
-                        <div class="hero-point">🛍️ Jastip fleksibel</div>
-                        <div class="hero-point">📊 Spreadsheet useful</div>
+                        <div class="hero-point">🎁 Gift Aesthetic</div>
+                        <div class="hero-point">💌 Digital & Greeting</div>
+                        <div class="hero-point">🛍️ Jastip Fleksibel</div>
+                        <div class="hero-point">📊 Spreadsheet Useful</div>
                     </div>
                 </div>
 
                 <div class="col-lg-5">
                     <div class="hero-showcase-card">
-                        <div class="showcase-chip">soft • modern • gen z</div>
+                        <div class="showcase-chip">soft • modern • simple</div>
                         <div class="showcase-grid">
                             <div class="showcase-box large gift">MySimpleGift</div>
                             <div class="showcase-box jastip">Jastip</div>
@@ -50,7 +50,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-kicker">main services</span>
-            <h2 class="section-title">Satu tempat buat tiga kebutuhan</h2>
+            <h2 class="section-title">Everything You Need, All in One Place</h2>
             <p class="section-subtitle">
                 <!-- Dibuat supaya orang yang baru datang langsung paham brand kamu jual apa, feel-nya seperti apa, dan harus klik ke mana. -->
             </p>
@@ -60,8 +60,8 @@
             <div class="col-lg-4">
                 <div class="service-card service-card-v2 text-center h-100">
                     <div class="icon-badge">MG</div>
-                    <h5>MySimpleGift</h5>
-                    <p>Bouquet, gift box, greeting card, dan hadiah custom yang estetik dan lebih personal.</p>
+                    <h5>My Simple Gift</h5>
+                    <p>Bouquet, gift box, undangan digital, greeting card, dan custom gift yang estetik dan bermakna.</p>
                     <a href="#mysimplegift" class="btn btn-soft mt-3">Explore</a>
                 </div>
             </div>
@@ -69,8 +69,8 @@
             <div class="col-lg-4">
                 <div class="service-card service-card-v2 text-center h-100">
                     <div class="icon-badge">JI</div>
-                    <h5>JastipinIndahAja</h5>
-                    <p>Titip beli yang praktis, santai, dan jelas. Cocok untuk request item favorit tanpa ribet.</p>
+                    <h5>Jastip Indah Aja</h5>
+                    <p>Titip beli yang praktis, santai, antiribet, dan terpercaya. Cocok untuk request kebutuhan favorit kamu.</p>
                     <a href="#jastip" class="btn btn-soft mt-3">Explore</a>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="service-card service-card-v2 text-center h-100 highlight">
                     <div class="icon-badge">SS</div>
                     <h5>Spreadsheet Template</h5>
-                    <p>Template yang berguna untuk Track Keuangan, Penjualan, dan Jastip dengan tampilan clean.</p>
+                    <p>Template yang berguna untuk Track Keuangan, Penjualan, dan Jastip dengan tampilan mudah digunakan.</p>
                     <a href="#spreadsheet" class="btn btn-soft mt-3">Explore</a>
                 </div>
             </div>
@@ -93,7 +93,7 @@
             <span class="section-kicker">gift & bouquet</span>
             <h2 class="section-title">MySimpleGift</h2>
             <p class="section-subtitle">
-                Gift dan bouquet yang dibuat biar momen terasa lebih manis, lebih niat, dan lebih personal.
+                <!-- Gift dan bouquet yang dibuat biar momen terasa lebih manis, lebih niat, dan bermakna. -->
             </p>
         </div>
 
@@ -105,8 +105,7 @@
                             <span class="soft-label">best for special moments</span>
                             <h3>Hadiah yang nggak cuma lucu, tapi juga berkesan.</h3>
                             <p>
-                                Bisa request isi, tema, dan budget. Cocok untuk wisuda, ulang tahun, anniversary,
-                                sampai hadiah spesial.
+                                Bisa request isi, tema, dan budget. Cocok untuk moment wisuda, ulang tahun, anniversary dan moment spesial lainnya.
                             </p>
                             <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
                         </div>
@@ -125,7 +124,7 @@
                     <span class="soft-label">cute add-on</span>
                     <h3>Greeting card & digital invitation</h3>
                     <p>
-                        Bisa custom nama, pesan, detail acara, dan cocok dipadukan dengan gift biar makin personal.
+                        Bisa custom nama, pesan, detail acara, dan cocok dipadukan dengan gift biar makin bermakna.
                     </p>
                     <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Preview</a>
                 </div>
@@ -141,14 +140,14 @@
                         <div class="price-amount">Mulai 15K</div>
                         <div class="price-desc">Untuk wisuda, ulang tahun, anniversary, dan momen spesial lainnya.</div>
                         <ul class="feature-list flex-grow-1">
-                            <li>Bisa request isi dan desain</li>
+                            <li>Bisa request sesuai keinginan</li>
                             <li>Fleksibel sesuai budget</li>
                             <li>Bisa tambah greeting card</li>
-                            <li>Feel lebih personal</li>
+                            <li>Feel lebih bermakna</li>
                         </ul>
                         <div class="d-grid gap-2">
                             <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya mau order Bouquet Gift'); ?>" class="btn btn-main">Order Gift</a>
+                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo kak, Saya mau order Gift'); ?>" class="btn btn-main">Order Gift</a>
                         </div>
                     </div>
                 </div>
@@ -169,7 +168,7 @@
                         </ul>
                         <div class="d-grid gap-2">
                             <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya ingin tambah Greeting Card'); ?>" class="btn btn-main">Order Greeting Card</a>
+                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo saya ingin Order Greeting Card'); ?>" class="btn btn-main">Order Greeting Card</a>
                         </div>
                     </div>
                 </div>
@@ -186,11 +185,11 @@
                             <li>Desain clean & elegan</li>
                             <li>Custom nama & detail acara</li>
                             <li>Mudah dibagikan</li>
-                            <li>Cocok dipadukan dengan gift</li>
+                            <li>Affordable</li>
                         </ul>
                         <div class="d-grid gap-2">
                             <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya tertarik Undangan Digital'); ?>" class="btn btn-main">Order Undangan</a>
+                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo saya ingin order Undangan Digital'); ?>" class="btn btn-main">Order Undangan</a>
                         </div>
                     </div>
                 </div>
@@ -203,23 +202,23 @@
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-kicker">jastip service</span>
-            <h2 class="section-title">JastipinIndahAja</h2>
-            <p class="section-subtitle">Titip beli yang simpel, santai, dan cocok untuk kebutuhan yang fleksibel.</p>
+            <h2 class="section-title">Jastip Indah Aja</h2>
+            <!-- <p class="section-subtitle">Titip beli yang simpel, santai, dan cocok untuk kebutuhan yang fleksibel.</p> -->
         </div>
 
         <div class="row g-4">
             <div class="col-lg-3 col-md-6">
                 <div class="service-card service-card-v2 h-100">
                     <div class="icon-badge">🧴</div>
-                    <h5>Beauty & Skincare</h5>
-                    <p>Titip produk favorit tanpa harus repot cari sendiri.</p>
+                    <h5>Beauty & Fashion</h5>
+                    <p>Titip produk favorit tanpa harus repot antri.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="service-card service-card-v2 h-100">
                     <div class="icon-badge">🍫</div>
                     <h5>Snack & Food</h5>
-                    <p>Cocok untuk oleh-oleh, camilan, atau makanan request.</p>
+                    <p>Cocok untuk oleh-oleh, camilan dan pelengkap moodbooster kamu.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -242,7 +241,7 @@
                         <span class="section-kicker">jastipin Indah Aja</span>
                         <h4 class="mt-2">Tinggal Infoin aja mau jastip apa</h4>
                         <p class="mb-4">
-                            Akan segera diproses tanpa ribet dan secepatnya.
+                            Akan kami proses tanpa ribet dan secepatnya.
                         </p>
 
                         <div class="d-flex justify-content-center gap-3 flex-wrap">
@@ -265,7 +264,7 @@
         <div class="text-center mb-5">
             <span class="section-kicker">template product</span>
             <h2 class="section-title">Spreadsheet Template</h2>
-            <p class="section-subtitle">Template yang rapi, useful, dan nyaman dipakai untuk kebutuhan personal maupun usaha kecil.</p>
+            <!-- <p class="section-subtitle">Template yang rapi, useful, dan nyaman dipakai untuk kebutuhan personal maupun usaha kecil.</p> -->
         </div>
 
         <div class="row g-4 mb-4">
@@ -280,13 +279,13 @@
                 <div class="service-card service-card-v2 h-100">
                     <div class="icon-badge">📦</div>
                     <h5>Sales Tracker</h5>
-                    <p>Tracking transaksi, stok, laba, dan laporan sederhana untuk usaha kecil.</p>
+                    <p>Tracking transaksi, laba, dan laporan sederhana untuk usahamu.</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="service-card service-card-v2 h-100 highlight">
                     <div class="icon-badge">📋</div>
-                    <h5>Custom Tracker</h5>
+                    <h5>Jastip Tracker</h5>
                     <p>Untuk kebutuhan jastip, order, atau dashboard sederhana yang ingin disesuaikan.</p>
                 </div>
             </div>
@@ -355,7 +354,7 @@
                 <div class="cta-panel cta-panel-soft h-100">
                     <span class="section-kicker">preview first</span>
                     <h3>Lihat hasilnya dulu</h3>
-                    <p>Cek gallery dan review biar calon customer langsung kebayang kualitas dan feel dari layanan kamu.</p>
+                    <p>Cek gallery dan review biar kamu langsung kebayang kualitas dan feel dari layanan kami.</p>
                     <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
                 </div>
             </div>
@@ -363,8 +362,8 @@
                 <div class="cta-panel cta-panel-main h-100">
                     <span class="section-kicker">ready to order</span>
                     <h3>Kalau sudah cocok, tinggal chat.</h3>
-                    <p>Tanya dulu boleh, konsultasi boleh, langsung order juga boleh. Kami bantu dari awal sampai jadi.</p>
-                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya ingin konsultasi lebih lanjut'); ?>" class="btn btn-main">Chat Sekarang</a>
+                    <p>Tanya dulu boleh, konsultasi boleh, langsung order juga boleh. Kami siap membantu dari awal sampai selesai.</p>
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo kak,Saya ingin order dong...'); ?>" class="btn btn-main">Chat Sekarang</a>
                 </div>
             </div>
         </div>

@@ -4,13 +4,13 @@
             <div class="col-md-7">
                 <strong><?= html_escape($brand_name); ?></strong><br>
                 <small>
-                    MySimpleGift × JastipinIndahAja<br>
+                    My Simple Gift × Jastip Indah Aja<br>
                     Gift, jastip, digital card, dan useful spreadsheet templates.
                 </small>
             </div>
             <div class="col-md-5 text-md-end">
                 <small>
-                    Built with soft colors, clean layout, and easy flow.<br>
+                    Built with Love , Simple to Special.<br>
                     © <?= date('Y'); ?> <?= html_escape($brand_name); ?>. All rights reserved.
                 </small>
             </div>

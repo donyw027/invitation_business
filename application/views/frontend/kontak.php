@@ -30,7 +30,7 @@
                         <span>spreadsheet</span>
                     </div>
 
-                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya ingin bertanya tentang layanan kami'); ?>" class="btn btn-main btn-lg mt-3">
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo saya ingin bertanya tentang layanan ini'); ?>" class="btn btn-main btn-lg mt-3">
                         Hubungi via WhatsApp
                     </a>
                 </div>

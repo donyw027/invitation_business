@@ -1,10 +1,10 @@
 <section class="page-hero page-hero-modern text-center">
     <div class="container">
         <div class="page-hero-shell">
-            <span class="section-kicker">how it works</span>
+            <span class="section-kicker">How it works</span>
             <h1>Cara order yang simpel, cepat, dan nggak bikin bingung.</h1>
             <p>
-                Flow-nya dibuat sesantai mungkin: pilih layanan, lihat opsi, lanjut chat,
+                Flow-nya dibuat sesantai mungkin : pilih layanan, lihat opsi, lanjut chat,
                 lalu pesanan diproses sesuai kebutuhanmu.
             </p>
         </div>
@@ -67,8 +67,8 @@
 
             <div class="faq-card-modern">
                 <span class="faq-tag">Jastip</span>
-                <h5>Order jastip bisa pakai greeting card juga?</h5>
-                <p>Bisa untuk order tertentu, terutama kalau pesanan ingin dijadikan hadiah.</p>
+                <h5>Apakah bisa pengiriman melalui shopee?</h5>
+                <p>Bisa, admin akan membuatkan link shopee untuk checkout.</p>
             </div>
 
             <div class="faq-card-modern">
@@ -90,7 +90,7 @@
             </div>
 
             <div class="faq-card-modern highlight">
-                <span class="faq-tag">Consult</span>
+                <span class="faq-tag">Tanya</span>
                 <h5>Bisa tanya dulu sebelum order?</h5>
                 <p>Tentu bisa. Malah lebih enak supaya paket yang dipilih benar-benar pas.</p>
             </div>

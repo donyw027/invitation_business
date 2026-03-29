@@ -26,7 +26,7 @@
                         </div>
                         <div class="stat-float two">
                             <strong>trusted</strong>
-                            <small>sudah dipakai banyak customer</small>
+                            <small>dipercaya banyak customer</small>
                         </div>
                         <div class="hero-preview-grid">
                             <div class="preview-bubble a">Gift</div>
@@ -48,7 +48,7 @@
             <div class="col-lg-6 col-md-6">
                 <div class="portfolio-shell mb-5">
                     <div class="review-topline">
-                        <span>MySimpleGift</span>
+                        <span>My Simple Gift</span>
                         <small>gift & bouquet</small>
                     </div>
 
@@ -99,14 +99,14 @@
             <div class="col-lg-6 col-md-6">
                 <div class="portfolio-shell mb-5">
                     <div class="review-topline">
-                        <span>JastipinIndahAja</span>
+                        <span>Jastip Indah Aja</span>
                         <small>Jastip Apa Aja</small>
                     </div>
 
                     <h5>🛍️ Titip beli yang simple, lucu, dan tetap rapi alurnya ga ribet.</h5>
 
                     <p>
-                        Cocok buat skincare, snack/Makanan, beauty item, hadiah, sampai request item tertentu.
+                        Cocok buat nitip skincare/beauty product, snack/makanan, fashion, hadiah, sampai request item tertentu.
                         Semua dibuat lebih praktis, jelas, dan nyaman untuk customer.
                     </p>
 
@@ -134,7 +134,7 @@
                     <div class="review-user-modern mt-4">
                         <div class="avatar-circle">J</div>
                         <div>
-                            <strong>JastipinIndahAja</strong>
+                            <strong>Jastip Indah Aja</strong>
                             <small>Curated Shopping & Titip Beli</small>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
             <div class="section-topline align-items-end">
                 <div>
                     <span class="section-kicker">useful templates</span>
-                    <h2>Spreadsheet yang nggak cuma berguna, tapi juga simpe dan enak dilihat</h2>
+                    <h2>Spreadsheet yang nggak cuma berguna, tapi juga simple dan enak dilihat</h2>
                 </div>
                 <p>
                     <!-- Cocok untuk jualan, keuangan, tracking order, dan operasional harian dengan feel yang lebih premium. -->
@@ -333,7 +333,7 @@
                     </p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo, saya mau konsultasi dulu tentang layanan yang tersedia'); ?>" class="btn btn-main btn-lg">
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo, saya mau tanya-tanya dulu tentang layanan yang tersedia'); ?>" class="btn btn-main btn-lg">
                         Chat WhatsApp
                     </a>
                 </div>
