@@ -253,7 +253,8 @@ INSERT INTO `product_types` (`id`, `name`, `code`, `description`, `is_active`, `
 INSERT INTO `templates` (`id`, `name`, `folder`, `product_type`, `thumbnail`, `description`, `preview_mobile`, `preview_desktop`, `demo_url`, `sort_order`, `is_active`, `created_at`) VALUES
 (1, 'Romantic Wedding', 'romantic', 'wedding', 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80', 'Tampilan clean dan elegan untuk wedding invitation.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/preview/amel-budi', 1, 1, NOW()),
 (2, 'Floral Wedding', 'floral', 'wedding', 'https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=900&q=80', 'Warna lembut dengan info acara dan RSVP.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/preview/amel-budi', 2, 1, NOW()),
-(3, 'Greeting Special', 'greeting', 'greeting_card', 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=900&q=80', 'Cocok untuk birthday, anniversary, dan ucapan spesial.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/card/happy-birthday-bella', 1, 1, NOW());
+(3, 'Greeting Special', 'greeting', 'greeting_card', 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=900&q=80', 'Cocok untuk birthday, anniversary, dan ucapan spesial.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/card/happy-birthday-bella', 1, 1, NOW()),
+(4, 'Greeting Blossom Animation', 'greeting_blossom', 'greeting_card', 'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=900&q=80', 'Greeting card animasi lucu dengan nuansa pastel, cocok untuk birthday dan ucapan manis.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/card/happy-birthday-bella', 2, 1, NOW());
 INSERT INTO `packages` (`id`, `product_type`, `name`, `price`, `old_price`, `description`, `features`, `button_text`, `is_featured`, `is_active`, `sort_order`, `created_at`) VALUES
 (1, 'wedding', 'Basic', 79000, 0, 'Paket entry level untuk undangan wedding.', '1 halaman undangan\n1 template\nRevisi minor 1x\nLink share', 'Pilih Paket', 0, 1, 1, NOW()),
 (2, 'wedding', 'Premium', 129000, 149000, 'Paket favorit untuk wedding invitation.', 'Wedding invitation\nRSVP & ucapan\n3 template pilihan\nRevisi 2x', 'Pilih Paket', 1, 1, 2, NOW()),
@@ -286,3 +287,9 @@ INSERT INTO `project_galleries` (`project_id`, `image_path`, `caption`, `sort_or
 (1, 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80', 'Venue wedding', 2, NOW());
 COMMIT;
 SET FOREIGN_KEY_CHECKS=1;
+
+
+-- Add-on greeting card animation template for existing installation
+INSERT INTO `templates` (`id`, `name`, `folder`, `product_type`, `thumbnail`, `description`, `preview_mobile`, `preview_desktop`, `demo_url`, `sort_order`, `is_active`, `created_at`)
+SELECT 4, 'Greeting Blossom Animation', 'greeting_blossom', 'greeting_card', 'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=900&q=80', 'Greeting card animasi lucu dengan nuansa pastel, cocok untuk birthday dan ucapan manis.', NULL, NULL, 'http://localhost/ci3_invitation_business_v4_3_production/card/happy-birthday-bella', 2, 1, NOW()
+WHERE NOT EXISTS (SELECT 1 FROM `templates` WHERE `folder` = 'greeting_blossom');
