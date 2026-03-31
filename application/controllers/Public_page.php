@@ -103,12 +103,26 @@ class Public_page extends MY_Controller
     public function view($slug, $guest_slug = null)
     {
         $project = $this->Project_model->detail_by_slug($slug);
-        if (!$project || $project->status !== 'published') show_404();
+
+        if (!$project) {
+            show_404();
+        }
+
+        if ($project->status !== 'published') {
+            $data = [
+                'project' => $project,
+                'guest_slug' => $guest_slug,
+            ];
+            $this->load->view('frontend/invitation_not_ready', $data);
+            return;
+        }
 
         $guest = null;
         if ($guest_slug && $project->product_type !== 'greeting_card') {
             $guest = $this->Guest_model->find_by_slug($project->id, $guest_slug);
-            if ($guest) $this->Guest_model->touch_opened($guest->id);
+            if ($guest) {
+                $this->Guest_model->touch_opened($guest->id);
+            }
         }
 
         $data = $this->build_project_data($project, FALSE, $guest);

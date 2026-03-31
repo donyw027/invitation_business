@@ -107,3 +107,5 @@ $route['admin/reports/export-projects-xlsx'] = 'admin/reports/export_projects_xl
 $route['admin/guests/export-xlsx/(:num)'] = 'admin/guests/export_xlsx/$1';
 $route['admin/projects/approve-timeline/(:num)'] = 'admin/projects/approve_timeline/$1';
 $route['admin/projects/reject-timeline/(:num)'] = 'admin/projects/reject_timeline/$1';
+
+$route['admin/orders/open-project/(:num)'] = 'admin/orders/open_project/$1';

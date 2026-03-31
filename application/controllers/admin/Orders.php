@@ -12,7 +12,7 @@ class Orders extends MY_Controller
         parent::__construct();
         $this->admin_guard();
         $this->require_access('orders');
-        $this->load->model(array('Order_model', 'Customer_model', 'Template_model', 'Product_type_model', 'User_model', 'Activity_log_model'));
+        $this->load->model(array('Order_model', 'Customer_model', 'Template_model', 'Product_type_model', 'User_model', 'Activity_log_model', 'Project_model'));
         $this->load->library(array('simple_pdf'));
     }
 
@@ -57,6 +57,72 @@ class Orders extends MY_Controller
         );
     }
 
+
+    private function build_project_from_order($order_id)
+    {
+        $order = $this->Order_model->find($order_id);
+        if (!$order) {
+            return 0;
+        }
+
+        if (($order->payment_status ?? '') !== 'paid' || ($order->status ?? '') === 'cancelled') {
+            return 0;
+        }
+
+        $existing = $this->Project_model->find_by_order($order_id);
+        if ($existing) {
+            return (int) $existing->id;
+        }
+
+        $customer_name = trim((string) ($order->customer_name ?? 'Customer'));
+        $template_name = trim((string) ($order->template_name ?? 'Template'));
+        $title = $order->product_type === 'greeting_card'
+            ? 'Greeting Card - ' . $customer_name
+            : 'Invitation - ' . $customer_name;
+        $slug_base = slugify($customer_name . '-' . ($order->order_no ?: $order->id));
+        $slug = $slug_base;
+        $counter = 1;
+        while ($this->Project_model->slug_exists($slug)) {
+            $counter++;
+            $slug = $slug_base . '-' . $counter;
+        }
+
+        $payload = array(
+            'order_id' => (int) $order->id,
+            'source' => 'order_auto',
+            'product_type' => $order->product_type ?: 'wedding',
+            'template_id' => !empty($order->template_id) ? (int) $order->template_id : NULL,
+            'assigned_user_id' => !empty($order->assigned_user_id) ? (int) $order->assigned_user_id : NULL,
+            'slug' => $slug,
+            'title' => $title,
+            'subtitle' => $order->product_type === 'greeting_card' ? 'A Sweet Greeting Card' : 'The Wedding Celebration',
+            'cover_text' => $order->product_type === 'greeting_card' ? 'A special card made just for you' : 'Kepada Yth. Bapak/Ibu/Saudara/i',
+            'deadline_date' => !empty($order->deadline_date) ? $order->deadline_date : NULL,
+            'message_title' => $order->product_type === 'greeting_card' ? 'A Special Greeting' : 'Wedding Invitation',
+            'rsvp_enabled' => $order->product_type === 'greeting_card' ? 0 : 1,
+            'wish_enabled' => 1,
+            'gift_enabled' => 0,
+            'revision_notes' => 'Auto dibuat dari order paid: ' . ($order->order_no ?: ('#' . $order->id)) . ' | Template: ' . ($template_name ?: '-'),
+            'status' => 'waiting_content',
+            'created_at' => date('Y-m-d H:i:s'),
+        );
+
+        if ($order->product_type === 'greeting_card') {
+            $payload['receiver_name'] = $customer_name;
+        }
+
+        $project_id = $this->Project_model->insert($payload);
+        $this->Activity_log_model->insert(array(
+            'user_id' => (int) $this->session->userdata('admin_id'),
+            'module' => 'projects',
+            'action' => 'auto_create_from_order',
+            'description' => 'Auto membuat project #' . $project_id . ' dari order #' . $order->id . ' (' . ($order->order_no ?: '-') . ')',
+            'created_at' => date('Y-m-d H:i:s')
+        ));
+
+        return (int) $project_id;
+    }
+
     public function index()
     {
         $data = $this->admin_data('Orders');
@@ -88,7 +154,12 @@ class Orders extends MY_Controller
         $payload['created_at'] = date('Y-m-d H:i:s');
         $id = $this->Order_model->insert($payload);
         $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'orders','action' => 'create','description' => 'Membuat order #' . $id . ' (' . $payload['order_no'] . ')','created_at' => date('Y-m-d H:i:s')));
-        $this->set_flash('success', 'Order berhasil ditambahkan.');
+        $project_id = $this->build_project_from_order($id);
+        $message = 'Order berhasil ditambahkan.';
+        if ($project_id) {
+            $message .= ' Project otomatis dibuat dan siap diedit.';
+        }
+        $this->set_flash('success', $message);
         redirect('admin/orders');
     }
 
@@ -118,8 +189,34 @@ class Orders extends MY_Controller
         $payload['order_no'] = trim($this->input->post('order_no', TRUE));
         $this->Order_model->update($id, $payload);
         $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'orders','action' => 'update','description' => 'Mengubah order #' . (int)$id . ' (' . $payload['order_no'] . ')','created_at' => date('Y-m-d H:i:s')));
-        $this->set_flash('success', 'Order berhasil diupdate.');
+        $project_id = $this->build_project_from_order($id);
+        $message = 'Order berhasil diupdate.';
+        if ($project_id) {
+            $message .= ' Project terkait sudah tersedia di menu Project.';
+        }
+        $this->set_flash('success', $message);
         redirect('admin/orders');
+    }
+
+    public function open_project($id)
+    {
+        $this->require_access('orders', 'update');
+        $order = $this->Order_model->find($id);
+        if (!$order) show_404();
+
+        $project = $this->Project_model->find_by_order($id);
+        if ($project) {
+            redirect('admin/projects/edit/' . $project->id);
+        }
+
+        $project_id = $this->build_project_from_order($id);
+        if ($project_id) {
+            $this->set_flash('success', 'Project dari order berhasil disiapkan.');
+            redirect('admin/projects/edit/' . $project_id);
+        }
+
+        $this->set_flash('warning', 'Project belum dibuat. Order harus berstatus paid dan tidak cancelled.');
+        redirect('admin/orders/edit/' . $id);
     }
 
     public function invoice($id)

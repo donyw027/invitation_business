@@ -126,6 +126,18 @@ if (!function_exists('asset_or_url')) {
     }
 }
 
+
+if (!function_exists('project_source_label')) {
+    function project_source_label($source)
+    {
+        $labels = array(
+            'manual' => 'Manual',
+            'order_auto' => 'Auto from Order',
+        );
+        return isset($labels[$source]) ? $labels[$source] : ucwords(str_replace('_', ' ', (string) $source));
+    }
+}
+
 if (!function_exists('admin_role_badge')) {
     function admin_role_badge($role)
     {

@@ -8,7 +8,7 @@ class Project_model extends CI_Model
     public function all()
     {
         return $this->db
-            ->select('projects.*, customers.name as customer_name, templates.name as template_name, users.name as assigned_user_name')
+            ->select('projects.*, customers.name as customer_name, templates.name as template_name, users.name as assigned_user_name, orders.order_no as order_no')
             ->join('orders', 'orders.id = projects.order_id', 'left')
             ->join('customers', 'customers.id = orders.customer_id', 'left')
             ->join('templates', 'templates.id = projects.template_id', 'left')
@@ -21,6 +21,17 @@ class Project_model extends CI_Model
     public function find($id)
     {
         return $this->db->get_where($this->table, array('id' => $id))->row();
+    }
+
+
+    public function find_by_order($order_id)
+    {
+        return $this->db->get_where($this->table, array('order_id' => (int) $order_id))->row();
+    }
+
+    public function exists_by_order($order_id)
+    {
+        return $this->db->where('order_id', (int) $order_id)->count_all_results($this->table) > 0;
     }
 
     public function detail_by_slug($slug)
