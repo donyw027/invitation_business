@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Orders extends MY_Controller
 {
@@ -90,15 +90,15 @@ class Orders extends MY_Controller
         $payload = array(
             'order_id' => (int) $order->id,
             'source' => 'order_auto',
-            'product_type' => $order->product_type ?: 'wedding',
+            'product_type' => $order->product_type ?: 'invitation',
             'template_id' => !empty($order->template_id) ? (int) $order->template_id : NULL,
             'assigned_user_id' => !empty($order->assigned_user_id) ? (int) $order->assigned_user_id : NULL,
             'slug' => $slug,
             'title' => $title,
-            'subtitle' => $order->product_type === 'greeting_card' ? 'A Sweet Greeting Card' : 'The Wedding Celebration',
+            'subtitle' => $order->product_type === 'greeting_card' ? 'A Sweet Greeting Card' : 'The Invitation Celebration',
             'cover_text' => $order->product_type === 'greeting_card' ? 'A special card made just for you' : 'Kepada Yth. Bapak/Ibu/Saudara/i',
             'deadline_date' => !empty($order->deadline_date) ? $order->deadline_date : NULL,
-            'message_title' => $order->product_type === 'greeting_card' ? 'A Special Greeting' : 'Wedding Invitation',
+            'message_title' => $order->product_type === 'greeting_card' ? 'A Special Greeting' : 'Digital Invitation',
             'rsvp_enabled' => $order->product_type === 'greeting_card' ? 0 : 1,
             'wish_enabled' => 1,
             'gift_enabled' => 0,
@@ -153,7 +153,7 @@ class Orders extends MY_Controller
         $payload['order_no'] = trim($this->input->post('order_no', TRUE)) ?: $this->Order_model->next_order_no();
         $payload['created_at'] = date('Y-m-d H:i:s');
         $id = $this->Order_model->insert($payload);
-        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'orders','action' => 'create','description' => 'Membuat order #' . $id . ' (' . $payload['order_no'] . ')','created_at' => date('Y-m-d H:i:s')));
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'), 'module' => 'orders', 'action' => 'create', 'description' => 'Membuat order #' . $id . ' (' . $payload['order_no'] . ')', 'created_at' => date('Y-m-d H:i:s')));
         $project_id = $this->build_project_from_order($id);
         $message = 'Order berhasil ditambahkan.';
         if ($project_id) {
@@ -188,7 +188,7 @@ class Orders extends MY_Controller
         if ($payload === FALSE) redirect('admin/orders/edit/' . $id);
         $payload['order_no'] = trim($this->input->post('order_no', TRUE));
         $this->Order_model->update($id, $payload);
-        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'orders','action' => 'update','description' => 'Mengubah order #' . (int)$id . ' (' . $payload['order_no'] . ')','created_at' => date('Y-m-d H:i:s')));
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'), 'module' => 'orders', 'action' => 'update', 'description' => 'Mengubah order #' . (int)$id . ' (' . $payload['order_no'] . ')', 'created_at' => date('Y-m-d H:i:s')));
         $project_id = $this->build_project_from_order($id);
         $message = 'Order berhasil diupdate.';
         if ($project_id) {
@@ -262,7 +262,7 @@ class Orders extends MY_Controller
             if (is_file($file)) @unlink($file);
         }
         $this->Order_model->delete($id);
-        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'),'module' => 'orders','action' => 'delete','description' => 'Menghapus order #' . (int)$id,'created_at' => date('Y-m-d H:i:s')));
+        $this->Activity_log_model->insert(array('user_id' => (int)$this->session->userdata('admin_id'), 'module' => 'orders', 'action' => 'delete', 'description' => 'Menghapus order #' . (int)$id, 'created_at' => date('Y-m-d H:i:s')));
         $this->set_flash('success', 'Order berhasil dihapus.');
         redirect('admin/orders');
     }

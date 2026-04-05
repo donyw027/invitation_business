@@ -259,7 +259,7 @@
 
                         <div class="col-md-4">
                             <label class="form-label">Product Type</label>
-                            <?php $pv = isset($project) ? $project->product_type : 'wedding'; ?>
+                            <?php $pv = isset($project) ? $project->product_type : 'invitation'; ?>
                             <select name="product_type" id="productTypeSelect" class="form-select">
                                 <?php foreach ($product_types as $pt): ?>
                                     <option value="<?= html_escape($pt->code); ?>" <?= $pv == $pt->code ? 'selected' : ''; ?>>
@@ -427,7 +427,7 @@
                 </div>
                 <div class="field-group-body">
                     <div class="section-note note-green">
-                        Isi bagian ini jika project berupa wedding atau invitation digital.
+                        Isi bagian ini jika project berupa invitation digital.
                     </div>
 
                     <div class="row g-3">
@@ -694,7 +694,7 @@
                 }
 
                 if (modeIndicatorText) {
-                    modeIndicatorText.textContent = 'Wedding / Invitation';
+                    modeIndicatorText.textContent = 'Invitation';
                 }
             }
         }

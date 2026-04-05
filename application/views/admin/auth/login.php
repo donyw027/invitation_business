@@ -102,16 +102,19 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" value="admin" required>
+                    <input type="text" class="form-control" name="username" value="" required>
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" value="admin123" required>
+                    <input type="password" class="form-control" name="password" value="" required>
                 </div>
                 <button class="btn btn-dark w-100">Masuk</button>
             </form>
             <div class="mt-4 small text-muted">
-                Login default: admin / admin123
+                Login Kedalam Sistem
+                <a href="<?= base_url(); ?>" class="btn btn-outline-secondary w-100 mt-3">
+                    ← Kembali ke Website
+                </a>
             </div>
         </div>
     </div>

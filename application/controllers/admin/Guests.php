@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Guests extends MY_Controller
 {
@@ -96,6 +96,46 @@ class Guests extends MY_Controller
 
         fclose($out);
         exit;
+    }
+
+    public function export_xlsx($project_id)
+    {
+        $this->require_access('guests', 'export');
+
+        $project = $this->Project_model->find($project_id);
+        if (!$project) {
+            show_404();
+        }
+
+        $rows = $this->Guest_model->by_project($project_id);
+
+        $data = array();
+
+        // header row
+        $data[] = array(
+            'guest_name',
+            'phone',
+            'category',
+            'status_opened',
+            'opened_at',
+            'link_personal'
+        );
+
+        foreach ($rows as $row) {
+            $data[] = array(
+                $row->guest_name,
+                isset($row->phone) ? $row->phone : '',
+                isset($row->category) ? $row->category : '',
+                !empty($row->is_opened) ? 'opened' : 'not_opened',
+                isset($row->opened_at) ? $row->opened_at : '',
+                $this->guest_project_url_safe($project, $row)
+            );
+        }
+
+        $filename = 'guest-list-' . $project_id . '.xlsx';
+        $sheetName = 'Guests';
+
+        $this->simple_xlsx_writer->download($filename, $sheetName, $data);
     }
 
     public function delete($id)
@@ -232,6 +272,8 @@ class Guests extends MY_Controller
 
         return implode("\n\n====================\n\n", $lines);
     }
+
+
 
     private function guest_project_url_safe($project, $guest)
     {

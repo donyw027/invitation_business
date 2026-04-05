@@ -94,8 +94,21 @@ class Public_page extends MY_Controller
 
     public function preview($slug)
     {
+        // Hanya admin login yang boleh akses preview
+        if (!$this->session->userdata('admin_logged_in')) {
+            show_404();
+        }
+
+        // Optional: cek role apakah punya akses project
+        if (!$this->can_access('projects', 'view')) {
+            show_404();
+        }
+
         $project = $this->Project_model->detail_by_slug($slug);
-        if (!$project) show_404();
+        if (!$project) {
+            show_404();
+        }
+
         $data = $this->build_project_data($project, TRUE, null);
         $this->render_project($project, $data);
     }
