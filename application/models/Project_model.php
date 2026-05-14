@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Project_model extends CI_Model
 {
@@ -67,6 +67,15 @@ class Project_model extends CI_Model
         return $this->db->count_all($this->table);
     }
 
+    public function get_by_order_id($order_id)
+    {
+        return $this->db
+            ->where('order_id', $order_id)
+            ->order_by('id', 'DESC')
+            ->get($this->table)
+            ->row();
+    }
+
     public function count_published()
     {
         return $this->db->where('status', 'published')->count_all_results($this->table);
@@ -90,5 +99,4 @@ class Project_model extends CI_Model
     {
         return $this->db->select('status, COUNT(*) as total')->group_by('status')->get($this->table)->result();
     }
-
 }

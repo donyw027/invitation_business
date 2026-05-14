@@ -6,6 +6,8 @@ $route['cara_order'] = 'public_page/cara_order';
 $route['faq'] = 'public_page/faq';
 $route['kontak'] = 'public_page/kontak';
 $route['review'] = 'public_page/review';
+$route['jastip-malang'] = 'public_page/jastip_malang';
+$route['jastip-trawas'] = 'public_page/jastip_trawas';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -109,3 +111,9 @@ $route['admin/projects/approve-timeline/(:num)'] = 'admin/projects/approve_timel
 $route['admin/projects/reject-timeline/(:num)'] = 'admin/projects/reject_timeline/$1';
 
 $route['admin/orders/open-project/(:num)'] = 'admin/orders/open_project/$1';
+
+$route['admin/quick-create'] = 'admin/quick_create/index';
+$route['admin/quick-create/customer'] = 'admin/quick_create/customer';
+$route['admin/quick-create/order'] = 'admin/quick_create/order';
+$route['admin/quick-create/project'] = 'admin/quick_create/project';
+$route['admin/quick-create/reset'] = 'admin/quick_create/reset';

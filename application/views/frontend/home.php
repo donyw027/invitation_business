@@ -1,341 +1,217 @@
-<section class="hero hero-v2">
+<?php
+if (!function_exists('pretty_local_img')) {
+    function pretty_local_img($name)
+    {
+        $exts = array('jpg', 'jpeg', 'png', 'webp');
+        foreach ($exts as $ext) {
+            $path = FCPATH . 'assets/img/' . $name . '.' . $ext;
+            if (file_exists($path)) {
+                return base_url('assets/img/' . $name . '.' . $ext);
+            }
+        }
+        return '';
+    }
+}
+$local_gallery = array(
+    array('file' => 'jastip1', 'title' => 'Jastip Cafe Malang', 'tag' => 'Jastip', 'desc' => 'Titip beli cafe, dessert, dan local finds area Malang.'),
+    array('file' => 'jastip2', 'title' => 'Jastip Trawas Trip', 'tag' => 'Trawas', 'desc' => 'Request cafe, bakery, dan oleh-oleh area Trawas.'),
+    array('file' => 'jastip3', 'title' => 'Daily Local Request', 'tag' => 'Local Finds', 'desc' => 'Titip produk favorit sesuai request customer.'),
+    array('file' => 'buket1', 'title' => 'Bouquet Gift', 'tag' => 'Bouquet', 'desc' => 'Bouquet manis untuk wisuda, birthday, dan surprise.'),
+    array('file' => 'buket2', 'title' => 'Pretty Bloom', 'tag' => 'Gift', 'desc' => 'Pilihan gift aesthetic dengan warna yang bisa disesuaikan.'),
+    array('file' => 'buket3', 'title' => 'Custom Bouquet', 'tag' => 'Custom', 'desc' => 'Request bouquet sesuai budget dan kebutuhan momen.'),
+);
+?>
+<section class="hero-local">
     <div class="container">
-        <div class="hero-glass-wrap">
-            <div class="row align-items-center g-4 g-lg-5">
+        <div class="hero-wrap">
+            <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <div class="hero-badge">Aesthetic Gift, Useful Template, Easy Order ✨</div>
-
-                    <h1>
-                        Lebih dari Sekedar Jasa,Kami <br>
-                        Menghadirkan Bahagia<br>
-                    </h1>
-
-                    <p>
-                        <strong>MySimpleGift</strong> buat hadiah hangat dan bermakna,
-                        <strong>JastipIndahAja</strong> buat titip belanja praktis anti ribet,
-                        plus <strong>Spreadsheet Template</strong> yang memudahkan pengelolaan data.
+                    <span class="kicker">📍 Open jastip Malang • Batu • Trawas</span>
+                    <h1 class="hero-title">Pretty Local Finds,<br><span class="script">delivered with care.</span></h1>
+                    <p class="hero-copy">
+                        Jastip Indah Aja bantu titip beli cafe hits, dessert, oleh-oleh, gift, dan hidden local finds area Malang & Trawas. Plus MySimpleGift untuk bouquet, greeting card, dan undangan digital yang lucu tapi tetap rapi.
                     </p>
-
                     <div class="d-flex flex-wrap gap-3 mt-4">
-                        <a href="<?= site_url('kontak'); ?>" class="btn btn-main btn-lg">Chat sekarang</a>
-                        <a href="<?= site_url('review'); ?>" class="btn btn-soft btn-lg">Lihat preview</a>
+                        <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau titip/order area Malang atau Trawas.'); ?>" class="btn btn-main btn-lg">Titip Sekarang ✨</a>
+                        <a href="<?= site_url('review'); ?>" class="btn btn-soft btn-lg">Lihat Review</a>
                     </div>
-
-                    <div class="hero-points hero-points-v2">
-                        <div class="hero-point">🎁 Gift Aesthetic</div>
-                        <div class="hero-point">💌 Digital & Greeting</div>
-                        <div class="hero-point">🛍️ Jastip Fleksibel</div>
-                        <div class="hero-point">📊 Spreadsheet Useful</div>
+                    <div class="hero-tags">
+                        <span class="pill">☕ Cafe & dessert</span>
+                        <span class="pill">🎁 Gift aesthetic</span>
+                        <span class="pill">🚗 Malang/Trawas trip</span>
+                        <span class="pill">💌 Digital card</span>
                     </div>
                 </div>
-
                 <div class="col-lg-5">
-                    <div class="hero-showcase-card">
-                        <div class="showcase-chip">soft • modern • simple</div>
-                        <div class="showcase-grid">
-                            <div class="showcase-box large gift">MySimpleGift</div>
-                            <div class="showcase-box jastip">Jastip</div>
-                            <div class="showcase-box sheet">Spreadsheet</div>
-                            <div class="showcase-box note">Fast respon<br><small>+ easy flow</small></div>
-                        </div>
-                        <a href="<?= site_url('cara_order'); ?>" class="btn btn-soft w-100 mt-3">Lihat cara order</a>
+                    <div class="moodboard">
+                        <div class="float-note">cute but trusted</div>
+                        <?php foreach (array_slice($local_gallery, 0, 4) as $i => $item): ?>
+                            <?php $img = pretty_local_img($item['file']); ?>
+                            <div class="pin <?= $i === 0 ? 'tall' : ($i === 1 ? 'mint' : ($i === 2 ? 'dark' : 'lav')); ?>" <?= $img ? 'style="background-image:url(' . html_escape($img) . ');"' : ''; ?>>
+                                <span class="label"><?= html_escape($item['tag']); ?></span>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
+            </div>
+            <div class="stat-strip">
+                <div class="stat-card"><strong>120+</strong><span>successful local orders</span></div>
+                <div class="stat-card"><strong>3 area</strong><span>Malang, Batu, Trawas</span></div>
+                <div class="stat-card"><strong>Fast</strong><span>response by WhatsApp</span></div>
+                <div class="stat-card"><strong>Custom</strong><span>request sesuai kebutuhan</span></div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section section-overlap-cards">
+<section id="services" class="section section-soft">
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-kicker">main services</span>
-            <h2 class="section-title">Everything You Need, All in One Place</h2>
-            <p class="section-subtitle">
-                <!-- Dibuat supaya orang yang baru datang langsung paham brand kamu jual apa, feel-nya seperti apa, dan harus klik ke mana. -->
-            </p>
+            <h2 class="section-title">Small things that feel special.</h2>
+            <p class="section-subtitle mx-auto">Dari titip beli cafe viral, bouquet manis, sampai template digital yang siap dipakai. Flow dibuat simple supaya customer langsung paham dan gampang order.</p>
         </div>
-
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="service-card service-card-v2 text-center h-100">
-                    <div class="icon-badge">MG</div>
-                    <h5>My Simple Gift</h5>
-                    <p>Bouquet, gift box, undangan digital, greeting card, dan custom gift yang estetik dan bermakna.</p>
-                    <a href="#mysimplegift" class="btn btn-soft mt-3">Explore</a>
-                </div>
+        <div class="service-grid">
+            <div class="card-pretty">
+                <div class="icon-bubble">🛍️</div>
+                <h3>Jastip Indah Aja</h3>
+                <p>Titip beli makanan, dessert, oleh-oleh, skincare, fashion, atau item request area Malang, Batu, dan Trawas.</p>
+                <a href="<?= site_url('review'); ?>#jastip-preview" class="btn btn-soft mt-4">Lihat Preview</a>
             </div>
-
-            <div class="col-lg-4">
-                <div class="service-card service-card-v2 text-center h-100">
-                    <div class="icon-badge">JI</div>
-                    <h5>Jastip Indah Aja</h5>
-                    <p>Titip beli yang praktis, santai, antiribet, dan terpercaya. Cocok untuk request kebutuhan favorit kamu.</p>
-                    <a href="#jastip" class="btn btn-soft mt-3">Explore</a>
-                </div>
+            <div class="card-pretty">
+                <div class="icon-bubble">🎁</div>
+                <h3>MySimpleGift</h3>
+                <p>Bouquet, gift box, hampers, greeting card, dan custom gift yang cocok untuk wisuda, ulang tahun, anniversary, atau surprise.</p>
+                <a href="<?= site_url('review'); ?>#bouquet-preview" class="btn btn-soft mt-4">Lihat Preview</a>
             </div>
-
-            <div class="col-lg-4">
-                <div class="service-card service-card-v2 text-center h-100 highlight">
-                    <div class="icon-badge">SS</div>
-                    <h5>Spreadsheet Template</h5>
-                    <p>Template yang berguna untuk Track Keuangan, Penjualan, dan Jastip dengan tampilan mudah digunakan.</p>
-                    <a href="#spreadsheet" class="btn btn-soft mt-3">Explore</a>
-                </div>
+            <div class="card-pretty">
+                <div class="icon-bubble">💌</div>
+                <h3>Digital & Template</h3>
+                <p>Undangan digital, greeting card, dan spreadsheet template untuk jualan, tracking order, dan kebutuhan harian yang rapi.</p>
+                <a href="<?= site_url('review'); ?>#template-preview" class="btn btn-soft mt-4">Lihat Preview</a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="mysimplegift" class="section section-light section-showcase-v2">
+<section class="section" id="jastip">
     <div class="container">
-        <div class="showcase-head text-center mb-5">
-            <span class="section-kicker">gift & bouquet</span>
-            <h2 class="section-title">MySimpleGift</h2>
-            <p class="section-subtitle">
-                <!-- Gift dan bouquet yang dibuat biar momen terasa lebih manis, lebih niat, dan bermakna. -->
-            </p>
-        </div>
-
-        <div class="row g-4 mb-4">
+        <div class="row align-items-end mb-4 g-4">
             <div class="col-lg-8">
-                <div class="feature-panel feature-panel-gift h-100">
-                    <div class="row g-4 align-items-center h-100">
-                        <div class="col-md-7">
-                            <span class="soft-label">best for special moments</span>
-                            <h3>Hadiah yang nggak cuma lucu, tapi juga berkesan.</h3>
-                            <p>
-                                Bisa request isi, tema, dan budget. Cocok untuk moment wisuda, ulang tahun, anniversary dan moment spesial lainnya.
-                            </p>
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="mini-visual-stack">
-                                <div class="mini-visual top">Bouquet</div>
-                                <div class="mini-visual bottom">Gift Box</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <span class="section-kicker">local service area</span>
+                <h2 class="section-title">Jastip harian untuk Malang, Batu, dan Trawas.</h2>
             </div>
-
             <div class="col-lg-4">
-                <div class="feature-panel feature-panel-digital h-100">
-                    <span class="soft-label">cute add-on</span>
-                    <h3>Greeting card & digital invitation</h3>
-                    <p>
-                        Bisa custom nama, pesan, detail acara, dan cocok dipadukan dengan gift biar makin bermakna.
-                    </p>
-                    <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Preview</a>
-                </div>
+                <p class="section-subtitle">Titip beli cafe hits, dessert, oleh-oleh, local brand, dan request toko tertentu dengan alur order yang jelas dan fast response.</p>
             </div>
         </div>
+        <div class="area-grid">
+            <div class="card-pretty area-card">
+                <span class="pill">📍 Jastip Area Malang</span>
+                <h3 class="mt-3">Cafe, dessert, local brand.</h3>
+                <p>Titip beli area Malang untuk cafe hits, dessert viral, bakery, makanan, skincare, fashion, dan local finds yang sedang ramai.</p>
+            </div>
+            <div class="card-pretty area-card">
+                <span class="pill">📍 Jastip Area Trawas</span>
+                <h3 class="mt-3">Hidden cafe & mountain finds.</h3>
+                <p>Special trip order dari cafe Trawas, hotel/resort, bakery aesthetic, produk lokal, dan oleh-oleh area pegunungan.</p>
+            </div>
+            <div class="card-pretty area-card">
+                <span class="pill">📍 Batu</span>
+                <h3 class="mt-3">Oleh-oleh & tourist snacks.</h3>
+                <p>Bisa titip oleh-oleh Batu, snack, susu, produk wisata, dan item lokal yang cocok dikirim ke luar kota.</p>
+            </div>
+            <div class="card-pretty area-card">
+                <span class="pill">✨ Popular request</span>
+                <h3 class="mt-3">Titip cafe Malang, titip dessert Trawas, dan request toko tertentu.</h3>
+                <p>Customer tinggal kirim nama produk, lokasi toko, foto referensi, dan deadline. Admin bantu cek ketersediaan, estimasi biaya, lalu proses jika sudah cocok.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="card price-card featured h-100 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <span class="price-type-label">Best Seller</span>
-                        <div class="price-name">Bouquet & Gift</div>
-                        <div class="price-amount">Mulai 15K</div>
-                        <div class="price-desc">Untuk wisuda, ulang tahun, anniversary, dan momen spesial lainnya.</div>
-                        <ul class="feature-list flex-grow-1">
-                            <li>Bisa request sesuai keinginan</li>
-                            <li>Fleksibel sesuai budget</li>
-                            <li>Bisa tambah greeting card</li>
-                            <li>Feel lebih bermakna</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo kak, Saya mau order Gift'); ?>" class="btn btn-main">Order Gift</a>
-                        </div>
-                    </div>
+<section class="section section-soft" id="buket">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-5">
+                <span class="section-kicker">bouquet & gift</span>
+                <h2 class="section-title">Bouquet cantik untuk momen kecil yang terasa spesial.</h2>
+                <p class="section-subtitle">Hadiah kecil bisa terasa niat kalau dikurasi dengan warna, pesan, dan detail yang tepat. Cocok untuk wisuda, birthday, anniversary, atau moodbooster.</p>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <span class="pill">Bouquet mulai 15K</span>
+                    <span class="pill">Greeting card mulai 10K</span>
+                    <span class="pill">Custom budget</span>
                 </div>
             </div>
-
-            <div class="col-lg-4">
-                <div class="card price-card h-100 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <span class="price-type-label">Add-on Favorit</span>
-                        <div class="price-name">Greeting Card</div>
-                        <div class="price-amount">Mulai 10K</div>
-                        <div class="price-desc">Tambahan kecil yang bikin hadiah terasa lebih manis dan berkesan.</div>
-                        <ul class="feature-list flex-grow-1">
-                            <li>Isi pesan custom</li>
-                            <li>Cocok untuk semua gift</li>
-                            <li>Simple tapi impactful</li>
-                            <li>Foto Custom</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo saya ingin Order Greeting Card'); ?>" class="btn btn-main">Order Greeting Card</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="card price-card h-100 d-flex flex-column">
-                    <div class="card-body d-flex flex-column">
-                        <span class="price-type-label">Digital Product</span>
-                        <div class="price-name">Undangan Digital</div>
-                        <div class="price-amount">Mulai 25K</div>
-                        <div class="price-desc">Simple, modern, dan praktis untuk dibagikan lewat WhatsApp.</div>
-                        <ul class="feature-list flex-grow-1">
-                            <li>Desain clean & elegan</li>
-                            <li>Custom nama & detail acara</li>
-                            <li>Mudah dibagikan</li>
-                            <li>Affordable</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo saya ingin order Undangan Digital'); ?>" class="btn btn-main">Order Undangan</a>
-                        </div>
-                    </div>
+            <div class="col-lg-7">
+                <div class="gallery-masonry">
+                    <div class="gallery-item"><div class="gallery-img" style="--h:320px"><span class="pill">Bouquet Gift</span></div><div class="gallery-body"><strong>Graduation Bouquet</strong><span>request warna & isi</span></div></div>
+                    <div class="gallery-item"><div class="gallery-img mint" style="--h:220px"><span class="pill">Gift Box</span></div><div class="gallery-body"><strong>Soft Hampers</strong><span>cute packaging</span></div></div>
+                    <div class="gallery-item"><div class="gallery-img dark" style="--h:280px"><span class="pill">Greeting Card</span></div><div class="gallery-body"><strong>Personal Note</strong><span>custom message</span></div></div>
+                    <div class="gallery-item"><div class="gallery-img" style="--h:190px"><span class="pill">Custom</span></div><div class="gallery-body"><strong>Budget Friendly</strong><span>sesuai kebutuhan</span></div></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="jastip" class="section">
+<section class="section" id="digital">
     <div class="container">
         <div class="text-center mb-5">
-            <span class="section-kicker">jastip service</span>
-            <h2 class="section-title">Jastip Indah Aja</h2>
-            <!-- <p class="section-subtitle">Titip beli yang simpel, santai, dan cocok untuk kebutuhan yang fleksibel.</p> -->
+            <span class="section-kicker">digital product</span>
+            <h2 class="section-title">Digital invitation, greeting card, dan template praktis.</h2>
+            <p class="section-subtitle mx-auto">Pilihan digital product yang rapi, lucu, dan mudah dibagikan untuk kebutuhan acara maupun jualan.</p>
         </div>
-
         <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="service-card service-card-v2 h-100">
-                    <div class="icon-badge">🧴</div>
-                    <h5>Beauty & Fashion</h5>
-                    <p>Titip produk favorit tanpa harus repot antri.</p>
+            <div class="col-lg-4">
+                <div class="card-pretty price-card">
+                    <span class="pill">Best seller</span>
+                    <h3 class="mt-3">Bouquet & Gift</h3>
+                    <div class="price">15K+</div>
+                    <p>Untuk wisuda, ulang tahun, anniversary, dan surprise kecil yang personal.</p>
+                    <ul class="feature-list"><li>Request warna & tema</li><li>Greeting card add-on</li><li>Fleksibel sesuai budget</li></ul>
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau order Gift/Bouquet.'); ?>" class="btn btn-main w-100">Order Gift</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-card service-card-v2 h-100">
-                    <div class="icon-badge">🍫</div>
-                    <h5>Snack & Food</h5>
-                    <p>Cocok untuk oleh-oleh, camilan dan pelengkap moodbooster kamu.</p>
+            <div class="col-lg-4">
+                <div class="card-pretty price-card">
+                    <span class="pill">Digital cute</span>
+                    <h3 class="mt-3">Undangan Digital</h3>
+                    <div class="price">25K+</div>
+                    <p>Simple, modern, dan gampang dibagikan lewat WhatsApp untuk berbagai acara.</p>
+                    <ul class="feature-list"><li>Custom nama & detail</li><li>Mobile friendly</li><li>Preview sebelum share</li></ul>
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau order Undangan Digital.'); ?>" class="btn btn-main w-100">Order Undangan</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-card service-card-v2 h-100">
-                    <div class="icon-badge">🛍️</div>
-                    <h5>Request Item</h5>
-                    <p>Nggak harus satu kategori. Selama memungkinkan, kami bantu carikan.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-card service-card-v2 h-100 highlight">
-                    <div class="icon-badge">💌</div>
-                    <h5>Optional Greeting Card</h5>
-                    <p>Bisa sekalian tambah sentuhan hadiah biar order terasa lebih personal.</p>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="service-card service-card-v2 highlight text-center p-4 p-lg-5">
-                        <span class="section-kicker">jastipin Indah Aja</span>
-                        <h4 class="mt-2">Tinggal Infoin aja mau jastip apa</h4>
-                        <p class="mb-4">
-                            Akan kami proses tanpa ribet dan secepatnya.
-                        </p>
-
-                        <div class="d-flex justify-content-center gap-3 flex-wrap">
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">
-                                Lihat Gallery
-                            </a>
-                            <a href="https://instagram.com/jastip.indahaja_" target="_blank" class="btn btn-main">
-                                Instagram Jastip
-                            </a>
-                        </div>
-                    </div>
+            <div class="col-lg-4">
+                <div class="card-pretty price-card">
+                    <span class="pill">Useful template</span>
+                    <h3 class="mt-3">Spreadsheet</h3>
+                    <div class="price">Ready</div>
+                    <p>Template tracking order, keuangan, dan penjualan untuk usaha kecil yang ingin rapi.</p>
+                    <ul class="feature-list"><li>Dashboard simple</li><li>Form input</li><li>Custom premium by request</li></ul>
+                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau tanya Spreadsheet Template.'); ?>" class="btn btn-main w-100">Tanya Template</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="spreadsheet" class="section section-light">
+<section class="section section-soft">
     <div class="container">
-        <div class="text-center mb-5">
-            <span class="section-kicker">template product</span>
-            <h2 class="section-title">Spreadsheet Template</h2>
-            <!-- <p class="section-subtitle">Template yang rapi, useful, dan nyaman dipakai untuk kebutuhan personal maupun usaha kecil.</p> -->
-        </div>
-
-        <div class="row g-4 mb-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="service-card service-card-v2 h-100">
-                    <div class="icon-badge">💸</div>
-                    <h5>Money Manager</h5>
-                    <p>Catat pemasukan, pengeluaran, tabungan, dan cash flow dengan tampilan clean.</p>
-                </div>
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-5">
+                <span class="section-kicker">how it works</span>
+                <h2 class="section-title">Order flow yang simple banget.</h2>
+                <p class="section-subtitle">Customer tidak perlu bingung. Cukup kirim wishlist, admin cek, deal, lalu pesanan diproses.</p>
+                <a href="<?= site_url('cara_order'); ?>" class="btn btn-soft mt-3">Lihat Cara Order</a>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-card service-card-v2 h-100">
-                    <div class="icon-badge">📦</div>
-                    <h5>Sales Tracker</h5>
-                    <p>Tracking transaksi, laba, dan laporan sederhana untuk usahamu.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="service-card service-card-v2 h-100 highlight">
-                    <div class="icon-badge">📋</div>
-                    <h5>Jastip Tracker</h5>
-                    <p>Untuk kebutuhan jastip, order, atau dashboard sederhana yang ingin disesuaikan.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="card price-card h-100">
-                    <div class="card-body">
-                        <span class="price-type-label">Regular</span>
-                        <div class="price-name">Template Spreadsheet Regular</div>
-                        <div class="price-amount">25K</div>
-                        <div class="price-desc">Siap pakai, clean, dan cocok untuk kebutuhan standar yang tetap rapi.</div>
-                        <ul class="feature-list">
-                            <li>Template siap pakai</li>
-                            <li>Sudah ada form input</li>
-                            <li>Layout clean</li>
-                            <li>Dashboard standar</li>
-                            <li>Cocok untuk personal / usaha kecil</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=Halo%20saya%20tertarik%20dengan%20Template%20Spreadsheet%20Regular%2025K" class="btn btn-main w-100">Pilih Paket Regular</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card price-card featured h-100">
-                    <div class="card-body">
-                        <span class="price-type-label">Premium</span>
-                        <div class="price-name">Template Spreadsheet Premium</div>
-                        <div class="price-amount">50K</div>
-                        <div class="price-desc">Lebih fleksibel untuk request warna, fungsi tambahan, dan sentuhan yang lebih personal.</div>
-                        <ul class="feature-list">
-                            <li>Semua fitur paket Regular</li>
-                            <li>Sudah ada form input</li>
-                            <li>Bisa request warna</li>
-                            <li>Bisa tambah fungsi tertentu</li>
-                            <li>Penyesuaian dashboard sederhana</li>
-                        </ul>
-                        <div class="d-grid gap-2">
-                            <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
-
-
-                            <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=Halo%20saya%20tertarik%20dengan%20Template%20Spreadsheet%20Premium%2050K" class="btn btn-main w-100">Pilih Paket Premium</a>
-                        </div>
-                    </div>
+            <div class="col-lg-7">
+                <div class="flow-grid">
+                    <div class="flow-card"><div class="flow-no">1</div><h5>Send wishlist</h5><p>Kirim produk, cafe, toko, foto, atau budget.</p></div>
+                    <div class="flow-card"><div class="flow-no">2</div><h5>Admin cek</h5><p>Dicek ketersediaan, estimasi, dan ongkir.</p></div>
+                    <div class="flow-card"><div class="flow-no">3</div><h5>Confirm</h5><p>Kalau cocok, lanjut pembayaran sesuai arahan.</p></div>
+                    <div class="flow-card"><div class="flow-no">4</div><h5>Delivered</h5><p>Pesanan diproses, dikemas, dan dikirim aman.</p></div>
                 </div>
             </div>
         </div>
@@ -344,213 +220,23 @@
 
 <section class="section">
     <div class="container">
-        <div class="text-center mb-5">
-            <span class="section-kicker">Contact</span>
-            <h2 class="section-title">Yuk,Hubungi Kami Sekarang</h2>
-            <!-- <p class="section-subtitle">Template yang rapi, useful, dan nyaman dipakai untuk kebutuhan personal maupun usaha kecil.</p> -->
-        </div>
-        <div class="row g-4 align-items-stretch">
-            <div class="col-lg-6">
-                <div class="cta-panel cta-panel-soft h-100">
-                    <span class="section-kicker">preview first</span>
-                    <h3>Lihat hasilnya dulu</h3>
-                    <p>Cek gallery dan review biar kamu langsung kebayang kualitas dan feel dari layanan kami.</p>
-                    <a href="<?= site_url('review'); ?>" class="btn btn-soft">Lihat Gallery</a>
+        <div class="seo-box">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <span class="section-kicker">SEO friendly</span>
+                    <h2 class="section-title mb-3">Jastip & Bouquet</h2>
+                    <p>Open daily jastip service from Malang, Batu, and Trawas area. Helping customers buy trending cafe menus, desserts, souvenirs, gifts, local favorite products, and custom store requests with safe delivery.</p>
+                    <div class="seo-keywords"><span>jastip malang</span><span>jastip trawas</span><span>titip cafe malang</span><span>dessert trawas</span><span>oleh-oleh batu</span><span>personal shopper malang</span></div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="cta-panel cta-panel-main h-100">
-                    <span class="section-kicker">ready to order</span>
-                    <h3>Kalau sudah cocok, tinggal chat.</h3>
-                    <p>Tanya dulu boleh, konsultasi boleh, langsung order juga boleh. Kami siap membantu dari awal sampai selesai.</p>
-                    <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Hallo kak,Saya ingin order dong...'); ?>" class="btn btn-main">Chat Sekarang</a>
+                <div class="col-lg-5">
+                    <div class="cta-panel">
+                        <span class="pill">Ready to order?</span>
+                        <h2 class="mt-3">Tell us what you want.</h2>
+                        <p>Spill aja mau titip apa, nanti admin bantu arahin yang paling cocok.</p>
+                        <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau titip/order dari website.'); ?>" class="btn btn-main">Chat WhatsApp</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    .hero-v2 {
-        padding-top: 112px;
-        padding-bottom: 86px;
-    }
-
-    .hero-glass-wrap {
-        background: rgba(255, 255, 255, .28);
-        border: 1px solid rgba(255, 255, 255, .62);
-        box-shadow: 0 24px 60px rgba(77, 131, 246, .14);
-        border-radius: 36px;
-        padding: 28px;
-        backdrop-filter: blur(10px);
-    }
-
-    .hero-showcase-card {
-        padding: 22px;
-        border-radius: 28px;
-        background: rgba(255, 255, 255, .82);
-        border: 1px solid rgba(255, 255, 255, .9);
-        box-shadow: 0 20px 48px rgba(77, 131, 246, .12);
-    }
-
-    .showcase-chip,
-    .soft-label,
-    .section-kicker {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, .78);
-        border: 1px solid rgba(255, 255, 255, .9);
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: .08em;
-        color: var(--pink-600);
-    }
-
-    .hero-points-v2 {
-        margin-top: 26px;
-    }
-
-    .showcase-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        margin-top: 16px;
-    }
-
-    .showcase-box {
-        border-radius: 24px;
-        min-height: 110px;
-        display: flex;
-        align-items: end;
-        justify-content: start;
-        padding: 16px;
-        font-weight: 800;
-        color: var(--text-dark);
-        box-shadow: 0 16px 34px rgba(77, 131, 246, .12);
-        border: 1px solid rgba(255, 255, 255, .92);
-    }
-
-    .showcase-box.large {
-        min-height: 150px;
-    }
-
-    .showcase-box.gift {
-        background: linear-gradient(135deg, #ffffff, #fff4fb);
-    }
-
-    .showcase-box.jastip {
-        background: linear-gradient(135deg, #f1f6ff, #ffffff);
-    }
-
-    .showcase-box.sheet {
-        background: linear-gradient(135deg, #fffbe8, #ffffff);
-    }
-
-    .showcase-box.note {
-        background: linear-gradient(135deg, #eefbff, #ffffff);
-        align-items: center;
-    }
-
-    .showcase-box.note small {
-        font-weight: 700;
-        color: var(--muted);
-    }
-
-    .service-card-v2 {
-        position: relative;
-        overflow: hidden;
-        border-radius: 28px;
-    }
-
-    .service-card-v2.highlight,
-    .cta-panel-main {
-        background: linear-gradient(135deg, #fff8fc 0%, #fffdf5 100%);
-    }
-
-    .section-overlap-cards {
-        padding-top: 12px;
-    }
-
-    .feature-panel,
-    .cta-panel {
-        border-radius: 30px;
-        padding: 28px;
-        background: #fff;
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow-md);
-        height: 100%;
-    }
-
-    .feature-panel-gift {
-        background: linear-gradient(135deg, #ffffff 0%, #fff6fb 62%, #fffbe7 100%);
-    }
-
-    .feature-panel-digital {
-        background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
-    }
-
-    .feature-panel h3,
-    .cta-panel h3 {
-        font-weight: 800;
-        color: var(--text-dark);
-        margin: 14px 0 12px;
-    }
-
-    .feature-panel p,
-    .cta-panel p {
-        line-height: 1.85;
-        color: var(--muted);
-    }
-
-    .mini-visual-stack {
-        display: grid;
-        gap: 14px;
-    }
-
-    .mini-visual {
-        min-height: 120px;
-        border-radius: 24px;
-        padding: 18px;
-        display: flex;
-        align-items: end;
-        font-weight: 800;
-        color: var(--text-dark);
-        box-shadow: 0 16px 34px rgba(77, 131, 246, .12);
-        border: 1px solid rgba(255, 255, 255, .9);
-    }
-
-    .mini-visual.top {
-        background: linear-gradient(135deg, #ffffff, #eef4ff);
-    }
-
-    .mini-visual.bottom {
-        background: linear-gradient(135deg, #ffffff, #fff0f8);
-    }
-
-    .cta-panel-soft {
-        background: linear-gradient(135deg, #f4f8ff 0%, #ffffff 100%);
-    }
-
-    .cta-panel-main .section-kicker {
-        background: rgba(255, 255, 255, .9);
-    }
-
-    @media (max-width: 767.98px) {
-        .hero-glass-wrap {
-            padding: 18px;
-            border-radius: 24px;
-        }
-
-        .showcase-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .showcase-box.large {
-            min-height: 120px;
-        }
-    }
-</style>

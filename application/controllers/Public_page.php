@@ -91,6 +91,20 @@ class Public_page extends MY_Controller
         $this->render('review', $data);
     }
 
+    public function jastip_malang()
+    {
+        $data['page_title'] = 'Jastip Malang';
+        $data['area'] = 'Malang';
+        $this->render('local_area', $data);
+    }
+
+    public function jastip_trawas()
+    {
+        $data['page_title'] = 'Jastip Trawas';
+        $data['area'] = 'Trawas';
+        $this->render('local_area', $data);
+    }
+
 
     public function preview($slug)
     {
