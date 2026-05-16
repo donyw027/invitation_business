@@ -1,29 +1,33 @@
 <!doctype html>
 <html lang="id">
-
 <head>
     <meta charset="utf-8">
-    <title><?= html_escape($page_title); ?></title>
+    <title><?= html_escape($page_title ?? ($project->title ?? 'Wedding Invitation')); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#b88c7d">
+    <meta name="theme-color" content="#4f3f34">
+    <link rel="icon" href="<?= base_url('assets/img/logo.ico'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #fffaf6;
-            --bg-soft: #f8efe9;
-            --card: #ffffff;
-            --primary: #9e6f61;
-            --primary-dark: #7f5549;
-            --accent: #d7b3a6;
-            --text: #4a3833;
-            --muted: #8b746d;
-            --line: #eddcd4;
-            --shadow: 0 18px 40px rgba(79, 55, 47, .10);
-            --radius-xl: 28px;
-            --radius-lg: 22px;
-            --radius-md: 16px;
+            --ivory: #fffaf1;
+            --paper: #fff6e8;
+            --deep: #3f342a;
+            --deep-soft: #695648;
+            --gold: #b9925d;
+            --gold-soft: #ead9bd;
+            --sage: #7a876d;
+            --line: rgba(185, 146, 93, .28);
+            --white: #ffffff;
+            --shadow: 0 24px 70px rgba(57, 43, 31, .13);
+            --radius-xl: 34px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         html {
@@ -31,684 +35,688 @@
         }
 
         body {
-            background: linear-gradient(180deg, #fffaf6 0%, #fff5ef 100%);
-            color: var(--text);
-            font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+            margin: 0;
+            color: var(--deep);
+            background:
+                radial-gradient(circle at 10% 0%, rgba(234, 217, 189, .7), transparent 30%),
+                radial-gradient(circle at 90% 8%, rgba(122, 135, 109, .18), transparent 26%),
+                linear-gradient(180deg, #fffaf1 0%, #f7efe2 55%, #fffaf1 100%);
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .sacred-shell {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .5;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(63, 52, 42, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(63, 52, 42, .03) 1px, transparent 1px);
+            background-size: 44px 44px;
         }
 
         .section {
-            padding: 88px 0;
             position: relative;
+            z-index: 1;
+            padding: 94px 0;
         }
 
-        .section-sm {
-            padding: 64px 0;
+        .section-soft {
+            padding: 72px 0;
         }
 
-        .section-title {
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--primary-dark);
-        }
-
-        .section-subtitle {
-            color: var(--muted);
-            max-width: 760px;
-            margin: 0 auto;
+        .container-narrow {
+            max-width: 1040px;
         }
 
         .kicker {
-            display: inline-block;
-            font-size: 12px;
-            letter-spacing: .18em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: .2em;
             text-transform: uppercase;
-            color: var(--primary);
-            background: #f8e7e0;
-            border: 1px solid #efd8cf;
-            padding: 8px 12px;
-            border-radius: 999px;
-            margin-bottom: 14px;
+            font-size: 11px;
             font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .kicker::before,
+        .kicker::after {
+            content: "";
+            width: 28px;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .serif {
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        .section-title {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: .96;
+            font-weight: 700;
+            color: var(--deep);
+            margin-bottom: 18px;
+        }
+
+        .section-subtitle {
+            color: var(--deep-soft);
+            line-height: 1.85;
+            max-width: 760px;
+            margin: 0 auto;
         }
 
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            position: relative;
+            padding: 44px 0 80px;
             overflow: hidden;
-            color: #fff;
-            background:
-                linear-gradient(rgba(54, 34, 28, .38), rgba(54, 34, 28, .55)),
-                url('<?= asset_or_url($project->hero_image); ?>') center/cover no-repeat;
         }
 
         .hero::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at top left, rgba(255, 255, 255, .20), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(255, 255, 255, .10), transparent 25%);
-            pointer-events: none;
+            width: 760px;
+            height: 760px;
+            border: 1px solid rgba(185, 146, 93, .18);
+            border-radius: 50%;
+            top: -240px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
         }
 
         .hero-card {
             position: relative;
+            background: rgba(255, 250, 241, .82);
+            border: 1px solid rgba(185, 146, 93, .28);
+            border-radius: 44px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            backdrop-filter: blur(18px);
+        }
+
+        .hero-visual {
+            min-height: 620px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-visual::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(63, 52, 42, .08), rgba(63, 52, 42, .64)),
+                radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, .28) 100%);
+        }
+
+        .hero-content {
+            position: absolute;
+            inset: 0;
             z-index: 2;
-            background: rgba(255, 255, 255, .12);
-            border: 1px solid rgba(255, 255, 255, .22);
-            backdrop-filter: blur(10px);
-            border-radius: 32px;
-            padding: 28px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .10);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 56px 28px;
+            color: #fff8ee;
         }
 
         .hero-cover {
-            font-size: 14px;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            opacity: .95;
-            margin-bottom: 14px;
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 999px;
+            background: rgba(255,255,255,.12);
+            backdrop-filter: blur(10px);
+            margin-bottom: 22px;
+            font-size: 13px;
+            color: rgba(255,248,238,.9);
         }
 
         .hero-title {
-            font-size: clamp(40px, 7vw, 82px);
-            line-height: 1.05;
-            font-weight: 800;
-            margin-bottom: 14px;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(54px, 9vw, 108px);
+            line-height: .82;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 15px 45px rgba(0,0,0,.35);
         }
 
         .hero-subtitle {
-            font-size: clamp(16px, 2.2vw, 24px);
-            opacity: .95;
-            margin-bottom: 18px;
+            max-width: 680px;
+            margin: 26px auto 0;
+            line-height: 1.85;
+            color: rgba(255,248,238,.88);
         }
 
-        .hero-date {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 22px;
+        .hero-date-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 28px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            background: rgba(255, 250, 241, .94);
+            color: var(--deep);
+            box-shadow: 0 16px 44px rgba(0,0,0,.16);
+            font-weight: 700;
         }
 
         .hero-actions {
             display: flex;
-            flex-wrap: wrap;
             gap: 12px;
             justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
 
-        .btn-main {
-            background: var(--primary);
-            color: #fff;
-            border: none;
+        .btn-sacred {
+            border: 0;
             border-radius: 999px;
-            padding: 12px 22px;
-            font-weight: 600;
-            box-shadow: 0 10px 20px rgba(126, 85, 73, .18);
+            padding: 14px 24px;
+            background: var(--deep);
+            color: #fff8ee;
+            font-weight: 700;
+            box-shadow: 0 16px 40px rgba(63, 52, 42, .22);
+            transition: .25s ease;
         }
 
-        .btn-main:hover {
-            background: var(--primary-dark);
-            color: #fff;
+        .btn-sacred:hover {
+            transform: translateY(-2px);
+            color: #fff8ee;
+            background: #2f261f;
         }
 
-        .btn-soft {
-            background: rgba(255, 255, 255, .16);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, .30);
+        .btn-outline-sacred {
+            border: 1px solid rgba(255,255,255,.45);
             border-radius: 999px;
-            padding: 12px 22px;
-            font-weight: 600;
-            backdrop-filter: blur(6px);
+            padding: 14px 24px;
+            background: rgba(255,255,255,.12);
+            color: #fff8ee;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            transition: .25s ease;
         }
 
-        .btn-soft:hover {
-            background: rgba(255, 255, 255, .24);
-            color: #fff;
+        .btn-outline-sacred:hover {
+            background: rgba(255,255,255,.22);
+            color: #fff8ee;
         }
 
-        .scroll-hint {
-            position: absolute;
+        .preview-badge {
+            position: fixed;
+            top: 18px;
             left: 50%;
-            bottom: 24px;
             transform: translateX(-50%);
-            z-index: 2;
-            color: #fff;
+            z-index: 20;
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            color: #8a6400;
+            padding: 10px 16px;
+            border-radius: 999px;
             font-size: 13px;
-            opacity: .9;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
         }
 
-        .glass-note {
-            background: rgba(255, 255, 255, .16);
-            border: 1px solid rgba(255, 255, 255, .25);
-            backdrop-filter: blur(8px);
-            border-radius: 18px;
-            padding: 14px 16px;
-            margin-top: 18px;
-            display: inline-block;
-        }
-
-        .ornament {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(215, 179, 166, .22), transparent 65%);
-            filter: blur(4px);
-            pointer-events: none;
-        }
-
-        .ornament.top-right {
-            top: -60px;
-            right: -30px;
-        }
-
-        .ornament.bottom-left {
-            bottom: -70px;
-            left: -40px;
-        }
-
-        .card-lux {
-            border: none;
+        .intro-card {
             border-radius: var(--radius-xl);
-            background: var(--card);
+            background: rgba(255,255,255,.68);
+            border: 1px solid rgba(185, 146, 93, .24);
             box-shadow: var(--shadow);
+            padding: clamp(28px, 5vw, 54px);
+            position: relative;
             overflow: hidden;
-            height: 100%;
         }
 
-        .card-lux .card-body {
-            padding: 28px;
+        .intro-card::before {
+            content: "❦";
+            position: absolute;
+            top: 8px;
+            right: 26px;
+            font-size: 92px;
+            color: rgba(185, 146, 93, .13);
+            font-family: Georgia, serif;
         }
 
-        .info-tile {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(79, 55, 47, .04);
-            height: 100%;
+        .message-quote {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.35;
+            color: var(--deep);
+            margin: 0;
         }
 
-        .info-icon {
-            width: 52px;
-            height: 52px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            background: #f8ebe6;
-            color: var(--primary);
-            font-size: 22px;
-            margin-bottom: 14px;
-        }
-
-        .mini-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: .15em;
-            color: var(--muted);
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .big-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            line-height: 1.25;
-        }
-
-        .countdown-wrap {
+        .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 16px;
-            margin-top: 24px;
+            gap: 14px;
+            margin-top: 34px;
         }
 
         .countdown-item {
-            background: #fff;
+            background: #fffdf8;
             border: 1px solid var(--line);
-            border-radius: 20px;
-            text-align: center;
-            padding: 18px 10px;
-            box-shadow: 0 8px 20px rgba(79, 55, 47, .04);
+            border-radius: 22px;
+            padding: 22px 12px;
+            box-shadow: 0 14px 30px rgba(57, 43, 31, .06);
         }
 
         .countdown-value {
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--primary-dark);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(34px, 5vw, 54px);
+            font-weight: 700;
+            color: var(--gold);
             line-height: 1;
         }
 
         .countdown-label {
             font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .14em;
             text-transform: uppercase;
-            letter-spacing: .10em;
-            color: var(--muted);
+            color: var(--deep-soft);
             margin-top: 8px;
         }
 
-        .timeline-text {
-            white-space: pre-line;
-            color: var(--text);
-            line-height: 1.8;
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
-        .gallery-card {
-            border: none;
+        .detail-tile,
+        .content-card {
+            background: rgba(255,255,255,.72);
+            border: 1px solid rgba(185, 146, 93, .25);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 18px 50px rgba(57, 43, 31, .08);
+        }
+
+        .detail-tile {
+            padding: 26px 22px;
+            text-align: center;
+            min-height: 178px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            font-size: 24px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--deep);
+            line-height: 1.5;
+        }
+
+        .content-card {
+            padding: 30px;
+        }
+
+        .map-frame {
+            height: 360px;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            background: #fff;
-            height: 100%;
+            border: 1px solid var(--line);
+            background: #efe2d2;
         }
 
-        .gallery-card img {
+        .map-frame iframe {
             width: 100%;
-            height: 320px;
-            object-fit: cover;
-            display: block;
+            height: 100%;
+            border: 0;
         }
 
-        .gallery-card .caption {
-            padding: 14px 18px 18px;
-            color: var(--muted);
-            font-size: 14px;
+        .gallery-masonry {
+            columns: 3 260px;
+            column-gap: 18px;
         }
 
-        .quote-box {
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 18px;
             border-radius: 28px;
-            background: linear-gradient(135deg, #fff 0%, #fdf5f1 100%);
-            border: 1px solid var(--line);
-            padding: 34px;
-            box-shadow: var(--shadow);
-        }
-
-        .quote-mark {
-            font-size: 48px;
-            line-height: 1;
-            color: var(--accent);
-        }
-
-        .share-box {
+            overflow: hidden;
             background: #fff;
+            border: 1px solid rgba(185, 146, 93, .24);
+            box-shadow: 0 18px 45px rgba(57, 43, 31, .09);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--deep-soft);
+            background: #fffdf8;
+        }
+
+        .gift-box {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+
+        .gift-icon {
+            min-width: 56px;
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            background: #fff8ec;
             border: 1px solid var(--line);
-            border-radius: 24px;
-            padding: 20px;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
         .form-control,
         .form-select {
-            min-height: 50px;
-            border-radius: 14px;
-            border: 1px solid #e6d7cf;
-            padding-left: 14px;
-            padding-right: 14px;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            padding-top: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(185, 146, 93, .32);
+            padding: 13px 15px;
+            background-color: rgba(255,255,255,.86);
         }
 
         .form-control:focus,
         .form-select:focus {
-            border-color: #c89a8a;
-            box-shadow: 0 0 0 .25rem rgba(158, 111, 97, .12);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 .2rem rgba(185, 146, 93, .16);
         }
 
         .btn-send {
-            background: #1f1f1f;
-            color: #fff;
-            border: none;
+            border: 0;
             border-radius: 999px;
-            padding: 12px 22px;
-            font-weight: 600;
-        }
-
-        .btn-send:hover {
-            background: #000;
+            padding: 14px 26px;
+            background: var(--gold);
             color: #fff;
+            font-weight: 800;
+            box-shadow: 0 14px 34px rgba(185, 146, 93, .22);
         }
 
         .wish-card {
-            border: 1px solid var(--line);
-            border-radius: 22px;
-            background: #fff;
-            padding: 20px;
             height: 100%;
-            box-shadow: 0 8px 20px rgba(79, 55, 47, .04);
+            background: #fffdf8;
+            border: 1px solid rgba(185, 146, 93, .24);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 16px 38px rgba(57, 43, 31, .07);
         }
 
         .wish-name {
-            font-weight: 700;
-            color: var(--primary-dark);
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .share-copy {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .share-copy input {
+            flex: 1 1 260px;
+        }
+
+        .footer-prayer {
+            border-radius: 34px;
+            background: var(--deep);
+            color: #fff8ee;
+            padding: clamp(34px, 5vw, 58px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-prayer h2 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(36px, 5vw, 58px);
+            margin-bottom: 12px;
         }
 
         .music-player {
             position: fixed;
             right: 18px;
             bottom: 18px;
-            z-index: 99;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 250, 241, .9);
+            border: 1px solid rgba(185, 146, 93, .35);
+            border-radius: 999px;
+            padding: 9px 11px;
+            box-shadow: 0 18px 42px rgba(57, 43, 31, .18);
+            backdrop-filter: blur(14px);
         }
 
         .music-btn {
-            width: 58px;
-            height: 58px;
-            border: none;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 12px 24px rgba(126, 85, 73, .28);
+            border: 0;
+            background: var(--deep);
+            color: #fff8ee;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-size: 20px;
         }
 
-        .music-btn:hover {
-            background: var(--primary-dark);
+        .music-text {
+            font-size: 12px;
+            line-height: 1.2;
+            color: var(--deep-soft);
+            padding-right: 8px;
+            min-width: 82px;
         }
 
-        .floating-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            color: var(--primary-dark);
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            padding: 10px 14px;
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(79, 55, 47, .06);
+        .music-text strong {
+            display: block;
+            color: var(--deep);
         }
 
-        .footer-soft {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .btn-map,
-        .btn-copy {
-            border-radius: 999px;
-            padding: 10px 18px;
-            font-weight: 600;
-        }
-
-        .preview-alert {
-            position: relative;
-            z-index: 3;
-        }
-
-        @media (max-width: 991.98px) {
-            .hero {
-                min-height: auto;
-                padding: 110px 0 80px;
+        @media (max-width: 991px) {
+            .hero-visual {
+                min-height: 700px;
             }
 
-            .countdown-wrap {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .gallery-card img {
-                height: 260px;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .hero-card {
-                padding: 22px 18px;
-                border-radius: 24px;
             }
 
             .section {
-                padding: 72px 0;
+                padding: 74px 0;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .hero {
+                padding: 22px 0 54px;
             }
 
-            .countdown-wrap {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
+            .hero-card {
+                border-radius: 30px;
             }
 
-            .countdown-item {
-                padding: 16px 8px;
+            .hero-visual {
+                min-height: 680px;
             }
 
-            .countdown-value {
-                font-size: 26px;
+            .hero-content {
+                padding: 40px 18px;
             }
 
-            .gallery-card img {
-                height: 220px;
+            .hero-date-pill {
+                border-radius: 20px;
+            }
+
+            .content-card {
+                padding: 22px;
+            }
+
+            .map-frame {
+                height: 300px;
+            }
+
+            .music-player {
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .music-text {
+                display: none;
             }
         }
     </style>
 </head>
 
 <body>
+<?php
+$eventDateFormatted = !empty($project->event_date) ? date('d F Y', strtotime($project->event_date)) : '';
+$eventDateISO = !empty($project->event_date) ? date('Y-m-d', strtotime($project->event_date)) : '';
+$eventTime = $project->event_time ?? '';
+$musicUrl = !empty($project->music_url) ? $project->music_url : '';
+$coverImageRaw = !empty($project->cover_image) ? $project->cover_image : (!empty($project->hero_image) ? $project->hero_image : '');
+$coverImage = !empty($coverImageRaw) ? asset_or_url($coverImageRaw) : 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop';
+$guestNameSafe = !empty($guest_name) ? $guest_name : '';
+$mapUrl = '';
+if (!empty($project->location_name) || !empty($project->location_address)) {
+    $mapQuery = trim(($project->location_name ?? '') . ' ' . ($project->location_address ?? ''));
+    $mapUrl = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($mapQuery);
+}
+$mapEmbed = !empty($project->map_embed) ? trim($project->map_embed) : '';
+?>
 
-    <?php
-    $eventDateFormatted = !empty($project->event_date) ? date('d F Y', strtotime($project->event_date)) : '';
-    $eventDateISO = !empty($project->event_date) ? date('Y-m-d', strtotime($project->event_date)) : '';
-    $musicUrl = !empty($project->music_url) ? $project->music_url : '';
-    $mapUrl = '';
-    if (!empty($project->location_name) || !empty($project->location_address)) {
-        $mapQuery = trim(($project->location_name ?? '') . ' ' . ($project->location_address ?? ''));
-        $mapUrl = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($mapQuery);
-    }
-    ?>
+<div class="sacred-shell">
+    <div class="grain"></div>
 
-    <section class="hero text-center">
-        <div class="ornament top-right"></div>
-        <div class="ornament bottom-left"></div>
+    <?php if (!empty($is_preview)): ?>
+        <div class="preview-badge">Preview Mode</div>
+    <?php endif; ?>
 
-        <div class="container position-relative">
-            <?php if ($is_preview): ?>
-                <div class="alert alert-warning preview-alert">Preview mode</div>
-            <?php endif; ?>
-
-            <div class="row justify-content-center">
-                <div class="col-xl-9">
-                    <div class="hero-card">
+    <section class="hero">
+        <div class="container container-narrow">
+            <div class="hero-card">
+                <div class="hero-visual" style="background-image: url('<?= html_escape($coverImage); ?>');">
+                    <div class="hero-content">
                         <div class="hero-cover">
-                            <?= html_escape($project->cover_text); ?>
-                            <?php if (!empty($guest_name)): ?>
-                                <br>
-                                <span class="fw-bold"><?= html_escape($guest_name); ?></span>
+                            <?= html_escape($project->cover_text ?? 'Kepada Yth. Bapak/Ibu/Saudara/i'); ?>
+                            <?php if (!empty($guestNameSafe)): ?>
+                                <br><strong><?= html_escape($guestNameSafe); ?></strong>
                             <?php endif; ?>
                         </div>
 
-                        <div class="kicker">Digital Wedding Invitation</div>
-                        <h1 class="hero-title"><?= html_escape($project->title); ?></h1>
-                        <p class="hero-subtitle"><?= html_escape($project->subtitle); ?></p>
+                        <div class="kicker text-white-50">Wedding Invitation</div>
+                        <h1 class="hero-title"><?= html_escape($project->title ?? 'The Wedding'); ?></h1>
 
-                        <?php if (!empty($project->event_date)): ?>
-                            <div class="hero-date">
-                                <i class="bi bi-calendar-heart me-2"></i><?= $eventDateFormatted; ?>
-                                <?php if (!empty($project->event_time)): ?>
-                                    <span class="mx-2">•</span>
-                                    <i class="bi bi-clock me-2"></i><?= html_escape($project->event_time); ?>
+                        <?php if (!empty($project->subtitle)): ?>
+                            <p class="hero-subtitle"><?= nl2br(html_escape($project->subtitle)); ?></p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($eventDateFormatted) || !empty($eventTime)): ?>
+                            <div class="hero-date-pill">
+                                <?php if (!empty($eventDateFormatted)): ?>
+                                    <span><i class="bi bi-calendar-heart me-2"></i><?= html_escape($eventDateFormatted); ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($eventTime)): ?>
+                                    <span><i class="bi bi-clock me-2"></i><?= html_escape($eventTime); ?></span>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
 
                         <div class="hero-actions">
-                            <a href="#detail-acara" class="btn btn-main">Lihat Detail Acara</a>
-                            <?php if ($project->rsvp_enabled): ?>
-                                <a href="#rsvp" class="btn btn-soft">Konfirmasi Kehadiran</a>
-                            <?php endif; ?>
-                        </div>
-
-                        <?php if (!empty($project->message_body)): ?>
-                            <div class="glass-note mt-4">
-                                “<?= nl2br(html_escape($project->message_body)); ?>”
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-hint">
-            <i class="bi bi-chevron-double-down"></i> Scroll untuk membuka undangan
-        </div>
-    </section>
-
-    <section class="section section-sm">
-        <div class="container text-center">
-            <span class="kicker">Save The Date</span>
-            <h2 class="section-title mb-3"><?= html_escape($project->title); ?></h2>
-            <p class="section-subtitle">
-                Dengan penuh kebahagiaan, kami mengundang Anda untuk hadir dan memberikan doa terbaik pada momen spesial kami.
-            </p>
-
-            <?php if (!empty($project->event_date)): ?>
-                <div class="countdown-wrap" id="countdown" data-date="<?= $eventDateISO; ?>">
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="cdDays">0</div>
-                        <div class="countdown-label">Hari</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="cdHours">0</div>
-                        <div class="countdown-label">Jam</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="cdMinutes">0</div>
-                        <div class="countdown-label">Menit</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-value" id="cdSeconds">0</div>
-                        <div class="countdown-label">Detik</div>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-    </section>
-
-    <section class="section" id="detail-acara">
-        <div class="container">
-            <div class="text-center mb-5">
-                <span class="kicker">Wedding Detail</span>
-                <h2 class="section-title">Detail Acara</h2>
-                <p class="section-subtitle">Berikut informasi acara yang dapat Anda simpan dan bagikan.</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="info-tile">
-                        <div class="info-icon"><i class="bi bi-calendar-event"></i></div>
-                        <div class="mini-label">Tanggal</div>
-                        <div class="big-value"><?= !empty($project->event_date) ? $eventDateFormatted : '-'; ?></div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="info-tile">
-                        <div class="info-icon"><i class="bi bi-clock-history"></i></div>
-                        <div class="mini-label">Waktu</div>
-                        <div class="big-value"><?= !empty($project->event_time) ? html_escape($project->event_time) : '-'; ?></div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="info-tile">
-                        <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
-                        <div class="mini-label">Lokasi</div>
-                        <div class="big-value"><?= !empty($project->location_name) ? html_escape($project->location_name) : '-'; ?></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-4 mt-1">
-                <div class="col-lg-7">
-                    <div class="card-lux">
-                        <div class="card-body">
-                            <span class="kicker">Venue</span>
-                            <h3 class="mb-3" style="color:var(--primary-dark);">Lokasi Acara</h3>
-                            <p class="mb-2 fs-5 fw-semibold"><?= html_escape($project->location_name); ?></p>
-                            <p class="text-muted mb-4"><?= nl2br(html_escape($project->location_address)); ?></p>
-
-                            <div class="d-flex flex-wrap gap-2">
-                                <?php if (!empty($mapUrl)): ?>
-                                    <a href="<?= $mapUrl; ?>" target="_blank" class="btn btn-main btn-map">
-                                        <i class="bi bi-map me-1"></i>Buka Maps
-                                    </a>
-                                <?php endif; ?>
-                                <a href="#share-link" class="btn btn-outline-secondary btn-map">Bagikan Undangan</a>
-                            </div>
-
-                            <?php if (!empty($project->map_embed)): ?>
-                                <div class="mt-4 ratio ratio-16x9 rounded-4 overflow-hidden border">
-                                    <?php
-                                    $mapEmbed = trim($project->map_embed);
-                                    if (stripos($mapEmbed, '<iframe') !== false) {
-                                        echo $mapEmbed;
-                                    } else {
-                                        echo '<iframe src="' . html_escape($mapEmbed) . '" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
-                                    }
-                                    ?>
-                                </div>
+                            <a href="#detail-acara" class="btn-sacred">Buka Undangan</a>
+                            <?php if (!empty($project->rsvp_enabled)): ?>
+                                <a href="#rsvp" class="btn-outline-sacred">Konfirmasi Kehadiran</a>
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-5">
-                    <div class="quote-box h-100 d-flex flex-column justify-content-center">
-                        <div class="quote-mark">“</div>
-                        <div class="fs-5 mb-3" style="line-height:1.8;">
-                            <?= !empty($project->description) ? nl2br(html_escape($project->description)) : 'Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.'; ?>
-                        </div>
-                        <div class="floating-badge mt-2">
-                            <i class="bi bi-heart-fill"></i>
-                            Kehadiran dan doa restu Anda sangat berarti
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <section class="section section-sm" id="share-link">
-        <div class="container">
-            <div class="row g-4 align-items-stretch">
-                <div class="col-lg-6">
-                    <div class="card-lux">
-                        <div class="card-body">
-                            <span class="kicker">Share</span>
-                            <h3 class="mb-3" style="color:var(--primary-dark);">Bagikan Undangan</h3>
-                            <p class="text-muted">Link undangan ini sudah siap dibagikan ke tamu undangan.</p>
+    <section class="section section-soft">
+        <div class="container container-narrow">
+            <div class="intro-card text-center">
+                <span class="kicker">With Grace & Blessing</span>
+                <h2 class="section-title"><?= html_escape($project->message_title ?? 'Assalamu’alaikum Warahmatullahi Wabarakatuh'); ?></h2>
+                <?php if (!empty($project->message_body)): ?>
+                    <p class="message-quote">“<?= nl2br(html_escape($project->message_body)); ?>”</p>
+                <?php else: ?>
+                    <p class="section-subtitle">Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud menyelenggarakan acara pernikahan kami.</p>
+                <?php endif; ?>
 
-                            <div class="share-box">
-                                <label class="form-label fw-semibold">Link Undangan</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="inviteLink" value="<?= current_url(); ?>" readonly>
-                                    <button class="btn btn-outline-secondary btn-copy" type="button" onclick="copyInviteLink()">Copy</button>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-wrap gap-2 mt-3">
-                                <a class="btn btn-main" target="_blank" href="https://wa.me/?text=<?= rawurlencode('Undangan kami: ' . current_url()); ?>">
-                                    <i class="bi bi-whatsapp me-1"></i>Share WhatsApp
-                                </a>
-                            </div>
+                <?php if (!empty($eventDateISO)): ?>
+                    <div class="countdown-grid" id="countdown" data-date="<?= html_escape($eventDateISO); ?>">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="cdDays">0</div>
+                            <div class="countdown-label">Hari</div>
                         </div>
-                    </div>
-                </div>
-
-                <?php if ($project->gift_enabled): ?>
-                    <div class="col-lg-6">
-                        <div class="card-lux">
-                            <div class="card-body">
-                                <span class="kicker">Wedding Gift</span>
-                                <h3 class="mb-3" style="color:var(--primary-dark);">Gift Info</h3>
-                                <p class="text-muted mb-3">Bagi keluarga dan sahabat yang ingin mengirimkan tanda kasih.</p>
-                                <div class="share-box">
-                                    <div class="timeline-text"><?= nl2br(html_escape($project->gift_info)); ?></div>
-                                </div>
-                            </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="cdHours">0</div>
+                            <div class="countdown-label">Jam</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="cdMinutes">0</div>
+                            <div class="countdown-label">Menit</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="cdSeconds">0</div>
+                            <div class="countdown-label">Detik</div>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -716,24 +724,104 @@
         </div>
     </section>
 
+    <section class="section" id="detail-acara">
+        <div class="container container-narrow">
+            <div class="text-center mb-5">
+                <span class="kicker">Sacred Moment</span>
+                <h2 class="section-title">Detail Acara</h2>
+                <p class="section-subtitle">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+            </div>
+
+            <div class="detail-grid mb-4">
+                <div class="detail-tile">
+                    <div class="detail-icon"><i class="bi bi-calendar-event"></i></div>
+                    <div class="detail-label">Tanggal</div>
+                    <div class="detail-value"><?= !empty($eventDateFormatted) ? html_escape($eventDateFormatted) : '-'; ?></div>
+                </div>
+                <div class="detail-tile">
+                    <div class="detail-icon"><i class="bi bi-clock-history"></i></div>
+                    <div class="detail-label">Waktu</div>
+                    <div class="detail-value"><?= !empty($eventTime) ? html_escape($eventTime) : '-'; ?></div>
+                </div>
+                <div class="detail-tile">
+                    <div class="detail-icon"><i class="bi bi-geo-alt"></i></div>
+                    <div class="detail-label">Tempat</div>
+                    <div class="detail-value"><?= !empty($project->location_name) ? html_escape($project->location_name) : '-'; ?></div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="content-card h-100">
+                        <span class="kicker">Venue</span>
+                        <h3 class="serif fs-1 fw-bold mb-3"><?= html_escape($project->location_name ?? 'Lokasi Acara'); ?></h3>
+                        <?php if (!empty($project->location_address)): ?>
+                            <p class="section-subtitle mx-0"><?= nl2br(html_escape($project->location_address)); ?></p>
+                        <?php endif; ?>
+
+                        <div class="share-copy mt-4">
+                            <?php if (!empty($mapUrl)): ?>
+                                <a class="btn-sacred" href="<?= html_escape($mapUrl); ?>" target="_blank">
+                                    <i class="bi bi-map me-2"></i>Buka Google Maps
+                                </a>
+                            <?php endif; ?>
+                            <button type="button" class="btn-send" onclick="copyInviteLink()">
+                                <i class="bi bi-link-45deg me-2"></i>Salin Link
+                            </button>
+                        </div>
+
+                        <input type="text" id="inviteLink" class="form-control mt-3" value="<?= html_escape(current_url()); ?>" readonly>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="content-card h-100">
+                        <span class="kicker">Location Map</span>
+                        <div class="map-frame">
+                            <?php if (!empty($mapEmbed)): ?>
+                                <?php if (stripos($mapEmbed, '<iframe') !== false): ?>
+                                    <?= $mapEmbed; ?>
+                                <?php else: ?>
+                                    <iframe src="<?= html_escape($mapEmbed); ?>" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <div class="d-flex align-items-center justify-content-center h-100 text-center p-4 text-muted">Map belum tersedia.</div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php if (!empty($project->gift_enabled)): ?>
+                <div class="content-card mt-4">
+                    <div class="gift-box">
+                        <div class="gift-icon"><i class="bi bi-gift"></i></div>
+                        <div>
+                            <span class="kicker">Wedding Gift</span>
+                            <h3 class="serif fs-2 fw-bold mb-2">Tanda Kasih</h3>
+                            <p class="section-subtitle mx-0 mb-0"><?= !empty($project->gift_info) ? nl2br(html_escape($project->gift_info)) : 'Informasi gift belum tersedia.'; ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
     <?php if (!empty($galleries)): ?>
         <section class="section" id="gallery">
-            <div class="container">
+            <div class="container container-narrow">
                 <div class="text-center mb-5">
-                    <span class="kicker">Gallery</span>
+                    <span class="kicker">Our Gallery</span>
                     <h2 class="section-title">Momen Bahagia</h2>
-                    <p class="section-subtitle">Beberapa potret terbaik untuk melengkapi undangan digital ini.</p>
+                    <p class="section-subtitle">Rangkaian cerita sederhana yang menjadi bagian dari perjalanan menuju hari penuh doa dan restu.</p>
                 </div>
 
-                <div class="row g-4">
+                <div class="gallery-masonry">
                     <?php foreach ($galleries as $g): ?>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="gallery-card">
-                                <img src="<?= asset_or_url($g->image_path); ?>" alt="<?= html_escape($g->caption ?: 'Gallery'); ?>">
-                                <?php if (!empty($g->caption)): ?>
-                                    <div class="caption"><?= html_escape($g->caption); ?></div>
-                                <?php endif; ?>
-                            </div>
+                        <div class="gallery-item">
+                            <img src="<?= asset_or_url($g->image_path); ?>" alt="<?= html_escape(!empty($g->caption) ? $g->caption : 'Gallery'); ?>">
+                            <?php if (!empty($g->caption)): ?>
+                                <div class="gallery-caption"><?= html_escape($g->caption); ?></div>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -741,96 +829,82 @@
         </section>
     <?php endif; ?>
 
-    <?php if ($project->rsvp_enabled): ?>
+    <?php if (!empty($project->rsvp_enabled)): ?>
         <section class="section" id="rsvp">
-            <div class="container">
+            <div class="container container-narrow">
                 <div class="text-center mb-5">
                     <span class="kicker">RSVP</span>
                     <h2 class="section-title">Konfirmasi Kehadiran</h2>
-                    <p class="section-subtitle">Mohon bantu konfirmasi kehadiran Anda agar persiapan acara kami semakin baik.</p>
+                    <p class="section-subtitle">Mohon bantu konfirmasi kehadiran Anda agar kami dapat mempersiapkan acara dengan lebih baik.</p>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-xl-9">
-                        <div class="card-lux">
-                            <div class="card-body">
-                                <?php if ($this->session->flashdata('success')): ?>
-                                    <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
-                                <?php endif; ?>
+                <div class="content-card">
+                    <?php if ($this->session->flashdata('success')): ?>
+                        <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
+                    <?php endif; ?>
 
-                                <form method="post" action="<?= site_url('rsvp/store'); ?>" class="row g-3">
-                                    <input type="hidden" name="project_id" value="<?= $project->id; ?>">
-                                    <input type="hidden" name="guest_slug" value="<?= !empty($guest) ? html_escape($guest->slug) : ''; ?>">
+                    <form method="post" action="<?= site_url('rsvp/store'); ?>" class="row g-3">
+                        <input type="hidden" name="project_id" value="<?= html_escape($project->id ?? ''); ?>">
+                        <input type="hidden" name="guest_slug" value="<?= !empty($guest) ? html_escape($guest->slug) : ''; ?>">
 
-                                    <div class="col-md-4">
-                                        <label class="form-label">Nama</label>
-                                        <input name="guest_name" class="form-control" value="<?= html_escape($guest_name); ?>" placeholder="Nama lengkap" required>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label class="form-label">Status Kehadiran</label>
-                                        <select name="attendance_status" class="form-select">
-                                            <option value="Hadir">Hadir</option>
-                                            <option value="Tidak Hadir">Tidak Hadir</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <label class="form-label">Jumlah Tamu</label>
-                                        <input type="number" name="guest_total" class="form-control" value="1" min="1">
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label class="form-label">Catatan</label>
-                                        <input name="note" class="form-control" placeholder="Contoh: hadir 2 orang">
-                                    </div>
-
-                                    <div class="col-12 pt-2">
-                                        <button class="btn btn-send">Kirim RSVP</button>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Nama</label>
+                            <input name="guest_name" class="form-control" value="<?= html_escape($guestNameSafe); ?>" placeholder="Nama lengkap" required>
                         </div>
-                    </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status Kehadiran</label>
+                            <select name="attendance_status" class="form-select">
+                                <option value="Hadir">Hadir</option>
+                                <option value="Tidak Hadir">Tidak Hadir</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Jumlah Tamu</label>
+                            <input type="number" name="guest_total" class="form-control" value="1" min="1">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Catatan</label>
+                            <input name="note" class="form-control" placeholder="Contoh: hadir 2 orang">
+                        </div>
+                        <div class="col-12 pt-2">
+                            <button class="btn-send">Kirim RSVP</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
     <?php endif; ?>
 
-    <?php if ($project->wish_enabled): ?>
-        <section class="section section-sm" id="wishes">
-            <div class="container">
+    <?php if (!empty($project->wish_enabled)): ?>
+        <section class="section section-soft" id="wishes">
+            <div class="container container-narrow">
                 <div class="text-center mb-5">
                     <span class="kicker">Best Wishes</span>
                     <h2 class="section-title">Ucapan & Doa</h2>
-                    <p class="section-subtitle">Tuliskan doa dan ucapan terbaik Anda untuk hari bahagia kami.</p>
+                    <p class="section-subtitle">Tuliskan doa dan ucapan terbaik Anda untuk mengiringi langkah kami.</p>
                 </div>
 
-                <div class="card-lux mb-4">
-                    <div class="card-body">
-                        <form method="post" action="<?= site_url('wish/store'); ?>" class="row g-3">
-                            <input type="hidden" name="project_id" value="<?= $project->id; ?>">
-                            <input type="hidden" name="guest_slug" value="<?= !empty($guest) ? html_escape($guest->slug) : ''; ?>">
+                <div class="content-card mb-4">
+                    <form method="post" action="<?= site_url('wish/store'); ?>" class="row g-3">
+                        <input type="hidden" name="project_id" value="<?= html_escape($project->id ?? ''); ?>">
+                        <input type="hidden" name="guest_slug" value="<?= !empty($guest) ? html_escape($guest->slug) : ''; ?>">
 
-                            <div class="col-md-4">
-                                <label class="form-label">Nama</label>
-                                <input name="guest_name" class="form-control" value="<?= html_escape($guest_name); ?>" placeholder="Nama" required>
-                            </div>
-
-                            <div class="col-md-8">
-                                <label class="form-label">Ucapan</label>
-                                <input name="message" class="form-control" placeholder="Tulis ucapan terbaik Anda" required>
-                            </div>
-
-                            <div class="col-12 pt-2">
-                                <button class="btn btn-send">Kirim Ucapan</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Nama</label>
+                            <input name="guest_name" class="form-control" value="<?= html_escape($guestNameSafe); ?>" placeholder="Nama" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label">Ucapan</label>
+                            <input name="message" class="form-control" placeholder="Tulis ucapan terbaik Anda" required>
+                        </div>
+                        <div class="col-12 pt-2">
+                            <button class="btn-send">Kirim Ucapan</button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="row g-4">
-                    <?php foreach ($wishes as $wish): ?>
+                    <?php foreach (($wishes ?? []) as $wish): ?>
                         <div class="col-md-6">
                             <div class="wish-card">
                                 <div class="wish-name"><?= html_escape($wish->guest_name); ?></div>
@@ -850,112 +924,116 @@
         </section>
     <?php endif; ?>
 
-    <section class="section section-sm">
-        <div class="container text-center">
-            <div class="footer-soft">
-                Terima kasih atas perhatian, doa, dan kehadiran Anda di hari bahagia kami.
+    <section class="section section-soft">
+        <div class="container container-narrow">
+            <div class="footer-prayer text-center">
+                <h2>Terima Kasih</h2>
+                <p class="mb-0">Atas kehadiran, doa, dan restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih yang sebesar-besarnya.</p>
             </div>
         </div>
     </section>
 
     <?php if (!empty($musicUrl)): ?>
-        <audio id="bgMusic" loop>
+        <audio id="bgMusic" loop playsinline>
             <source src="<?= html_escape($musicUrl); ?>">
-            Browser Anda tidak mendukung audio.
         </audio>
 
         <div class="music-player">
             <button type="button" class="music-btn" id="musicToggle" aria-label="Toggle music">
-                <i class="bi bi-music-note-beamed"></i>
+                <i class="bi bi-play-fill" id="musicIcon"></i>
             </button>
+            <div class="music-text">
+                <strong id="musicStatus">Music Off</strong>
+                tap to play
+            </div>
         </div>
     <?php endif; ?>
+</div>
 
-    <script>
-        function copyInviteLink() {
-            const el = document.getElementById('inviteLink');
-            if (!el) return;
-            el.select();
-            el.setSelectionRange(0, 99999);
-            document.execCommand('copy');
-            alert('Link undangan berhasil disalin.');
+<script>
+    function copyInviteLink() {
+        const el = document.getElementById('inviteLink');
+        if (!el) return;
+        el.select();
+        el.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        alert('Link undangan berhasil disalin.');
+    }
+
+    (function() {
+        const wrap = document.getElementById('countdown');
+        if (!wrap) return;
+
+        const targetDate = wrap.getAttribute('data-date');
+        if (!targetDate) return;
+
+        const daysEl = document.getElementById('cdDays');
+        const hoursEl = document.getElementById('cdHours');
+        const minutesEl = document.getElementById('cdMinutes');
+        const secondsEl = document.getElementById('cdSeconds');
+
+        function updateCountdown() {
+            const target = new Date(targetDate + 'T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = target - now;
+
+            if (distance <= 0) {
+                daysEl.textContent = '0';
+                hoursEl.textContent = '0';
+                minutesEl.textContent = '0';
+                secondsEl.textContent = '0';
+                return;
+            }
+
+            daysEl.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+            hoursEl.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            minutesEl.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            secondsEl.textContent = Math.floor((distance % (1000 * 60)) / 1000);
         }
 
-        (function() {
-            const wrap = document.getElementById('countdown');
-            if (!wrap) return;
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
 
-            const targetDate = wrap.getAttribute('data-date');
-            if (!targetDate) return;
+    (function() {
+        const audio = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggle');
+        const icon = document.getElementById('musicIcon');
+        const status = document.getElementById('musicStatus');
 
-            const daysEl = document.getElementById('cdDays');
-            const hoursEl = document.getElementById('cdHours');
-            const minutesEl = document.getElementById('cdMinutes');
-            const secondsEl = document.getElementById('cdSeconds');
+        if (!audio || !btn) return;
 
-            function updateCountdown() {
-                const target = new Date(targetDate + 'T00:00:00').getTime();
-                const now = new Date().getTime();
-                const distance = target - now;
+        function setState(isPlaying) {
+            if (icon) icon.className = isPlaying ? 'bi bi-pause-fill' : 'bi bi-play-fill';
+            if (status) status.textContent = isPlaying ? 'Music On' : 'Music Off';
+        }
 
-                if (distance <= 0) {
-                    daysEl.textContent = '0';
-                    hoursEl.textContent = '0';
-                    minutesEl.textContent = '0';
-                    secondsEl.textContent = '0';
-                    return;
-                }
+        function playMusic() {
+            audio.play().then(function() {
+                setState(true);
+            }).catch(function() {
+                setState(false);
+            });
+        }
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                daysEl.textContent = days;
-                hoursEl.textContent = hours;
-                minutesEl.textContent = minutes;
-                secondsEl.textContent = seconds;
-            }
-
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        })();
-
-        (function() {
-            const audio = document.getElementById('bgMusic');
-            const btn = document.getElementById('musicToggle');
-            if (!audio || !btn) return;
-
-            let started = false;
-
-            function playMusic() {
-                audio.play().then(() => {
-                    started = true;
-                    btn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-                }).catch(() => {});
-            }
-
-            function pauseMusic() {
+        btn.addEventListener('click', function() {
+            if (audio.paused) {
+                playMusic();
+            } else {
                 audio.pause();
-                btn.innerHTML = '<i class="bi bi-music-note-beamed"></i>';
+                setState(false);
             }
+        });
 
-            btn.addEventListener('click', function() {
-                if (audio.paused) {
-                    playMusic();
-                } else {
-                    pauseMusic();
-                }
-            });
+        document.addEventListener('click', function initAudio() {
+            if (audio.paused) playMusic();
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
 
-            document.addEventListener('click', function initMusicOnce() {
-                if (!started) {
-                    playMusic();
-                }
-                document.removeEventListener('click', initMusicOnce);
-            });
-        })();
-    </script>
+        window.addEventListener('load', function() {
+            playMusic();
+        });
+    })();
+</script>
 </body>
-
 </html>

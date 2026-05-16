@@ -36,7 +36,7 @@
             background:
                 radial-gradient(circle at top left, rgba(255, 255, 255, .35), transparent 35%),
                 radial-gradient(circle at bottom right, rgba(255, 255, 255, .25), transparent 35%),
-                linear-gradient(135deg, #eaf6ff 0%, #d6ecff 30%, #ffeaf4 70%, #fff4c7 100%);
+                linear-gradient(135deg, #fff8ec 0%, #f8ead2 30%, #efe0c8 70%, #f7e7b7 100%);
         }
 
         .login-card {
@@ -49,28 +49,28 @@
             background: white;
 
             box-shadow:
-                0 20px 60px rgba(47, 128, 195, .18),
-                0 10px 30px rgba(232, 91, 156, .12);
+                0 20px 60px rgba(139, 94, 52, .18),
+                0 10px 30px rgba(176, 137, 104, .12);
         }
 
         .login-card h2 {
             font-weight: 800;
-            color: #1f5f97;
+            color: #7f4f24;
         }
 
         .login-card p {
-            color: #6f8096;
+            color: #8a7665;
         }
 
         .form-control {
             border-radius: 12px;
             padding: 10px 14px;
-            border: 1px solid #dce8f3;
+            border: 1px solid #ead8bf;
         }
 
         .form-control:focus {
-            border-color: #2f80c3;
-            box-shadow: 0 0 0 .15rem rgba(47, 128, 195, .15);
+            border-color: #8b5e34;
+            box-shadow: 0 0 0 .15rem rgba(139, 94, 52, .15);
         }
 
         .btn-dark {
@@ -78,11 +78,11 @@
             border-radius: 14px;
             font-weight: 700;
 
-            background: linear-gradient(135deg, #2f80c3, #e85b9c);
+            background: linear-gradient(135deg, #8b5e34, #e85b9c);
         }
 
         .btn-dark:hover {
-            background: linear-gradient(135deg, #1f5f97, #c93d7e);
+            background: linear-gradient(135deg, #7f4f24, #d9a441);
         }
 
         .alert-danger {

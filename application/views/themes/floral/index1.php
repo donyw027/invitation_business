@@ -798,8 +798,6 @@
                             <?php endif; ?>
                             <?php if (!empty($project->location_address)): ?>
                                 <p class="section-subtitle mb-4"><?= nl2br(html_escape($project->location_address)); ?></p>
-                            <?php else: ?>
-                                <p class="section-subtitle mb-4">Alamat acara akan diinformasikan kemudian.</p>
                             <?php endif; ?>
                             <?php if (!empty($mapUrl)): ?>
                                 <a class="btn btn-floral" target="_blank" href="<?= html_escape($mapUrl); ?>"><i class="bi bi-map me-1"></i> Buka Google Maps</a>
@@ -807,24 +805,18 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-7">
-                        <div class="map-frame">
-                            <?php if (!empty($project->map_embed)): ?>
-                                <?= html_entity_decode($project->map_embed, ENT_QUOTES, 'UTF-8'); ?>
-                            <?php elseif (!empty($mapQuery)): ?>
+                    <?php if (!empty($mapIframeSrc)): ?>
+                        <div class="col-lg-7">
+                            <div class="map-frame">
                                 <iframe
-                                    src="https://maps.google.com/maps?q=<?= rawurlencode($mapQuery); ?>&output=embed"
+                                    src="<?= html_escape($mapIframeSrc); ?>"
                                     allowfullscreen
                                     loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade">
                                 </iframe>
-                            <?php else: ?>
-                                <div style="min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--muted);">
-                                    Maps belum tersedia.
-                                </div>
-                            <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>

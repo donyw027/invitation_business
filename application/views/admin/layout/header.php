@@ -7,28 +7,28 @@
 
     <title><?= isset($page_title) ? html_escape($page_title) : 'Admin'; ?> | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#fffaf5">
+    <meta name="theme-color" content="#fff8ec">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cream: #fffaf5;
-            --cream-2: #fff7ed;
-            --pink: #f7dfe4;
-            --pink-2: #ffd8e1;
-            --peach: #ffb7a3;
-            --rose: #e85d75;
-            --ink: #1f2937;
-            --body: #4b5563;
-            --muted: #6b7280;
-            --line: rgba(31, 41, 55, .09);
+            --cream: #fff8ec;
+            --cream-2: #f8ead2;
+            --pink: #efe0c8;
+            --pink-2: #f3d9a6;
+            --peach: #ddb892;
+            --rose: #b08968;
+            --ink: #3f2e24;
+            --body: #6f5a48;
+            --muted: #8a7665;
+            --line: rgba(63, 46, 36, .09);
             --white: #ffffff;
-            --mint: #ecfdf5;
-            --lavender: #f3e8ff;
-            --shadow: 0 18px 45px rgba(31, 41, 55, .08);
-            --shadow-soft: 0 12px 30px rgba(31, 41, 55, .06);
+            --mint: #f1ead7;
+            --lavender: #f5e7c6;
+            --shadow: 0 18px 45px rgba(63, 46, 36, .08);
+            --shadow-soft: 0 12px 30px rgba(63, 46, 36, .06);
             --radius-xl: 30px;
             --radius-lg: 24px;
             --radius-md: 18px;
@@ -42,8 +42,8 @@
         body {
             min-height: 100vh;
             background:
-                radial-gradient(circle at top left, rgba(247, 223, 228, .78), transparent 32%),
-                radial-gradient(circle at 90% 12%, rgba(255, 183, 163, .28), transparent 28%),
+                radial-gradient(circle at top left, rgba(239, 224, 200, .78), transparent 32%),
+                radial-gradient(circle at 90% 12%, rgba(221, 184, 146, .28), transparent 28%),
                 linear-gradient(180deg, var(--cream) 0%, #ffffff 58%, var(--cream-2) 100%);
             color: var(--ink);
             font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -63,8 +63,8 @@
             top: 0;
             min-height: 100vh;
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 250, 245, .92)),
-                radial-gradient(circle at top, rgba(247, 223, 228, .9), transparent 36%);
+                linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 248, 236, .92)),
+                radial-gradient(circle at top, rgba(239, 224, 200, .9), transparent 36%);
             border-right: 1px solid var(--line);
             padding: 22px 16px;
         }
@@ -84,7 +84,7 @@
             object-fit: cover;
             background: linear-gradient(135deg, var(--pink), var(--cream-2));
             border: 2px solid #fff;
-            box-shadow: 0 10px 24px rgba(31, 41, 55, .12);
+            box-shadow: 0 10px 24px rgba(63, 46, 36, .12);
         }
 
         .brand-title {
@@ -103,7 +103,7 @@
 
         .sidebar .group {
             margin: 22px 10px 8px;
-            color: #9ca3af;
+            color: #b7a38d;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: .14em;
@@ -133,8 +133,8 @@
         }
 
         .sidebar a[href*="logout"] {
-            color: #9f1239;
-            background: rgba(247, 223, 228, .58);
+            color: #8a5a44;
+            background: rgba(239, 224, 200, .58);
         }
 
         main.admin-content {
@@ -158,7 +158,7 @@
             padding: 7px 12px;
             border-radius: 999px;
             background: var(--cream-2);
-            color: #9f5f43;
+            color: #8b5e34;
             font-size: 12px;
             font-weight: 900;
             margin-bottom: 8px;
@@ -204,27 +204,27 @@
             background: var(--ink) !important;
             border-color: var(--ink) !important;
             color: #fff !important;
-            box-shadow: 0 14px 30px rgba(31, 41, 55, .12);
+            box-shadow: 0 14px 30px rgba(63, 46, 36, .12);
         }
 
         .btn-primary:hover,
         .btn-success:hover,
         .btn-info:hover {
             transform: translateY(-1px);
-            background: #111827 !important;
-            border-color: #111827 !important;
+            background: #2f2118 !important;
+            border-color: #2f2118 !important;
         }
 
         .btn-warning {
-            background: #fff7ed !important;
-            border-color: rgba(255, 183, 163, .5) !important;
-            color: #9a3412 !important;
+            background: #f8ead2 !important;
+            border-color: rgba(221, 184, 146, .5) !important;
+            color: #7f4f24 !important;
         }
 
         .btn-danger {
-            background: #fff1f2 !important;
-            border-color: rgba(232, 93, 117, .35) !important;
-            color: #be123c !important;
+            background: #fff3d6 !important;
+            border-color: rgba(176, 137, 104, .35) !important;
+            color: #8a5a44 !important;
         }
 
         .btn-outline-secondary,
@@ -276,7 +276,7 @@
 
         .card-header,
         .card-footer {
-            background: rgba(255, 250, 245, .9) !important;
+            background: rgba(255, 248, 236, .9) !important;
             border-color: var(--line) !important;
         }
 
@@ -318,12 +318,12 @@
         }
 
         .table tbody td {
-            border-color: rgba(31, 41, 55, .065);
+            border-color: rgba(63, 46, 36, .065);
             padding: 14px 16px;
         }
 
         .table tbody tr:hover td {
-            background: rgba(255, 250, 245, .7);
+            background: rgba(255, 248, 236, .7);
         }
 
         .form-control,
@@ -349,8 +349,8 @@
         textarea:focus,
         input:focus,
         select:focus {
-            border-color: rgba(232, 93, 117, .42) !important;
-            box-shadow: 0 0 0 4px rgba(247, 223, 228, .8) !important;
+            border-color: rgba(176, 137, 104, .42) !important;
+            box-shadow: 0 0 0 4px rgba(239, 224, 200, .8) !important;
         }
 
         label,
@@ -372,13 +372,13 @@
         }
 
         .badge.bg-warning {
-            background: #fff7ed !important;
-            color: #9a3412 !important;
+            background: #f8ead2 !important;
+            color: #7f4f24 !important;
         }
 
         .badge.bg-danger {
-            background: #fff1f2 !important;
-            color: #be123c !important;
+            background: #fff3d6 !important;
+            color: #8a5a44 !important;
         }
 
         .alert {
@@ -406,20 +406,20 @@
             padding: 28px;
             border-radius: var(--radius-xl);
             overflow: hidden;
-            border: 1px solid rgba(31, 41, 55, .08);
+            border: 1px solid rgba(63, 46, 36, .08);
             box-shadow: var(--shadow);
             background: #fff;
         }
 
         .spotlight-gift {
             background:
-                radial-gradient(circle at top left, rgba(247, 223, 228, .95), transparent 42%),
-                linear-gradient(135deg, #fff 0%, #fff7ed 100%);
+                radial-gradient(circle at top left, rgba(239, 224, 200, .95), transparent 42%),
+                linear-gradient(135deg, #fff 0%, #f8ead2 100%);
         }
 
         .spotlight-jastip {
             background:
-                radial-gradient(circle at top right, rgba(255, 183, 163, .35), transparent 42%),
+                radial-gradient(circle at top right, rgba(221, 184, 146, .35), transparent 42%),
                 linear-gradient(135deg, #fffef8 0%, #fff 100%);
         }
 
@@ -517,7 +517,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(31, 41, 55, .32), rgba(31, 41, 55, .04));
+            background: linear-gradient(to top, rgba(63, 46, 36, .32), rgba(63, 46, 36, .04));
         }
 
         .mock-card span {
@@ -555,7 +555,7 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #f0c7cf;
+            background: #d8b78f;
             border-radius: 999px;
             border: 2px solid var(--cream-2);
         }

@@ -6,55 +6,49 @@
     <title><?= html_escape($page_title); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ff7aa8">
+    <link rel="icon" href="<?= base_url('assets/img/logo.ico'); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <?php
     $receiver = $guest_name ?: ($project->receiver_name ?: $project->title ?: 'Someone Special');
     $sender = $project->sender_name ?: 'Someone Special';
-    $messageTitle = $project->message_title ?: ($project->title ?: 'A Special Greeting');
-    $messageBody = $project->message_body ?: ($project->description ?: 'Ada pesan manis untukmu.');
-    $subtitle = $project->subtitle ?: 'Ada sesuatu yang manis dan spesial buat kamu hari ini ✨';
+    $title = $project->title ?: 'Memory Blossom';
+    $subtitle = $project->subtitle ?: 'A sweet little greeting made just for you';
     $coverText = $project->cover_text ?: 'Sebuah kartu kecil dengan banyak rasa sayang di dalamnya.';
+    $messageTitle = $project->message_title ?: 'A Special Greeting';
+    $messageBody = $project->message_body ?: ($project->description ?: 'Ada pesan manis untukmu. Semoga hari ini membawa senyum, bahagia, dan kenangan kecil yang indah.');
     $description = $project->description ?: 'A little note made especially for you.';
-    $coverImage = asset_or_url($project->hero_image, '');
+    $coverImage = !empty($project->hero_image) ? asset_or_url($project->hero_image) : '';
     $musicUrl = !empty($project->music_url) ? asset_or_url($project->music_url) : '';
     $shareUrl = function_exists('project_url') ? project_url($project) : current_url();
-
-    $memoryDate = !empty($project->event_date) ? date('d F Y', strtotime($project->event_date)) : '';
-    $memoryTime = !empty($project->event_time) ? $project->event_time : '';
-    $memoryPlace = !empty($project->location_name) ? $project->location_name : '';
-    $memoryAddress = !empty($project->location_address) ? $project->location_address : '';
-    $hasMemory = !empty($memoryDate) || !empty($memoryTime) || !empty($memoryPlace) || !empty($memoryAddress);
     ?>
 
     <style>
         :root {
             --bg1: #fff8fb;
-            --bg2: #fff3d7;
-            --pink: #ff79aa;
-            --pink-dark: #f04b8d;
-            --pink-soft: #ffe5ef;
+            --bg2: #fff1d9;
+            --pink: #ff78a8;
+            --pink-dark: #ed4b88;
+            --pink-soft: #ffe8f1;
             --yellow: #ffd86d;
             --purple: #8b6cf7;
-            --purple-soft: #efe8ff;
-            --text: #564b62;
-            --muted: #8d8096;
+            --purple-soft: #f2ecff;
+            --brown: #6d4d3f;
+            --text: #51465f;
+            --muted: #8a7b92;
             --white: #ffffff;
-            --shadow: 0 24px 55px rgba(114, 83, 134, .16);
-            --radius-xl: 34px;
-            --radius-lg: 26px;
-            --radius-md: 20px;
+            --shadow: 0 28px 70px rgba(114, 83, 134, .16);
         }
 
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
         }
 
         body {
@@ -62,200 +56,195 @@
             min-height: 100vh;
             font-family: 'Nunito', sans-serif;
             color: var(--text);
-            overflow-x: hidden;
             background:
-                radial-gradient(circle at 12% 15%, rgba(255, 121, 170, .18), transparent 24%),
-                radial-gradient(circle at 85% 18%, rgba(255, 216, 109, .20), transparent 24%),
-                radial-gradient(circle at 82% 86%, rgba(139, 108, 247, .10), transparent 22%),
+                radial-gradient(circle at 10% 10%, rgba(255, 120, 168, .20), transparent 26%),
+                radial-gradient(circle at 88% 14%, rgba(255, 216, 109, .28), transparent 24%),
+                radial-gradient(circle at 86% 86%, rgba(139, 108, 247, .12), transparent 26%),
                 linear-gradient(135deg, var(--bg1), var(--bg2));
+            overflow-x: hidden;
         }
 
-        .float,
+        .wrap {
+            width: min(1160px, 92%);
+            margin: 0 auto;
+            padding: 24px 0 48px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .preview-alert {
+            max-width: 980px;
+            margin: 0 auto 18px;
+            background: #fff7d7;
+            border: 1px solid #ffe28a;
+            color: #8b6200;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .orb,
         .petal {
             position: fixed;
             pointer-events: none;
             z-index: 0;
         }
 
-        .float {
-            width: 120px;
-            height: 120px;
+        .orb {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            filter: blur(8px);
-            opacity: .35;
+            filter: blur(10px);
+            opacity: .34;
             animation: floaty 8s ease-in-out infinite;
         }
 
-        .f1 {
-            left: 4%;
+        .orb.one {
+            left: 3%;
             top: 8%;
-            background: #ffb3cf
+            background: #ffb3cf;
         }
 
-        .f2 {
+        .orb.two {
             right: 5%;
-            top: 14%;
+            top: 16%;
             background: #ffe088;
-            animation-delay: 1s
+            animation-delay: 1s;
         }
 
-        .f3 {
-            left: 8%;
+        .orb.three {
+            left: 7%;
             bottom: 8%;
             background: #d6cbff;
-            animation-delay: 2s
+            animation-delay: 2s;
         }
 
         .petal {
+            top: -12%;
             font-size: 20px;
             opacity: .55;
             animation: fall linear infinite;
         }
 
         .p1 {
-            left: 8%;
-            top: -10%;
-            animation-duration: 10s
+            left: 9%;
+            animation-duration: 10s;
         }
 
         .p2 {
             left: 28%;
-            top: -8%;
             animation-duration: 12s;
-            animation-delay: 1.2s
+            animation-delay: 1.1s;
         }
 
         .p3 {
-            left: 50%;
-            top: -12%;
+            left: 51%;
             animation-duration: 11s;
-            animation-delay: .6s
+            animation-delay: .6s;
         }
 
         .p4 {
-            left: 74%;
-            top: -7%;
+            left: 73%;
             animation-duration: 13s;
-            animation-delay: 2s
+            animation-delay: 2s;
         }
 
         .p5 {
-            left: 90%;
-            top: -10%;
+            left: 91%;
             animation-duration: 9s;
-            animation-delay: 1.5s
+            animation-delay: 1.5s;
         }
 
         @keyframes floaty {
 
             0%,
             100% {
-                transform: translateY(0)
+                transform: translateY(0);
             }
 
             50% {
-                transform: translateY(-15px)
+                transform: translateY(-18px);
             }
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-20px) rotate(0deg)
+                transform: translateY(-20px) rotate(0deg);
             }
 
             100% {
-                transform: translateY(120vh) translateX(22px) rotate(280deg)
+                transform: translateY(120vh) translateX(24px) rotate(280deg);
             }
-        }
-
-        .wrap {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 26px 16px 44px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .preview-alert {
-            max-width: 960px;
-            margin: 0 auto 16px;
-            background: #fff7d7;
-            border: 1px solid #ffe28a;
-            color: #8b6200;
-            padding: 12px 16px;
-            border-radius: 16px;
-            font-weight: 700;
         }
 
         .hero {
             text-align: center;
-            margin-bottom: 22px;
+            padding: 24px 0 22px;
         }
 
         .kicker {
             display: inline-flex;
-            gap: 8px;
             align-items: center;
-            background: rgba(255, 255, 255, .78);
-            padding: 10px 16px;
+            gap: 8px;
+            background: rgba(255, 255, 255, .82);
+            color: var(--pink-dark);
+            border: 1px solid rgba(255, 255, 255, .95);
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, .92);
-            box-shadow: 0 10px 22px rgba(255, 121, 170, .12);
+            padding: 10px 16px;
+            box-shadow: 0 12px 30px rgba(255, 121, 170, .12);
             font-size: 13px;
-            font-weight: 800;
-            color: #d9467d;
+            font-weight: 900;
         }
 
         .hero h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(42px, 7vw, 82px);
+            color: var(--pink-dark);
             margin: 16px 0 8px;
-            font-size: clamp(30px, 5vw, 58px);
-            line-height: 1.06;
-            font-weight: 800;
+            line-height: 1.04;
+            text-shadow: 0 10px 0 rgba(255, 255, 255, .72);
         }
 
         .hero p {
             max-width: 720px;
             margin: 0 auto;
             color: var(--muted);
-            font-size: 15px;
-            line-height: 1.75;
+            font-size: 16px;
+            line-height: 1.8;
         }
 
         .layout {
             display: grid;
             grid-template-columns: 1.02fr .98fr;
-            gap: 22px;
-            align-items: start;
+            gap: 24px;
+            align-items: stretch;
         }
 
-        .card-shell {
+        .panel {
             background: rgba(255, 255, 255, .74);
-            border: 1px solid rgba(255, 255, 255, .94);
+            border: 1px solid rgba(255, 255, 255, .95);
             box-shadow: var(--shadow);
             backdrop-filter: blur(16px);
-            border-radius: 32px;
+            border-radius: 34px;
             overflow: hidden;
             position: relative;
         }
 
         .scene {
-            min-height: 760px;
+            min-height: 750px;
             padding: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .side {
-            padding: 18px;
-        }
-
         .phone {
             width: min(395px, 100%);
             background: #fff;
-            border-radius: 36px;
+            border-radius: 38px;
             border: 8px solid #fff6fb;
-            box-shadow: 0 26px 60px rgba(90, 66, 110, .18);
+            box-shadow: 0 28px 65px rgba(90, 66, 110, .18);
             overflow: hidden;
             position: relative;
         }
@@ -277,7 +266,7 @@
             min-height: 670px;
             padding: 18px 18px 22px;
             background:
-                radial-gradient(circle at top right, rgba(255, 216, 109, .34), transparent 28%),
+                radial-gradient(circle at top right, rgba(255, 216, 109, .35), transparent 28%),
                 radial-gradient(circle at top left, rgba(255, 121, 170, .18), transparent 24%),
                 linear-gradient(180deg, #fffdf6, #fff8fb 45%, #fff8ef 100%);
             position: relative;
@@ -294,14 +283,14 @@
             width: 92px;
             height: 28px;
             top: 54px;
-            left: 18px
+            left: 18px;
         }
 
         .c2 {
             width: 78px;
             height: 24px;
             top: 86px;
-            right: 18px
+            right: 18px;
         }
 
         .c1:before,
@@ -318,28 +307,28 @@
             width: 36px;
             height: 36px;
             left: 10px;
-            top: -14px
+            top: -14px;
         }
 
         .c1:after {
             width: 42px;
             height: 42px;
             left: 34px;
-            top: -20px
+            top: -20px;
         }
 
         .c2:before {
             width: 28px;
             height: 28px;
             left: 8px;
-            top: -11px
+            top: -11px;
         }
 
         .c2:after {
             width: 36px;
             height: 36px;
             left: 28px;
-            top: -16px
+            top: -16px;
         }
 
         .sun {
@@ -363,30 +352,30 @@
 
         .s1 {
             top: 40px;
-            left: 34px
+            left: 34px;
         }
 
         .s2 {
             top: 104px;
             left: 92px;
-            animation-delay: .8s
+            animation-delay: .8s;
         }
 
         .s3 {
             top: 132px;
             right: 92px;
-            animation-delay: 1.2s
+            animation-delay: 1.2s;
         }
 
         @keyframes bounce {
 
             0%,
             100% {
-                transform: translateY(0)
+                transform: translateY(0);
             }
 
             50% {
-                transform: translateY(-8px)
+                transform: translateY(-8px);
             }
         }
 
@@ -395,18 +384,18 @@
             0%,
             100% {
                 opacity: .35;
-                transform: scale(.9)
+                transform: scale(.9);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.15)
+                transform: scale(1.15);
             }
         }
 
         .cover {
             margin-top: 108px;
-            background: rgba(255, 255, 255, .80);
+            background: rgba(255, 255, 255, .82);
             border: 1px solid rgba(255, 255, 255, .96);
             border-radius: 30px;
             box-shadow: 0 18px 40px rgba(255, 121, 170, .12);
@@ -426,7 +415,7 @@
             padding: 8px 12px;
             border-radius: 999px;
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 14px;
         }
 
@@ -449,7 +438,7 @@
         .face,
         .hand,
         .blush {
-            position: absolute
+            position: absolute;
         }
 
         .ear {
@@ -461,11 +450,11 @@
         }
 
         .ear.left {
-            left: 18px
+            left: 18px;
         }
 
         .ear.right {
-            right: 18px
+            right: 18px;
         }
 
         .ear:after {
@@ -497,11 +486,11 @@
         }
 
         .face:before {
-            left: 34px
+            left: 34px;
         }
 
         .face:after {
-            right: 34px
+            right: 34px;
         }
 
         .snout {
@@ -546,11 +535,11 @@
         }
 
         .blush.left {
-            left: 18px
+            left: 18px;
         }
 
         .blush.right {
-            right: 18px
+            right: 18px;
         }
 
         .hand {
@@ -563,12 +552,12 @@
 
         .hand.left {
             left: 8px;
-            transform: rotate(20deg)
+            transform: rotate(20deg);
         }
 
         .hand.right {
             right: 8px;
-            transform: rotate(-20deg)
+            transform: rotate(-20deg);
         }
 
         .bouquet {
@@ -588,19 +577,19 @@
 
         .fl1 {
             left: 0;
-            top: 12px
+            top: 12px;
         }
 
         .fl2 {
             left: 28px;
             top: 0;
-            animation-delay: .6s
+            animation-delay: .6s;
         }
 
         .fl3 {
             right: 0;
             top: 14px;
-            animation-delay: 1.1s
+            animation-delay: 1.1s;
         }
 
         .wrap-stem {
@@ -615,11 +604,11 @@
 
             0%,
             100% {
-                transform: rotate(0)
+                transform: rotate(0);
             }
 
             50% {
-                transform: rotate(8deg)
+                transform: rotate(8deg);
             }
         }
 
@@ -647,9 +636,13 @@
             border-radius: 18px;
             padding: 14px 16px;
             font-family: inherit;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 15px;
             transition: .25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .open-btn {
@@ -730,7 +723,7 @@
             padding: 8px 12px;
             border-radius: 999px;
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .bubble {
@@ -766,7 +759,6 @@
             font-size: 15px;
             line-height: 1.9;
             color: #5a4f69;
-            white-space: pre-line;
         }
 
         .sign {
@@ -778,7 +770,7 @@
         }
 
         .sign strong {
-            color: #413550
+            color: #413550;
         }
 
         .bottom-bar {
@@ -802,13 +794,13 @@
 
         .m1 {
             right: 42px;
-            bottom: 170px
+            bottom: 170px;
         }
 
         .m2 {
             right: 68px;
             bottom: 138px;
-            animation-delay: .8s
+            animation-delay: .8s;
         }
 
         @keyframes musicFloat {
@@ -816,38 +808,46 @@
             0%,
             100% {
                 opacity: 0;
-                transform: translateY(6px)
+                transform: translateY(6px);
             }
 
             35% {
-                opacity: 1
+                opacity: 1;
             }
 
             60% {
-                opacity: .8
+                opacity: .8;
             }
 
             100% {
                 opacity: 0;
-                transform: translateY(-32px)
+                transform: translateY(-32px);
             }
         }
 
-        .box {
-            background: rgba(255, 255, 255, .78);
+        .side {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, .82);
             border: 1px solid rgba(255, 255, 255, .95);
-            border-radius: 26px;
-            padding: 18px;
-            box-shadow: 0 12px 30px rgba(255, 121, 170, .08);
-            margin-bottom: 14px;
+            border-radius: 28px;
+            padding: 20px;
+            box-shadow: 0 14px 34px rgba(255, 121, 170, .08);
         }
 
-        .box h3 {
+        .info-box h3 {
             margin: 0 0 8px;
-            font-size: 22px;
+            font-size: 24px;
+            font-weight: 900;
+            color: #4d405b;
         }
 
-        .box p {
+        .info-box p {
             margin: 0;
             color: var(--muted);
             line-height: 1.75;
@@ -871,7 +871,7 @@
 
         .fact .label {
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 900;
             color: #d9467d;
             text-transform: uppercase;
             letter-spacing: .04em;
@@ -880,68 +880,24 @@
 
         .fact .value {
             font-size: 15px;
-            font-weight: 800;
+            font-weight: 900;
             line-height: 1.5;
-        }
-
-        .memory-card {
-            background: linear-gradient(135deg, #fff 0%, #fff6fb 100%);
-            border: 1px solid #f3dce8;
-            border-radius: 26px;
-            padding: 18px;
-            box-shadow: 0 12px 28px rgba(139, 108, 247, .06);
-        }
-
-        .memory-head {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .memory-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 16px;
-            display: grid;
-            place-items: center;
-            background: #fff0f6;
-            color: #d9467d;
-            font-size: 20px;
-        }
-
-        .memory-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin: 0;
-        }
-
-        .memory-sub {
-            color: var(--muted);
-            font-size: 13px;
-            margin: 2px 0 0;
-        }
-
-        .memory-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 14px;
         }
 
         .polaroid {
             background: #fff;
-            border-radius: 22px;
+            border-radius: 24px;
             padding: 12px 12px 18px;
-            box-shadow: 0 18px 32px rgba(255, 121, 170, .10);
+            box-shadow: 0 18px 38px rgba(255, 121, 170, .11);
             border: 1px solid #fff1f6;
+            transform: rotate(-1deg);
         }
 
         .polaroid img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 18px;
             display: block;
-            aspect-ratio: 4/4.2;
+            aspect-ratio: 4/4.1;
             object-fit: cover;
         }
 
@@ -950,80 +906,95 @@
             margin-top: 10px;
             color: #8b7e94;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        .helper {
+        .closing {
+            margin-top: 22px;
+            background: linear-gradient(135deg, #ff78a8, #ffd86d);
+            color: #fff;
+            border-radius: 32px;
+            padding: 28px;
+            box-shadow: 0 24px 55px rgba(255, 121, 170, .20);
             text-align: center;
-            color: var(--muted);
-            font-size: 13px;
-            margin-top: 10px;
+        }
+
+        .closing h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 34px;
+            margin: 0 0 8px;
+        }
+
+        .closing p {
+            margin: 0;
+            font-weight: 800;
+            line-height: 1.6;
         }
 
         audio {
-            display: none
+            display: none;
         }
 
-        @media (max-width:960px) {
+        @media (max-width: 960px) {
             .layout {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
             }
 
             .scene {
-                min-height: auto
+                min-height: auto;
             }
 
             .phone {
-                margin-inline: auto
+                margin-inline: auto;
             }
         }
 
-        @media (max-width:520px) {
+        @media (max-width: 520px) {
             .wrap {
-                padding: 18px 12px 28px
+                width: min(100% - 24px, 1160px);
+                padding: 18px 0 30px;
             }
 
             .scene,
             .side {
-                padding: 14px
+                padding: 14px;
             }
 
             .phone {
                 border-width: 6px;
-                border-radius: 30px
+                border-radius: 30px;
             }
 
             .screen {
                 min-height: 630px;
-                padding: 14px 14px 18px
+                padding: 14px 14px 18px;
             }
 
             .cover {
                 margin-top: 104px;
-                padding: 16px
+                padding: 16px;
             }
 
             .title-script {
-                font-size: 30px
+                font-size: 30px;
             }
 
             .for-name {
-                font-size: 28px
+                font-size: 28px;
             }
 
             .bottom-bar,
-            .facts,
-            .memory-grid {
-                grid-template-columns: 1fr
+            .facts {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="float f1"></div>
-    <div class="float f2"></div>
-    <div class="float f3"></div>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
     <div class="petal p1">🌸</div>
     <div class="petal p2">🌼</div>
     <div class="petal p3">💮</div>
@@ -1031,18 +1002,18 @@
     <div class="petal p5">🌼</div>
 
     <div class="wrap">
-        <?php if ($is_preview): ?>
+        <?php if (!empty($is_preview)): ?>
             <div class="preview-alert">Preview mode aktif. Publish project agar greeting card bisa dibuka public.</div>
         <?php endif; ?>
 
-        <div class="hero">
-            <span class="kicker">🌸 Greeting Card Animation • Memory Blossom</span>
-            <h1><?= html_escape($project->title ?: $messageTitle); ?></h1>
+        <header class="hero">
+            <span class="kicker"><i class="bi bi-envelope-heart-fill"></i> Greeting Card Animation • Memory Blossom</span>
+            <h1><?= html_escape($title); ?></h1>
             <p><?= html_escape($subtitle); ?></p>
-        </div>
+        </header>
 
-        <div class="layout">
-            <div class="card-shell scene">
+        <main class="layout">
+            <section class="panel scene">
                 <div class="phone">
                     <div class="phone-top">
                         <div class="notch"></div>
@@ -1092,13 +1063,13 @@
 
                             <div class="for-name"><?= html_escape($receiver); ?></div>
                             <div class="subtitle"><?= html_escape($description); ?></div>
-                            <div class="msg"><?= nl2br(html_escape($messageBody)); ?></div>
+                            <!-- <div class="msg"><?= nl2br(html_escape($messageBody)); ?></div> -->
                             <div class="sign">With lots of love from <strong><?= html_escape($sender); ?></strong> 💖</div>
 
                             <div class="bottom-bar">
                                 <button type="button" class="soft-btn primary" id="replayBtn">Buka Lagi</button>
                                 <button type="button" class="soft-btn secondary" id="musicBtn"><?= $musicUrl ? 'Play Music' : 'No Music'; ?></button>
-                                <a class="soft-btn whatsapp" target="_blank" href="https://wa.me/?text=<?= rawurlencode('Hi ' . $receiver . ', aku kirim greeting card spesial ini buat kamu 💌 ' . $shareUrl); ?>" style="text-decoration:none;text-align:center;">Share WA</a>
+                                <a class="soft-btn whatsapp" target="_blank" href="https://wa.me/?text=<?= rawurlencode('Hi ' . $receiver . ', aku kirim greeting card spesial ini buat kamu 💌 ' . $shareUrl); ?>">Share WA</a>
                             </div>
                         </div>
 
@@ -1106,97 +1077,55 @@
                         <div class="music-note m2">🎶</div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="card-shell side">
-                <div>
-                    <div class="box">
-                        <h3>Special for <?= html_escape($receiver); ?> 💌</h3>
-                        <p>
-                            Tema ini fokus ke greeting personal yang manis dan interaktif.
-                            Jadi bukan sekadar kartu, tapi terasa seperti pengalaman kecil yang spesial.
-                        </p>
+            <aside class="panel side">
+                <div class="info-box">
+                    <h3>Special for <?= html_escape($receiver); ?> 💌</h3>
+                    <p><?= html_escape($coverText); ?></p>
 
-                        <div class="facts">
-                            <div class="fact">
-                                <div class="label">Tema</div>
-                                <div class="value">Memory Blossom</div>
-                            </div>
-                            <div class="fact">
-                                <div class="label">Judul</div>
-                                <div class="value"><?= html_escape($project->title ?: $messageTitle); ?></div>
-                            </div>
-                            <div class="fact">
-                                <div class="label">From</div>
-                                <div class="value"><?= html_escape($sender); ?></div>
-                            </div>
-                            <div class="fact">
-                                <div class="label">To</div>
-                                <div class="value"><?= html_escape($receiver); ?></div>
-                            </div>
+                    <div class="facts">
+                        <div class="fact">
+                            <div class="label">Theme</div>
+                            <div class="value">Memory Blossom</div>
+                        </div>
+                        <div class="fact">
+                            <div class="label">Title</div>
+                            <div class="value"><?= html_escape($title); ?></div>
+                        </div>
+                        <div class="fact">
+                            <div class="label">From</div>
+                            <div class="value"><?= html_escape($sender); ?></div>
+                        </div>
+                        <div class="fact">
+                            <div class="label">To</div>
+                            <div class="value"><?= html_escape($receiver); ?></div>
                         </div>
                     </div>
-
-                    <?php if ($coverImage): ?>
-                        <div class="box">
-                            <h3>Memory Photo 🌷</h3>
-                            <p>Hero image dari project dipakai sebagai foto kenangan agar greeting terasa lebih personal.</p>
-
-                            <div class="polaroid" style="margin-top:12px;">
-                                <img src="<?= $coverImage; ?>" alt="memory photo">
-                                <div class="polaroid-caption">A sweet little memory</div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($hasMemory): ?>
-                        <div class="memory-card">
-                            <div class="memory-head">
-                                <div class="memory-icon"><i class="bi bi-stars"></i></div>
-                                <div>
-                                    <h3 class="memory-title">Little Memory</h3>
-                                    <p class="memory-sub">Beberapa detail kecil yang bikin greeting ini terasa lebih bermakna.</p>
-                                </div>
-                            </div>
-
-                            <div class="memory-grid">
-                                <?php if ($memoryDate): ?>
-                                    <div class="fact">
-                                        <div class="label">Special Date</div>
-                                        <div class="value"><?= html_escape($memoryDate); ?></div>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($memoryTime): ?>
-                                    <div class="fact">
-                                        <div class="label">Special Time</div>
-                                        <div class="value"><?= html_escape($memoryTime); ?></div>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($memoryPlace): ?>
-                                    <div class="fact">
-                                        <div class="label">Special Place</div>
-                                        <div class="value"><?= html_escape($memoryPlace); ?></div>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($memoryAddress): ?>
-                                    <div class="fact">
-                                        <div class="label">Little Note Place</div>
-                                        <div class="value"><?= nl2br(html_escape($memoryAddress)); ?></div>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
                 </div>
 
-                <div class="helper">
-                    Made with love for your special greeting card ✨
+                <?php if ($coverImage): ?>
+                    <div class="info-box">
+                        <h3>Memory Photo 🌷</h3>
+                        <p></p>
+                        <div class="polaroid" style="margin-top:12px;">
+                            <img src="<?= $coverImage; ?>" alt="<?= html_escape($title); ?>">
+                            <div class="polaroid-caption">A sweet little memory</div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <div class="info-box">
+                    <h3>Message ✨</h3>
+                    <p><?= nl2br(html_escape($messageBody)); ?></p>
                 </div>
-            </div>
-        </div>
+
+                <div class="closing">
+                    <h3>Made with Love</h3>
+                    <!-- <p>Kartu ucapan digital yang manis, ringan, dan siap dibagikan.</p> -->
+                </div>
+            </aside>
+        </main>
     </div>
 
     <?php if ($musicUrl): ?>
@@ -1217,25 +1146,27 @@
             function openCard() {
                 screen.classList.add('opened');
                 if (audio && !musicStarted) {
-                    audio.play().then(() => {
+                    audio.play().then(function() {
                         musicStarted = true;
                         if (musicBtn) musicBtn.textContent = 'Pause Music';
-                    }).catch(() => {});
+                    }).catch(function() {});
                 }
             }
 
             function replayCard() {
                 screen.classList.remove('opened');
-                setTimeout(() => screen.classList.add('opened'), 260);
+                setTimeout(function() {
+                    screen.classList.add('opened');
+                }, 260);
             }
 
             function toggleMusic() {
                 if (!audio) return;
                 if (audio.paused) {
-                    audio.play().then(() => {
+                    audio.play().then(function() {
                         musicStarted = true;
                         musicBtn.textContent = 'Pause Music';
-                    }).catch(() => {
+                    }).catch(function() {
                         alert('Klik lagi jika browser masih menahan autoplay audio.');
                     });
                 } else {

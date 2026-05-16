@@ -7,9 +7,9 @@
                 <tr>
                     <th>No</th>
                     <th>Customer</th>
-                    <th>Produk</th>
+                    <!-- <th>Produk</th> -->
                     <!-- <th>PIC</th> -->
-                    <th>Status</th>
+                    <!-- <th>Status</th> -->
                     <th>Payment</th>
                     <th>Total</th>
                     <!-- <th>Paid</th> -->
@@ -21,9 +21,9 @@
                 <?php foreach ($orders as $row): ?><tr>
                         <td><strong><?= html_escape($row->order_no); ?></strong><br><small class="text-muted"><?= html_escape($row->package_name); ?></small></td>
                         <td><?= html_escape($row->customer_name); ?><br><small class="text-muted"><?= html_escape($row->template_name); ?></small></td>
-                        <td><?= html_escape(status_label($row->product_type)); ?></td>
+                        <!-- <td><?= html_escape(status_label($row->product_type)); ?></td> -->
                         <!-- <td><?= html_escape($row->assigned_user_name); ?></td> -->
-                        <td><span class="badge text-bg-<?= badge_status($row->status); ?>"><?= html_escape(status_label($row->status)); ?></span></td>
+                        <!-- <td><span class="badge text-bg-<?= badge_status($row->status); ?>"><?= html_escape(status_label($row->status)); ?></span></td> -->
                         <td><span class="badge text-bg-<?= badge_status($row->payment_status); ?>"><?= html_escape(strtoupper($row->payment_status)); ?></span><br><small><?= html_escape($row->payment_method); ?></small><?php if (!empty($row->payment_proof)): ?><br><small><a target="_blank" href="<?= asset_or_url($row->payment_proof); ?>">Bukti</a></small><?php endif; ?></td>
                         <td><?= rupiah($row->final_price); ?></td>
                         <!-- <td><?= rupiah($row->paid_amount); ?></td> -->

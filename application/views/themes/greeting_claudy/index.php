@@ -1,15 +1,9 @@
 <?php
-
-/**
- * Greeting Candy Pop
- * Cute colorful Gen-Z greeting theme
- */
-
-$title = $project->title ?? 'Candy Pop';
-$subtitle = $project->subtitle ?? 'A tiny sweet message';
-$coverText = $project->cover_text ?? 'A colorful little greeting for someone special.';
-$message = $project->message_body ?? 'Semoga harimu dipenuhi hal manis, tawa, dan kebahagiaan.';
-$receiver = $guest_name ?: ($project->receiver_name ?? 'Bestie');
+$title = $project->title ?? 'Cloudy Hug';
+$subtitle = $project->subtitle ?? 'Soft dreamy greeting';
+$coverText = $project->cover_text ?? 'A warm little cloud carrying sweet wishes.';
+$message = $project->message_body ?? 'Semoga semua harimu terasa ringan, hangat, dan dipenuhi hal-hal baik.';
+$receiver = $guest_name ?: ($project->receiver_name ?? 'Lovely Person');
 $sender = $project->sender_name ?? 'Someone';
 $hero = !empty($project->hero_image) ? asset_or_url($project->hero_image) : '';
 $hasMusic = !empty($project->music_url);
@@ -21,7 +15,7 @@ $hasMusic = !empty($project->music_url);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="<?= base_url('assets/img/logo.ico'); ?>">
 
 
@@ -29,13 +23,12 @@ $hasMusic = !empty($project->music_url);
 
     <style>
         :root {
-            --bg1: #fff6d6;
-            --bg2: #ffd7e6;
-            --bg3: #d7f5ff;
-            --pink: #ff5ea8;
-            --orange: #ff9d42;
-            --purple: #8c6bff;
-            --dark: #50324d;
+            --sky: #dff5ff;
+            --sky2: #f7fcff;
+            --blue: #74b9ff;
+            --purple: #a29bfe;
+            --soft: #f1fbff;
+            --dark: #4d6580;
             --white: #fff;
         }
 
@@ -46,157 +39,173 @@ $hasMusic = !empty($project->music_url);
         body {
             margin: 0;
             overflow-x: hidden;
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             color: var(--dark);
             background:
-                radial-gradient(circle at top left, #ffe1ec 0%, transparent 28%),
-                radial-gradient(circle at bottom right, #d8f6ff 0%, transparent 30%),
-                linear-gradient(180deg, #fffdf6 0%, #fff5fb 50%, #f3fcff 100%);
+                radial-gradient(circle at top left, #dff4ff 0%, transparent 30%),
+                radial-gradient(circle at bottom right, #efe7ff 0%, transparent 28%),
+                linear-gradient(180deg, #f8fdff 0%, #eef9ff 45%, #f8f4ff 100%);
         }
 
-        .font-cute {
-            font-family: 'Fredoka', cursive;
+        .font-cloud {
+            font-family: 'Comfortaa', cursive;
         }
 
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 50px 0;
             position: relative;
+            overflow: hidden;
+            padding: 50px 0;
         }
 
         .container {
             width: min(1120px, 92%);
             margin: auto;
+            position: relative;
+            z-index: 2;
         }
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 42px;
             align-items: center;
         }
 
         .badge {
             display: inline-block;
             background: #fff;
-            color: var(--pink);
+            color: var(--blue);
             padding: 10px 18px;
             border-radius: 999px;
             font-weight: 800;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
             margin-bottom: 18px;
         }
 
         .title {
-            font-size: clamp(52px, 8vw, 100px);
-            line-height: .9;
+            font-size: clamp(54px, 8vw, 102px);
+            line-height: .92;
             margin: 0 0 18px;
-            color: var(--pink);
+            color: var(--blue);
         }
 
         .cover {
             font-size: 20px;
-            line-height: 1.8;
+            line-height: 1.9;
             max-width: 580px;
         }
 
-        .receiver-card {
+        .card {
             display: inline-block;
-            background: rgba(255, 255, 255, .9);
+            background: rgba(255, 255, 255, .88);
             padding: 24px;
-            border-radius: 32px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, .08);
-            margin-top: 12px;
+            border-radius: 34px;
+            box-shadow: 0 22px 60px rgba(0, 0, 0, .08);
+            margin-top: 10px;
         }
 
         .receiver {
-            font-size: 34px;
+            font-size: 36px;
             margin: 4px 0;
         }
 
-        .open-btn {
+        .btn-open {
             display: inline-block;
             margin-top: 28px;
-            background: linear-gradient(135deg, var(--pink), var(--orange));
-            color: #fff;
             padding: 15px 28px;
             border-radius: 999px;
             text-decoration: none;
+            color: #fff;
             font-weight: 900;
-            box-shadow: 0 18px 40px rgba(255, 94, 168, .28);
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            box-shadow: 0 18px 42px rgba(116, 185, 255, .28);
         }
 
         .visual {
             position: relative;
         }
 
-        .photo-card {
+        .photo-wrap {
             background: #fff;
+            border-radius: 40px;
             padding: 16px;
-            border-radius: 36px;
-            transform: rotate(3deg);
-            box-shadow: 0 35px 80px rgba(0, 0, 0, .12);
+            transform: rotate(-3deg);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, .1);
         }
 
-        .photo-card img {
+        .photo-wrap img {
             width: 100%;
-            height: 480px;
+            height: 500px;
             object-fit: cover;
-            border-radius: 24px;
+            border-radius: 28px;
         }
 
-        .sticker {
+        .cloud {
             position: absolute;
             background: #fff;
-            border-radius: 24px;
-            padding: 14px 18px;
-            font-size: 28px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+            border-radius: 999px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
         }
 
-        .s1 {
-            top: -10px;
-            left: -10px;
+        .c1 {
+            width: 130px;
+            height: 50px;
+            top: -15px;
+            left: -30px;
         }
 
-        .s2 {
-            bottom: -15px;
-            right: -15px;
+        .c2 {
+            width: 90px;
+            height: 40px;
+            bottom: 30px;
+            right: -20px;
         }
 
         .section {
-            padding: 80px 0;
+            padding: 82px 0;
         }
 
         .message-box {
             max-width: 880px;
             margin: auto;
-            background: #fff;
+            background: rgba(255, 255, 255, .9);
             border-radius: 42px;
             padding: 42px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, .08);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, .08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-box:before {
+            content: "☁️";
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 90px;
+            opacity: .08;
         }
 
         .message-title {
-            font-size: clamp(36px, 5vw, 64px);
-            color: var(--purple);
+            font-size: clamp(38px, 5vw, 66px);
             margin: 0 0 20px;
+            color: var(--purple);
         }
 
         .message {
             font-size: 20px;
-            line-height: 1.9;
+            line-height: 1.95;
         }
 
         .closing {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            color: #fff;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 44px;
+            padding: 54px 28px;
             text-align: center;
-            border-radius: 42px;
-            padding: 50px 26px;
-            box-shadow: 0 28px 80px rgba(140, 107, 255, .25);
+            color: #fff;
+            box-shadow: 0 30px 80px rgba(116, 185, 255, .24);
         }
 
         .music-btn {
@@ -205,13 +214,13 @@ $hasMusic = !empty($project->music_url);
             bottom: 22px;
             width: 60px;
             height: 60px;
-            border-radius: 50%;
             border: none;
-            background: linear-gradient(135deg, var(--pink), var(--purple));
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
             color: #fff;
             font-size: 20px;
-            cursor: pointer;
             z-index: 50;
+            cursor: pointer;
         }
 
         .float {
@@ -220,9 +229,9 @@ $hasMusic = !empty($project->music_url);
         }
 
         .f1 {
-            top: 10%;
-            left: 6%;
-            font-size: 38px
+            top: 12%;
+            left: 8%;
+            font-size: 34px
         }
 
         .f2 {
@@ -233,9 +242,9 @@ $hasMusic = !empty($project->music_url);
         }
 
         .f3 {
-            top: 15%;
-            right: 7%;
-            font-size: 34px;
+            top: 18%;
+            right: 8%;
+            font-size: 30px;
             animation-delay: 2s
         }
 
@@ -268,12 +277,12 @@ $hasMusic = !empty($project->music_url);
                 font-size: 17px;
             }
 
-            .photo-card {
+            .photo-wrap {
                 transform: none;
             }
 
-            .photo-card img {
-                height: 320px;
+            .photo-wrap img {
+                height: 330px;
             }
 
             .message-box {
@@ -299,17 +308,21 @@ $hasMusic = !empty($project->music_url);
 
     <section class="hero">
 
-        <div class="float f1">🍭</div>
+        <div class="float f1">☁️</div>
         <div class="float f2">✨</div>
-        <div class="float f3">💖</div>
+        <div class="float f3">💙</div>
 
         <div class="container">
+
             <div class="grid">
 
                 <div>
-                    <div class="badge">Candy Pop Greeting</div>
 
-                    <h1 class="title font-cute">
+                    <div class="badge">
+                        Cloudy Hug Greeting
+                    </div>
+
+                    <h1 class="title font-cloud">
                         <?= html_escape($title); ?>
                     </h1>
 
@@ -317,34 +330,36 @@ $hasMusic = !empty($project->music_url);
                         <?= html_escape($coverText); ?>
                     </p>
 
-                    <div class="receiver-card">
-                        <div style="font-size:12px;font-weight:800;letter-spacing:.15em;color:#999">
+                    <div class="card">
+
+                        <div style="font-size:12px;font-weight:800;letter-spacing:.15em;color:#8aa2b7">
                             SPECIAL FOR
                         </div>
 
-                        <h2 class="receiver font-cute">
+                        <h2 class="receiver font-cloud">
                             <?= html_escape($receiver); ?>
                         </h2>
 
-                        <div style="font-weight:800;color:#777">
+                        <div style="font-weight:800;color:#8799aa">
                             from <?= html_escape($sender); ?>
                         </div>
+
                     </div>
 
                     <br>
 
-                    <a href="#message" class="open-btn">
-                        Open Sweet Message 💌
+                    <a href="#message" class="btn-open">
+                        Open Message ☁️
                     </a>
 
                 </div>
 
                 <div class="visual">
 
-                    <div class="sticker s1">🧸</div>
-                    <div class="sticker s2">🌈</div>
+                    <div class="cloud c1"></div>
+                    <div class="cloud c2"></div>
 
-                    <div class="photo-card">
+                    <div class="photo-wrap">
 
                         <?php if ($hero): ?>
                             <img src="<?= $hero; ?>" alt="<?= html_escape($title); ?>">
@@ -355,58 +370,69 @@ $hasMusic = !empty($project->music_url);
                 </div>
 
             </div>
+
         </div>
+
     </section>
 
     <section class="section" id="message">
+
         <div class="container">
 
             <div class="message-box">
 
-                <div style="font-size:12px;font-weight:900;letter-spacing:.16em;color:#999;text-transform:uppercase">
-                    Sweet Message
+                <div style="font-size:12px;font-weight:900;letter-spacing:.16em;color:#90a4b8;text-transform:uppercase">
+                    Dreamy Message
                 </div>
 
-                <h2 class="message-title font-cute">
-                    Hi <?= html_escape($receiver); ?> 💖
+                <h2 class="message-title font-cloud">
+                    Hello <?= html_escape($receiver); ?> ☁️
                 </h2>
 
                 <div class="message">
                     <?= nl2br(html_escape($message)); ?>
                 </div>
 
-                <div style="margin-top:28px;padding-top:22px;border-top:2px dashed #ffd4e5">
-                    <div style="color:#777;font-weight:800">with love,</div>
-                    <h3 class="font-cute" style="font-size:34px;margin:5px 0 0">
+                <div style="margin-top:28px;padding-top:22px;border-top:2px dashed #d8ebff">
+
+                    <div style="color:#8aa2b7;font-weight:800">
+                        warm wishes,
+                    </div>
+
+                    <h3 class="font-cloud" style="font-size:34px;margin:5px 0 0">
                         <?= html_escape($sender); ?>
                     </h3>
+
                 </div>
 
             </div>
 
         </div>
+
     </section>
 
     <section class="section" style="padding-top:0">
+
         <div class="container">
 
             <div class="closing">
 
-                <h2 class="font-cute" style="font-size:clamp(36px,5vw,60px);margin:0 0 14px">
-                    Sending You Happy Vibes ✨
+                <h2 class="font-cloud" style="font-size:clamp(36px,5vw,60px);margin:0 0 14px">
+                    A Soft Hug For You ☁️
                 </h2>
 
                 <p style="font-size:18px;line-height:1.8;max-width:650px;margin:auto auto 24px">
-                    Semoga hari kamu selalu dipenuhi warna, tawa, dan hal-hal baik yang bikin hati hangat.
+                    Semoga semua hari kamu terasa ringan seperti awan dan sehangat pelukan kecil.
                 </p>
 
-                <!-- <a href="<?= site_url(); ?>" style="display:inline-block;background:#fff;color:var(--purple);padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:900">
-                    Create Your Greeting Card
-                </a> -->
+                <a href="<?= site_url(); ?>" style="display:inline-block;background:#fff;color:var(--blue);padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:900">
+                    Create Your Greeting
+                </a>
 
             </div>
 
         </div>
+
     </section>
 
     <script>

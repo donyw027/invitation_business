@@ -107,15 +107,16 @@ $spreadsheet_previews = array(
             <h2 class="section-title">Undangan Digital & Greeting Card</h2>
             <p class="section-subtitle mx-auto">Preview template digital yang clean, mobile friendly, dan siap dibagikan.</p>
         </div>
-        <div class="row g-4">
+        <div class="row g-4 align-items-stretch">
             <?php $has_templates = false; ?>
             <?php foreach ($product_types as $type): ?>
                 <?php $items = isset($template_groups[$type->code]) ? $template_groups[$type->code] : array(); ?>
                 <?php if (!empty($items)): ?>
                     <?php $has_templates = true; ?>
                     <?php foreach ($items as $t): ?>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card-pretty h-100">
+                        <div class="col-lg-3 col-md-6 d-flex">
+                            <div class="card-pretty template-card w-100 d-flex flex-column">
+
                                 <div class="template-preview-frame">
                                     <?php if (!empty($t->thumbnail)): ?>
                                         <img src="<?= html_escape($t->thumbnail); ?>" alt="<?= html_escape($t->name); ?>">
@@ -123,25 +124,40 @@ $spreadsheet_previews = array(
                                         <span><?= html_escape($type->name); ?></span>
                                     <?php endif; ?>
                                 </div>
-                                <div class="pt-4">
-                                    <span class="pill"><?= html_escape($type->name); ?></span>
-                                    <h4 class="mt-3"><?= html_escape($t->name); ?></h4>
-                                    <p><?= !empty($t->description) ? html_escape($t->description) : 'Template modern, mobile friendly, dan siap disesuaikan dengan kebutuhan acara.'; ?></p>
-                                    <div class="d-flex flex-wrap gap-2 mt-3">
-                                        <?php if (!empty($t->demo_url)): ?><a href="<?= html_escape($t->demo_url); ?>" target="_blank" class="btn btn-soft btn-sm">Preview</a><?php endif; ?>
-                                        <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku tertarik dengan template ' . $t->name); ?>" class="btn btn-main btn-sm">Order</a>
+
+                                <div class="pt-4 d-flex flex-column flex-grow-1">
+                                    <div>
+                                        <span class="pill"><?= html_escape($type->name); ?></span>
+
+                                        <h4 class="mt-3 mb-2">
+                                            <?= html_escape($t->name); ?>
+                                        </h4>
+
+                                        <p class="template-desc">
+                                            <?= !empty($t->description)
+                                                ? html_escape($t->description)
+                                                : 'Template modern, mobile friendly, dan siap disesuaikan dengan kebutuhan acara.'; ?>
+                                        </p>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-auto pt-3">
+                                        <?php if (!empty($t->demo_url)): ?>
+                                            <a href="<?= html_escape($t->demo_url); ?>" target="_blank" class="btn btn-soft btn-sm">
+                                                Preview
+                                            </a>
+                                        <?php endif; ?>
+
+                                        <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku tertarik dengan template ' . $t->name); ?>" class="btn btn-main btn-sm">
+                                            Order
+                                        </a>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <?php if (!$has_templates): ?>
-                <div class="col-lg-4 col-md-6"><div class="card-pretty h-100"><div class="preview-plain-card"><span class="pill">Wedding</span><h4>Digital Invitation</h4><p>Undangan digital untuk wedding, engagement, birthday, dan event personal.</p></div></div></div>
-                <div class="col-lg-4 col-md-6"><div class="card-pretty h-100"><div class="preview-plain-card mint"><span class="pill">Greeting</span><h4>Greeting Card</h4><p>Kartu ucapan digital untuk birthday, graduation, anniversary, dan thank you card.</p></div></div></div>
-                <div class="col-lg-4 col-md-6"><div class="card-pretty h-100"><div class="preview-plain-card dark"><span class="pill">Custom</span><h4>Custom Template</h4><p>Template bisa disesuaikan dengan warna, nama, detail acara, dan kebutuhan brand.</p></div></div></div>
-            <?php endif; ?>
         </div>
     </div>
 </section>
@@ -168,6 +184,64 @@ $spreadsheet_previews = array(
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding review-static-section">
+    <div class="container">
+        <div class="section-heading text-center mb-5">
+            <span class="eyebrow">Customer Review</span>
+            <h2>Yang Mereka Rasakan Setelah Order</h2>
+            <p>
+                Beberapa feedback dari customer untuk buket, jastip, dan template spreadsheet.
+            </p>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-3 col-md-6 d-flex">
+                <div class="review-static-card w-100">
+                    <div class="review-stars">★★★★★</div>
+                    <p>“Hasil buketnya lucu-lucu banget, warna dan packaging-nya juga rapi. Cocok buat hadiah.”</p>
+                    <div class="review-user">
+                        <strong>Customer Buket</strong>
+                        <span>Buket Custom</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+                <div class="review-static-card w-100">
+                    <div class="review-stars">★★★★★</div>
+                    <p>“Jastipnya tidak mengecewakan. Barang aman, proses jelas, dan komunikasinya enak.”</p>
+                    <div class="review-user">
+                        <strong>Customer Jastip</strong>
+                        <span>Jastip Order</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+                <div class="review-static-card w-100">
+                    <div class="review-stars">★★★★★</div>
+                    <p>“Spreadsheet-nya bisa menyesuaikan kebutuhan pengguna, jadi lebih gampang dipakai harian.”</p>
+                    <div class="review-user">
+                        <strong>Customer Template</strong>
+                        <span>Spreadsheet Template</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+                <div class="review-static-card w-100">
+                    <div class="review-stars">★★★★★</div>
+                    <p>“Fast response, ramah, dan dibantu sampai paham. Recommended buat yang butuh custom.”</p>
+                    <div class="review-user">
+                        <strong>Happy Customer</strong>
+                        <span>Custom Service</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
