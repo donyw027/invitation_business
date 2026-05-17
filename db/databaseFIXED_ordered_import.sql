@@ -14,48 +14,28 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping structure for table ci3_invitation_business_v3.activity_logs
-CREATE TABLE IF NOT EXISTS `activity_logs` (
+-- Dumping structure for table ci3_invitation_business_v3.users
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int unsigned DEFAULT NULL,
-  `module` varchar(80) DEFAULT NULL,
-  `action` varchar(80) DEFAULT NULL,
-  `description` text,
+  `name` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(120) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(30) NOT NULL DEFAULT 'admin',
+  `photo` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `last_login_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ci3_invitation_business_v3.activity_logs: ~111 rows (approximately)
-INSERT INTO `activity_logs` (`id`, `user_id`, `module`, `action`, `description`, `created_at`) VALUES
-	(1, 1, 'templates', 'seed', 'Mengisi 11 template aktif sesuai folder tema yang tersedia.', '2026-04-05 12:41:00'),
-	(2, 1, 'customers', 'seed', 'Mengisi customer dummy realistis untuk demo project.', '2026-04-05 12:42:00'),
-	(3, 1, 'orders', 'seed', 'Mengisi 11 order berbayar agar otomatis punya project.', '2026-04-05 12:43:00'),
-	(4, 1, 'projects', 'seed', 'Mengisi 11 project untuk seluruh template.', '2026-04-05 12:44:00'),
-	(5, 1, 'guests', 'seed', 'Mengisi guest hanya untuk project invitation.', '2026-04-05 12:45:00'),
-	(186, 5, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:48:35'),
-	(187, 5, 'templates', 'update', 'Mengubah template #1', '2026-05-17 03:49:35'),
-	(188, 5, 'templates', 'update', 'Mengubah template #16', '2026-05-17 03:50:25'),
-	(189, 5, 'templates', 'update', 'Mengubah template #2', '2026-05-17 03:50:45'),
-	(190, 5, 'templates', 'update', 'Mengubah template #17', '2026-05-17 03:51:27'),
-	(191, 5, 'templates', 'update', 'Mengubah template #3', '2026-05-17 03:51:53'),
-	(192, 5, 'templates', 'update', 'Mengubah template #12', '2026-05-17 03:52:10'),
-	(193, 5, 'templates', 'update', 'Mengubah template #4', '2026-05-17 03:52:27'),
-	(194, 5, 'templates', 'update', 'Mengubah template #5', '2026-05-17 03:52:44'),
-	(195, 5, 'templates', 'update', 'Mengubah template #14', '2026-05-17 03:53:02'),
-	(196, 5, 'templates', 'update', 'Mengubah template #6', '2026-05-17 03:53:20'),
-	(197, 5, 'templates', 'update', 'Mengubah template #7', '2026-05-17 03:53:43'),
-	(198, 5, 'templates', 'update', 'Mengubah template #8', '2026-05-17 03:53:59'),
-	(199, 5, 'templates', 'update', 'Mengubah template #13', '2026-05-17 03:54:16'),
-	(200, 5, 'templates', 'update', 'Mengubah template #9', '2026-05-17 03:54:35'),
-	(201, 5, 'templates', 'update', 'Mengubah template #10', '2026-05-17 03:54:51'),
-	(202, 5, 'templates', 'update', 'Mengubah template #11', '2026-05-17 03:55:08'),
-	(203, 5, 'users', 'update', 'Mengubah admin user #4 (indah)', '2026-05-17 03:55:57'),
-	(204, 5, 'users', 'update', 'Mengubah admin user #5 (doni)', '2026-05-17 03:56:05'),
-	(205, 5, 'auth', 'logout', 'User logout dari admin panel', '2026-05-17 03:56:07'),
-	(206, 5, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:56:12'),
-	(207, 5, 'auth', 'logout', 'User logout dari admin panel', '2026-05-17 03:56:14'),
-	(208, 4, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:56:22');
+-- Dumping data for table ci3_invitation_business_v3.users: ~1 rows (approximately)
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`, `photo`, `is_active`, `last_login_at`, `created_at`, `updated_at`) VALUES
+	(1, 'Administrator', 'admin', 'admin@example.com', '$2y$12$Mif.oYTiZ1LCKYtg73M/jOTEkdLNJS6WlzFbuXSQLHMX1toxPAt/6', 'super_admin', '', 1, '2026-05-16 02:39:57', '2026-03-31 08:00:00', '2026-03-31 08:00:00'),
+	(4, 'Indah', 'indah', 'indah@gmail.com', '$2y$10$lzWe64Ats4jMQ9U95TmdD.lAUmgg0mAXuZpd1V36MoUDWTxi3cLTa', 'super_admin', '', 1, '2026-05-17 03:56:22', '2026-04-12 10:32:08', '2026-05-17 03:55:57'),
+	(5, 'doni', 'doni', 'doniwicaksono27@gmail.com', '$2y$10$CPJ6H6qe1gX61N0Ufi4wm.BSNQ1phiuccJDaW.wFe.wGJyx8v/kMW', 'super_admin', '', 1, '2026-05-17 03:56:12', '2026-05-05 12:05:54', '2026-05-17 03:56:05');
 
 -- Dumping structure for table ci3_invitation_business_v3.customers
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -68,51 +48,91 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `notes` text,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.customers: ~12 rows (approximately)
 INSERT INTO `customers` (`id`, `name`, `phone`, `email`, `source`, `address`, `notes`, `created_at`) VALUES
 	(20, 'Demo', '123456', 'demo@gmail.com', 'IG', 'Demo', 'Demo', '2026-05-14 13:19:08');
 
--- Dumping structure for table ci3_invitation_business_v3.guests
-CREATE TABLE IF NOT EXISTS `guests` (
+-- Dumping structure for table ci3_invitation_business_v3.product_types
+CREATE TABLE IF NOT EXISTS `product_types` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `project_id` int unsigned NOT NULL,
-  `guest_name` varchar(150) NOT NULL,
-  `phone` varchar(40) DEFAULT NULL,
-  `category` varchar(80) DEFAULT NULL,
-  `slug` varchar(160) NOT NULL,
-  `is_opened` tinyint(1) NOT NULL DEFAULT '0',
-  `opened_at` datetime DEFAULT NULL,
+  `name` varchar(120) NOT NULL,
+  `code` varchar(80) NOT NULL,
+  `description` text,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` int NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `project_id` (`project_id`),
-  KEY `slug` (`slug`),
-  CONSTRAINT `guests_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ci3_invitation_business_v3.guests: ~20 rows (approximately)
-INSERT INTO `guests` (`id`, `project_id`, `guest_name`, `phone`, `category`, `slug`, `is_opened`, `opened_at`, `created_at`) VALUES
-	(1, 1, 'Keluarga Bapak Andi', '628131000001', 'Keluarga', 'keluarga-bapak-andi', 1, '2026-04-04 19:10:00', '2026-04-02 12:00:00'),
-	(2, 1, 'Mbak Rini & Suami', '628131000002', 'Teman', 'mbak-rini-suami', 1, '2026-04-05 08:30:00', '2026-04-02 12:05:00'),
-	(3, 1, 'Pak Hendra', '628131000003', 'Rekan Kerja', 'pak-hendra', 0, NULL, '2026-04-02 12:08:00'),
-	(4, 1, 'Dewi & Keluarga', '628131000004', 'Teman Kuliah', 'dewi-keluarga', 1, '2026-04-05 09:00:00', '2026-04-02 12:12:00'),
-	(5, 1, 'Keluarga Om Joko', '628131000005', 'Keluarga', 'keluarga-om-joko', 0, NULL, '2026-04-02 12:15:00'),
-	(6, 2, 'Nita & Dimas', '628131000006', 'Teman', 'nita-dimas', 1, '2026-04-03 16:00:00', '2026-04-02 13:00:00'),
-	(7, 2, 'Keluarga Pak Yudi', '628131000007', 'Keluarga', 'keluarga-pak-yudi', 1, '2026-04-03 16:20:00', '2026-04-02 13:05:00'),
-	(8, 2, 'Mila', '628131000008', 'Teman Kantor', 'mila', 0, NULL, '2026-04-02 13:10:00'),
-	(9, 2, 'Kak Arif', '628131000009', 'Saudara', 'kak-arif', 1, '2026-04-04 11:15:00', '2026-04-02 13:12:00'),
-	(10, 3, 'Aisha', '628131000010', 'Teman Sekolah', 'aisha', 1, '2026-04-04 15:45:00', '2026-04-03 10:10:00'),
-	(11, 3, 'Rafa', '628131000011', 'Teman Sekolah', 'rafa', 1, '2026-04-04 15:48:00', '2026-04-03 10:12:00'),
-	(12, 3, 'Caca', '628131000012', 'Tetangga', 'caca', 0, NULL, '2026-04-03 10:14:00'),
-	(13, 3, 'Keluarga Om Bayu', '628131000013', 'Keluarga', 'keluarga-om-bayu', 1, '2026-04-04 18:10:00', '2026-04-03 10:16:00'),
-	(14, 4, 'Bapak Ustadz Rahman', '628131000014', 'Tokoh Masyarakat', 'bapak-ustadz-rahman', 1, '2026-04-04 20:20:00', '2026-04-03 11:00:00'),
-	(15, 4, 'Keluarga Pak Seno', '628131000015', 'Tetangga', 'keluarga-pak-seno', 1, '2026-04-04 20:25:00', '2026-04-03 11:03:00'),
-	(16, 4, 'Mbak Yuni', '628131000016', 'Keluarga', 'mbak-yuni', 0, NULL, '2026-04-03 11:05:00'),
-	(17, 4, 'Pak RT', '628131000017', 'Tetangga', 'pak-rt', 1, '2026-04-04 21:00:00', '2026-04-03 11:08:00'),
-	(18, 5, 'Keluarga Pak Ahmad', '628131000018', 'Keluarga', 'keluarga-pak-ahmad', 1, '2026-04-03 20:15:00', '2026-04-02 19:00:00'),
-	(19, 5, 'Bu Nur', '628131000019', 'Tetangga', 'bu-nur', 1, '2026-04-03 20:30:00', '2026-04-02 19:03:00'),
-	(20, 5, 'Pak Slamet', '628131000020', 'Kerabat', 'pak-slamet', 0, NULL, '2026-04-02 19:05:00');
+-- Dumping data for table ci3_invitation_business_v3.product_types: ~2 rows (approximately)
+INSERT INTO `product_types` (`id`, `name`, `code`, `description`, `is_active`, `sort_order`, `created_at`) VALUES
+	(1, 'Invitation', 'invitation', 'Undangan digital untuk wedding, birthday, khitan, dan tahlil.', 1, 1, '2026-03-31 08:00:00'),
+	(2, 'Greeting Card', 'greeting_card', 'Kartu ucapan digital untuk momen spesial personal.', 1, 2, '2026-03-31 08:00:00');
+
+-- Dumping structure for table ci3_invitation_business_v3.packages
+CREATE TABLE IF NOT EXISTS `packages` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `product_type` varchar(80) NOT NULL,
+  `name` varchar(120) NOT NULL,
+  `price` bigint NOT NULL DEFAULT '0',
+  `old_price` bigint NOT NULL DEFAULT '0',
+  `description` text,
+  `features` text,
+  `button_text` varchar(100) DEFAULT 'Pilih Paket',
+  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `sort_order` int NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table ci3_invitation_business_v3.packages: ~6 rows (approximately)
+INSERT INTO `packages` (`id`, `product_type`, `name`, `price`, `old_price`, `description`, `features`, `button_text`, `is_featured`, `is_active`, `sort_order`, `created_at`) VALUES
+	(1, 'invitation', 'Basic', 79000, 0, 'Paket simple untuk undangan digital.', '1 halaman undangan\n1 template\nLink share\nRevisi minor 1x', 'Pilih Paket', 0, 1, 1, '2026-03-31 08:00:00'),
+	(2, 'invitation', 'Premium', 129000, 149000, 'Paket favorit untuk invitation digital.', 'RSVP\nUcapan\n3 pilihan template\nRevisi 2x', 'Pilih Paket', 1, 1, 2, '2026-03-31 08:00:00'),
+	(3, 'invitation', 'Exclusive', 199000, 229000, 'Paket invitation premium paling lengkap.', 'RSVP\nUcapan\nGift info\nPrioritas pengerjaan', 'Pilih Paket', 0, 1, 3, '2026-03-31 08:00:00'),
+	(4, 'greeting_card', 'Greeting Basic', 49000, 0, 'Greeting card simple dan manis.', '1 halaman greeting\n1 template\nLink share', 'Pilih Paket', 0, 1, 1, '2026-03-31 08:00:00'),
+	(5, 'greeting_card', 'Greeting Special', 69000, 0, 'Greeting card dengan desain premium.', 'Animasi\nTemplate premium\nLink share', 'Pilih Paket', 1, 1, 2, '2026-03-31 08:00:00'),
+	(6, 'greeting_card', 'Greeting Deluxe', 89000, 0, 'Greeting card dengan custom lebih lengkap.', 'Animasi\nTemplate premium\nPrioritas pengerjaan', 'Pilih Paket', 0, 1, 3, '2026-03-31 08:00:00');
+
+-- Dumping structure for table ci3_invitation_business_v3.templates
+CREATE TABLE IF NOT EXISTS `templates` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  `folder` varchar(100) NOT NULL,
+  `product_type` varchar(50) NOT NULL DEFAULT 'wedding',
+  `thumbnail` text,
+  `description` text,
+  `preview_mobile` varchar(255) DEFAULT NULL,
+  `preview_desktop` varchar(255) DEFAULT NULL,
+  `demo_url` text,
+  `sort_order` int NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table ci3_invitation_business_v3.templates: ~12 rows (approximately)
+INSERT INTO `templates` (`id`, `name`, `folder`, `product_type`, `thumbnail`, `description`, `preview_mobile`, `preview_desktop`, `demo_url`, `sort_order`, `is_active`, `created_at`) VALUES
+	(1, 'Romantic Wedding', 'romantic', 'invitation', 'uploads/templates/68d32283c25fa48949fa9e8987c4387d.png', 'Tema wedding elegan dengan pasangan, bunga, dan nuansa romantis.', 'uploads/templates/a822fc9880ce704e37b44160ac877945.png', 'uploads/templates/aaf8b3dfc44b59814680c203a5596179.png', 'i/demo-romantic', 1, 1, '2026-03-31 08:30:00'),
+	(2, 'Floral Wedding', 'floral', 'invitation', 'uploads/templates/eec27f508f3502149f427e5c71f0fe1f.png', 'Tema wedding floral lembut dengan dekorasi bunga pastel.', 'uploads/templates/5e90192dfb9c7aad2cfa47981a722dfd.png', 'uploads/templates/9da11e45c2ac79fbbc2777337f1e0a9a.png', 'i/demo-floral', 2, 1, '2026-03-31 08:31:00'),
+	(3, 'Birthday Party', 'birthday', 'invitation', 'uploads/templates/a3e4f62ec92acdd29956b4cede51eae4.png', 'Tema invitation ulang tahun dengan kue, lilin, dan pesta.', 'uploads/templates/105a530517b68f66a81f968948053080.png', 'uploads/templates/16638378920fd67c14aec5e226a3b7e6.png', 'i/demo-birthday', 3, 1, '2026-04-05 12:35:00'),
+	(4, 'Khitan', 'khitan', 'invitation', 'uploads/templates/3c85ee1e1373e467bbe048a2db71e02b.png', 'Tema invitation khitan keluarga dengan suasana hangat dan meriah.', 'uploads/templates/3f3028a53b992496519237cc41c738fb.png', 'uploads/templates/bbe1fb4169231943d6dd818fd0a5fc33.png', 'i/demo-khitan', 4, 1, '2026-04-05 12:37:00'),
+	(5, 'Tahlil Invitation', 'tahlil', 'invitation', 'uploads/templates/e8df5de1ba890c82acdcb5ab6c6c28be.png', 'Tema invitation tahlil bernuansa tenang, sopan, dan khidmat.', 'uploads/templates/8c179f06b1857ee6ac6276d301df376e.png', 'uploads/templates/deeef1398f5755d5e4cfba0172eda9e9.png', 'i/demo-tahlil', 5, 1, '2026-04-05 12:40:00'),
+	(6, 'Greeting Blush', 'greeting_blush', 'greeting_card', 'uploads/templates/d235d9cedf8a147c9d6153f7c85db9ef.png', 'Greeting ulang tahun dengan suasana ceria dan colorful.', 'uploads/templates/d7e99685f687eff43af3bb27bc7355b9.png', 'uploads/templates/84414fc55b861cad3faf039182dcf05c.png', 'i/demo-greeting-blush', 6, 1, '2026-03-31 03:00:00'),
+	(7, 'Greeting Bear', 'greeting_bear', 'greeting_card', 'uploads/templates/d650a814f3014279a3a347bccfaa0068.png', 'Greeting card lucu dengan vibe teddy bear hangat.', 'uploads/templates/f8edd3a8dc0f5d7c0ed0ae371b6da7aa.png', 'uploads/templates/4ecc2fcdc5611e01b28d0d7406192f1f.png', 'i/demo-greeting-bear', 7, 1, '2026-03-31 04:10:00'),
+	(8, 'Greeting Blossom', 'greeting_blossom', 'greeting_card', 'uploads/templates/b5f5a6d3074c2f354581eb94e336b3bc.png', 'Greeting card pastel dengan bunga-bunga manis.', 'uploads/templates/1a0e299abdc09803dc1891d3b3849723.png', 'uploads/templates/1b59cfd4fa2e0649cb54a501cabe7557.png', 'i/demo-greeting-blossom', 8, 1, '2026-03-31 21:37:00'),
+	(9, 'Greeting Polaroid', 'greeting_polaroid', 'greeting_card', 'uploads/templates/e0fcdb52ff527f58693f4cd84abe67a1.png', 'Greeting card dengan gaya foto polaroid dan memory wall.', 'uploads/templates/c8b05080cc15e09cf093b53dcd60b3ea.png', 'uploads/templates/f63a09673fe586f609c981088632516a.png', 'i/demo-greeting-polaroid', 9, 1, '2026-03-31 04:28:00'),
+	(10, 'Greeting Sunflower', 'greeting_sunflower', 'greeting_card', 'uploads/templates/322f0f22c271e2003c9964eb1ebd0774.png', 'Greeting card cerah dengan nuansa bunga matahari.', 'uploads/templates/38136c743acbce5079b8925dbe09b818.png', 'uploads/templates/d2f665247c30331bf04a50c6b2d25481.png', 'i/demo-greeting-sunflower', 10, 1, '2026-03-31 04:14:00'),
+	(11, 'Greeting Sunny Bunny', 'greeting_sunny_bunny', 'greeting_card', 'uploads/templates/d2c48039aa0abb1e0ed828bf77d2ba06.png', 'Greeting card bunny lucu dengan nuansa kuning ceria.', 'uploads/templates/b44bbec6ad8871f1f597df949cc8b7c9.png', 'uploads/templates/7b69bec15d72775a073506ad53fb252f.png', 'i/demo-greeting-sunny-bunny', 11, 1, '2026-03-31 04:18:00'),
+	(12, 'Graduation', 'graduation', 'invitation', 'uploads/templates/00d8f81d98fc275b9df60b8634374903.png', 'Tema invitation Graduation', 'uploads/templates/cbfea28c8bc23207047f2f6edde31958.png', 'uploads/templates/c33db673c0f832e88061642f3eb339ac.png', 'i/demo-graduation', 3, 1, '2026-05-16 03:32:01'),
+	(13, 'Greeting Claudy', 'greeting_claudy', 'greeting_card', 'uploads/templates/037670d927c4251954a9f1f72ae5d7a8.png', 'Greeting card Claudy dengan Awan-Awan manis.', 'uploads/templates/714fbe19a79781e09604402a3ba93c6a.png', 'uploads/templates/1dfcbfe76efca0e59729138cac823f7d.png', 'i/demo-greeting-claudy', 8, 1, '2026-05-16 05:57:03'),
+	(14, 'Doa Bersama', 'doa', 'invitation', 'uploads/templates/fb698b189859867f842931f48c0f2976.png', 'Tema invitation Doa Bersama, sopan, dan Minimalist.', 'uploads/templates/4d5eacc8efaa4099a323238a0e2e9b05.png', 'uploads/templates/7ef0900e07493ba3399edecd68a19df3.png', 'i/demo-doa', 5, 1, '2026-05-16 06:37:59'),
+	(16, 'Black', 'black', 'invitation', 'uploads/templates/a186bd470421a7dfad5e6f647c7003c2.png', 'Tema wedding elegan dengan pasangan, bunga, dan nuansa romantis.', 'uploads/templates/401ae3171b89c99bc1786e52aa8d155c.png', 'uploads/templates/5694b959273ccf1c26a1ae92306737b6.png', 'i/demo-black', 1, 1, '2026-05-16 06:39:03'),
+	(17, 'Minimalist', 'minimalist', 'invitation', 'uploads/templates/cb356702dc79fe337800e144c550fd86.png', 'Tema undangan keren untuk acara apapun.', 'uploads/templates/c6b55da645790935e2fed7f91e5c29a4.png', 'uploads/templates/8e050b91b26345c271d9dbc9b3a7eece.png', 'i/demo-minimalist', 2, 1, '2026-05-16 06:39:54');
 
 -- Dumping structure for table ci3_invitation_business_v3.orders
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -144,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `orders_customer_fk` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `orders_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `orders_user_fk` FOREIGN KEY (`assigned_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.orders: ~11 rows (approximately)
 INSERT INTO `orders` (`id`, `order_no`, `customer_id`, `product_type`, `package_name`, `template_id`, `assigned_user_id`, `payment_status`, `status`, `price`, `discount`, `final_price`, `dp_amount`, `paid_amount`, `payment_method`, `payment_date`, `deadline_date`, `payment_proof`, `notes`, `created_at`) VALUES
@@ -164,50 +184,6 @@ INSERT INTO `orders` (`id`, `order_no`, `customer_id`, `product_type`, `package_
 	(28, 'ORD-20260516-0002', 20, 'invitation', 'Premium', 16, 1, 'paid', 'new', 0, 0, 0, 0, 0, 'bank_transfer', '2026-05-16', '2026-05-16', NULL, '', '2026-05-16 06:49:56'),
 	(29, 'ORD-20260516-0003', 20, 'invitation', 'Premium', 17, 1, 'paid', 'new', 0, 0, 0, 0, 0, 'bank_transfer', '2026-05-16', '2026-05-16', '', '', '2026-05-16 07:01:23'),
 	(30, 'ORD-20260516-0004', 20, 'invitation', 'Premium', 14, 1, 'paid', 'new', 0, 0, 0, 0, 0, 'bank_transfer', '2026-05-16', '2026-05-16', '', '', '2026-05-16 07:05:07');
-
--- Dumping structure for table ci3_invitation_business_v3.packages
-CREATE TABLE IF NOT EXISTS `packages` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `product_type` varchar(80) NOT NULL,
-  `name` varchar(120) NOT NULL,
-  `price` bigint NOT NULL DEFAULT '0',
-  `old_price` bigint NOT NULL DEFAULT '0',
-  `description` text,
-  `features` text,
-  `button_text` varchar(100) DEFAULT 'Pilih Paket',
-  `is_featured` tinyint(1) NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `sort_order` int NOT NULL DEFAULT '0',
-  `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ci3_invitation_business_v3.packages: ~6 rows (approximately)
-INSERT INTO `packages` (`id`, `product_type`, `name`, `price`, `old_price`, `description`, `features`, `button_text`, `is_featured`, `is_active`, `sort_order`, `created_at`) VALUES
-	(1, 'invitation', 'Basic', 79000, 0, 'Paket simple untuk undangan digital.', '1 halaman undangan\n1 template\nLink share\nRevisi minor 1x', 'Pilih Paket', 0, 1, 1, '2026-03-31 08:00:00'),
-	(2, 'invitation', 'Premium', 129000, 149000, 'Paket favorit untuk invitation digital.', 'RSVP\nUcapan\n3 pilihan template\nRevisi 2x', 'Pilih Paket', 1, 1, 2, '2026-03-31 08:00:00'),
-	(3, 'invitation', 'Exclusive', 199000, 229000, 'Paket invitation premium paling lengkap.', 'RSVP\nUcapan\nGift info\nPrioritas pengerjaan', 'Pilih Paket', 0, 1, 3, '2026-03-31 08:00:00'),
-	(4, 'greeting_card', 'Greeting Basic', 49000, 0, 'Greeting card simple dan manis.', '1 halaman greeting\n1 template\nLink share', 'Pilih Paket', 0, 1, 1, '2026-03-31 08:00:00'),
-	(5, 'greeting_card', 'Greeting Special', 69000, 0, 'Greeting card dengan desain premium.', 'Animasi\nTemplate premium\nLink share', 'Pilih Paket', 1, 1, 2, '2026-03-31 08:00:00'),
-	(6, 'greeting_card', 'Greeting Deluxe', 89000, 0, 'Greeting card dengan custom lebih lengkap.', 'Animasi\nTemplate premium\nPrioritas pengerjaan', 'Pilih Paket', 0, 1, 3, '2026-03-31 08:00:00');
-
--- Dumping structure for table ci3_invitation_business_v3.product_types
-CREATE TABLE IF NOT EXISTS `product_types` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(120) NOT NULL,
-  `code` varchar(80) NOT NULL,
-  `description` text,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `sort_order` int NOT NULL DEFAULT '0',
-  `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ci3_invitation_business_v3.product_types: ~2 rows (approximately)
-INSERT INTO `product_types` (`id`, `name`, `code`, `description`, `is_active`, `sort_order`, `created_at`) VALUES
-	(1, 'Invitation', 'invitation', 'Undangan digital untuk wedding, birthday, khitan, dan tahlil.', 1, 1, '2026-03-31 08:00:00'),
-	(2, 'Greeting Card', 'greeting_card', 'Kartu ucapan digital untuk momen spesial personal.', 1, 2, '2026-03-31 08:00:00');
 
 -- Dumping structure for table ci3_invitation_business_v3.projects
 CREATE TABLE IF NOT EXISTS `projects` (
@@ -250,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   CONSTRAINT `projects_order_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `projects_template_fk` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `projects_user_fk` FOREIGN KEY (`assigned_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.projects: ~12 rows (approximately)
 INSERT INTO `projects` (`id`, `order_id`, `source`, `product_type`, `template_id`, `assigned_user_id`, `slug`, `title`, `subtitle`, `cover_text`, `hero_image`, `music_url`, `event_date`, `event_time`, `deadline_date`, `location_name`, `location_address`, `map_embed`, `description`, `sender_name`, `receiver_name`, `message_title`, `message_body`, `rsvp_enabled`, `wish_enabled`, `gift_enabled`, `gift_info`, `revision_notes`, `status`, `created_at`, `updated_at`) VALUES
@@ -271,6 +247,46 @@ INSERT INTO `projects` (`id`, `order_id`, `source`, `product_type`, `template_id
 	(24, 29, 'quick_create', 'invitation', 17, 1, 'demo-minimalist', 'Faith & Fellowship Night', 'An Evening of Reflection and Togetherness', 'Dengan penuh sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara malam kebersamaan dan sharing rohani bersama keluarga serta sahabat terkasih.', 'uploads/projects/fbbf72dd84e22978763bd50e07173f0b.jpg', 'https://www.youtube.com/watch?v=6F9N0rM4k7Q', '2026-06-06', '09:00 WIB - selesai', '2026-05-16', 'Jl. Tunjungan Plaza Boulevard No. 25', 'Jl. Tunjungan Plaza Boulevard No. 25', '', 'Acara ini diadakan sebagai momen sederhana untuk berkumpul, berbagi cerita kehidupan, mempererat hubungan dalam kasih, serta menikmati malam penuh kehangatan dan kebersamaan bersama orang-orang terdekat.', 'Komunitas Damai', 'Bapak/Ibu/Saudara/i Terkasih', 'Undangan Fellowship & Sharing Night', 'Dengan penuh kebahagiaan kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara fellowship dan malam kebersamaan ini. Semoga melalui pertemuan sederhana ini kita dapat saling menguatkan, berbagi sukacita, dan menikmati indahnya kebersamaan.', 0, 1, 1, 'Kehadiran dan kebersamaan Bapak/Ibu/Saudara/i merupakan kebahagiaan dan kehormatan terbesar bagi kami.', '', 'published', '2026-05-16 07:02:03', '2026-05-16 07:41:29'),
 	(25, 30, 'quick_create', 'invitation', 14, 1, 'demo-doa', 'Doa Bersama Malam Penuh Kasih', 'Gathering in Faith, Hope, and Love', 'Dengan penuh rasa syukur kepada Tuhan Yesus Kristus, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara doa bersama dan malam persekutuan sebagai ungkapan syukur, harapan, dan kebersamaan dal', 'uploads/projects/9ae5e59a0f01da9082115f9dcc5e5c43.jpg', 'https://www.youtube.com/watch?v=0LAs7i1H3K8', '2026-06-06', '09:00 WIB - selesai', '2026-05-16', 'Gereja Santa Maria Penuh Rahmat', 'Jl. Raya Darmo No. 112 Surabaya, Jawa Timur', '', 'Dengan penuh rasa syukur kepada Tuhan Yesus Kristus, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara doa bersama sebagai ungkapan syukur atas penyertaan dan kasih Tuhan dalam kehidupan kami, serta sebagai momen kebersamaan dalam iman, pengharapan, dan damai sejahtera.', 'Keluarga Bapak Andreas Wijaya & Ibu Maria Helena', 'Bapak/Ibu/Saudara/i Terkasih', 'Undangan Doa Bersama', 'Shalom, dengan penuh sukacita kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan mengambil bagian dalam acara doa bersama ini. Kehadiran serta doa yang diberikan akan menjadi berkat dan kebahagiaan bagi kami dan keluarga. Atas perhatian dan kehadirannya kami ucapkan terima kasih. Tuhan memberkati.', 0, 0, 1, 'Kehadiran dan doa tulus dari Bapak/Ibu/Saudara/i merupakan hadiah terindah bagi kami. Namun apabila berkenan memberikan tanda kasih, dapat disampaikan secara langsung pada saat acara berlangsung.', '', 'published', '2026-05-16 07:05:53', '2026-05-16 07:36:40');
 
+-- Dumping structure for table ci3_invitation_business_v3.guests
+CREATE TABLE IF NOT EXISTS `guests` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `project_id` int unsigned NOT NULL,
+  `guest_name` varchar(150) NOT NULL,
+  `phone` varchar(40) DEFAULT NULL,
+  `category` varchar(80) DEFAULT NULL,
+  `slug` varchar(160) NOT NULL,
+  `is_opened` tinyint(1) NOT NULL DEFAULT '0',
+  `opened_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `project_id` (`project_id`),
+  KEY `slug` (`slug`),
+  CONSTRAINT `guests_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table ci3_invitation_business_v3.guests: ~20 rows (approximately)
+INSERT INTO `guests` (`id`, `project_id`, `guest_name`, `phone`, `category`, `slug`, `is_opened`, `opened_at`, `created_at`) VALUES
+	(1, 1, 'Keluarga Bapak Andi', '628131000001', 'Keluarga', 'keluarga-bapak-andi', 1, '2026-04-04 19:10:00', '2026-04-02 12:00:00'),
+	(2, 1, 'Mbak Rini & Suami', '628131000002', 'Teman', 'mbak-rini-suami', 1, '2026-04-05 08:30:00', '2026-04-02 12:05:00'),
+	(3, 1, 'Pak Hendra', '628131000003', 'Rekan Kerja', 'pak-hendra', 0, NULL, '2026-04-02 12:08:00'),
+	(4, 1, 'Dewi & Keluarga', '628131000004', 'Teman Kuliah', 'dewi-keluarga', 1, '2026-04-05 09:00:00', '2026-04-02 12:12:00'),
+	(5, 1, 'Keluarga Om Joko', '628131000005', 'Keluarga', 'keluarga-om-joko', 0, NULL, '2026-04-02 12:15:00'),
+	(6, 2, 'Nita & Dimas', '628131000006', 'Teman', 'nita-dimas', 1, '2026-04-03 16:00:00', '2026-04-02 13:00:00'),
+	(7, 2, 'Keluarga Pak Yudi', '628131000007', 'Keluarga', 'keluarga-pak-yudi', 1, '2026-04-03 16:20:00', '2026-04-02 13:05:00'),
+	(8, 2, 'Mila', '628131000008', 'Teman Kantor', 'mila', 0, NULL, '2026-04-02 13:10:00'),
+	(9, 2, 'Kak Arif', '628131000009', 'Saudara', 'kak-arif', 1, '2026-04-04 11:15:00', '2026-04-02 13:12:00'),
+	(10, 3, 'Aisha', '628131000010', 'Teman Sekolah', 'aisha', 1, '2026-04-04 15:45:00', '2026-04-03 10:10:00'),
+	(11, 3, 'Rafa', '628131000011', 'Teman Sekolah', 'rafa', 1, '2026-04-04 15:48:00', '2026-04-03 10:12:00'),
+	(12, 3, 'Caca', '628131000012', 'Tetangga', 'caca', 0, NULL, '2026-04-03 10:14:00'),
+	(13, 3, 'Keluarga Om Bayu', '628131000013', 'Keluarga', 'keluarga-om-bayu', 1, '2026-04-04 18:10:00', '2026-04-03 10:16:00'),
+	(14, 4, 'Bapak Ustadz Rahman', '628131000014', 'Tokoh Masyarakat', 'bapak-ustadz-rahman', 1, '2026-04-04 20:20:00', '2026-04-03 11:00:00'),
+	(15, 4, 'Keluarga Pak Seno', '628131000015', 'Tetangga', 'keluarga-pak-seno', 1, '2026-04-04 20:25:00', '2026-04-03 11:03:00'),
+	(16, 4, 'Mbak Yuni', '628131000016', 'Keluarga', 'mbak-yuni', 0, NULL, '2026-04-03 11:05:00'),
+	(17, 4, 'Pak RT', '628131000017', 'Tetangga', 'pak-rt', 1, '2026-04-04 21:00:00', '2026-04-03 11:08:00'),
+	(18, 5, 'Keluarga Pak Ahmad', '628131000018', 'Keluarga', 'keluarga-pak-ahmad', 1, '2026-04-03 20:15:00', '2026-04-02 19:00:00'),
+	(19, 5, 'Bu Nur', '628131000019', 'Tetangga', 'bu-nur', 1, '2026-04-03 20:30:00', '2026-04-02 19:03:00'),
+	(20, 5, 'Pak Slamet', '628131000020', 'Kerabat', 'pak-slamet', 0, NULL, '2026-04-02 19:05:00');
+
 -- Dumping structure for table ci3_invitation_business_v3.project_galleries
 CREATE TABLE IF NOT EXISTS `project_galleries` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -282,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `project_galleries` (
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `project_galleries_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.project_galleries: ~7 rows (approximately)
 INSERT INTO `project_galleries` (`id`, `project_id`, `image_path`, `caption`, `sort_order`, `created_at`) VALUES
@@ -312,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `project_timelines` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `project_timelines_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `project_timelines_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.project_timelines: ~8 rows (approximately)
 INSERT INTO `project_timelines` (`id`, `project_id`, `user_id`, `status_label`, `note`, `approval_status`, `approved_by`, `approved_at`, `created_at`) VALUES
@@ -340,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `rsvps` (
   KEY `guest_id` (`guest_id`),
   CONSTRAINT `rsvps_guest_fk` FOREIGN KEY (`guest_id`) REFERENCES `guests` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `rsvps_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.rsvps: ~10 rows (approximately)
 INSERT INTO `rsvps` (`id`, `project_id`, `guest_id`, `guest_name`, `attendance_status`, `guest_total`, `note`, `created_at`) VALUES
@@ -355,80 +371,6 @@ INSERT INTO `rsvps` (`id`, `project_id`, `guest_id`, `guest_name`, `attendance_s
 	(9, 5, 18, 'Keluarga Pak Ahmad', 'Hadir', 2, 'Siap hadir untuk tahlil.', '2026-04-03 20:17:00'),
 	(10, 5, 19, 'Bu Nur', 'Berhalangan', 1, 'Mohon maaf tidak bisa hadir, titip doa.', '2026-04-03 20:31:00');
 
--- Dumping structure for table ci3_invitation_business_v3.settings
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `setting_key` varchar(100) NOT NULL,
-  `setting_value` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `setting_key` (`setting_key`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ci3_invitation_business_v3.settings: ~3 rows (approximately)
-INSERT INTO `settings` (`id`, `setting_key`, `setting_value`) VALUES
-	(1, 'brand_name', 'My Simple Gift'),
-	(2, 'wa_number', '6281234567890'),
-	(3, 'auto_approve_wishes', '1');
-
--- Dumping structure for table ci3_invitation_business_v3.templates
-CREATE TABLE IF NOT EXISTS `templates` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(120) NOT NULL,
-  `folder` varchar(100) NOT NULL,
-  `product_type` varchar(50) NOT NULL DEFAULT 'wedding',
-  `thumbnail` text,
-  `description` text,
-  `preview_mobile` varchar(255) DEFAULT NULL,
-  `preview_desktop` varchar(255) DEFAULT NULL,
-  `demo_url` text,
-  `sort_order` int NOT NULL DEFAULT '0',
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ci3_invitation_business_v3.templates: ~12 rows (approximately)
-INSERT INTO `templates` (`id`, `name`, `folder`, `product_type`, `thumbnail`, `description`, `preview_mobile`, `preview_desktop`, `demo_url`, `sort_order`, `is_active`, `created_at`) VALUES
-	(1, 'Romantic Wedding', 'romantic', 'invitation', 'uploads/templates/68d32283c25fa48949fa9e8987c4387d.png', 'Tema wedding elegan dengan pasangan, bunga, dan nuansa romantis.', 'uploads/templates/a822fc9880ce704e37b44160ac877945.png', 'uploads/templates/aaf8b3dfc44b59814680c203a5596179.png', 'i/demo-romantic', 1, 1, '2026-03-31 08:30:00'),
-	(2, 'Floral Wedding', 'floral', 'invitation', 'uploads/templates/eec27f508f3502149f427e5c71f0fe1f.png', 'Tema wedding floral lembut dengan dekorasi bunga pastel.', 'uploads/templates/5e90192dfb9c7aad2cfa47981a722dfd.png', 'uploads/templates/9da11e45c2ac79fbbc2777337f1e0a9a.png', 'i/demo-floral', 2, 1, '2026-03-31 08:31:00'),
-	(3, 'Birthday Party', 'birthday', 'invitation', 'uploads/templates/a3e4f62ec92acdd29956b4cede51eae4.png', 'Tema invitation ulang tahun dengan kue, lilin, dan pesta.', 'uploads/templates/105a530517b68f66a81f968948053080.png', 'uploads/templates/16638378920fd67c14aec5e226a3b7e6.png', 'i/demo-birthday', 3, 1, '2026-04-05 12:35:00'),
-	(4, 'Khitan', 'khitan', 'invitation', 'uploads/templates/3c85ee1e1373e467bbe048a2db71e02b.png', 'Tema invitation khitan keluarga dengan suasana hangat dan meriah.', 'uploads/templates/3f3028a53b992496519237cc41c738fb.png', 'uploads/templates/bbe1fb4169231943d6dd818fd0a5fc33.png', 'i/demo-khitan', 4, 1, '2026-04-05 12:37:00'),
-	(5, 'Tahlil Invitation', 'tahlil', 'invitation', 'uploads/templates/e8df5de1ba890c82acdcb5ab6c6c28be.png', 'Tema invitation tahlil bernuansa tenang, sopan, dan khidmat.', 'uploads/templates/8c179f06b1857ee6ac6276d301df376e.png', 'uploads/templates/deeef1398f5755d5e4cfba0172eda9e9.png', 'i/demo-tahlil', 5, 1, '2026-04-05 12:40:00'),
-	(6, 'Greeting Blush', 'greeting_blush', 'greeting_card', 'uploads/templates/d235d9cedf8a147c9d6153f7c85db9ef.png', 'Greeting ulang tahun dengan suasana ceria dan colorful.', 'uploads/templates/d7e99685f687eff43af3bb27bc7355b9.png', 'uploads/templates/84414fc55b861cad3faf039182dcf05c.png', 'i/demo-greeting-blush', 6, 1, '2026-03-31 03:00:00'),
-	(7, 'Greeting Bear', 'greeting_bear', 'greeting_card', 'uploads/templates/d650a814f3014279a3a347bccfaa0068.png', 'Greeting card lucu dengan vibe teddy bear hangat.', 'uploads/templates/f8edd3a8dc0f5d7c0ed0ae371b6da7aa.png', 'uploads/templates/4ecc2fcdc5611e01b28d0d7406192f1f.png', 'i/demo-greeting-bear', 7, 1, '2026-03-31 04:10:00'),
-	(8, 'Greeting Blossom', 'greeting_blossom', 'greeting_card', 'uploads/templates/b5f5a6d3074c2f354581eb94e336b3bc.png', 'Greeting card pastel dengan bunga-bunga manis.', 'uploads/templates/1a0e299abdc09803dc1891d3b3849723.png', 'uploads/templates/1b59cfd4fa2e0649cb54a501cabe7557.png', 'i/demo-greeting-blossom', 8, 1, '2026-03-31 21:37:00'),
-	(9, 'Greeting Polaroid', 'greeting_polaroid', 'greeting_card', 'uploads/templates/e0fcdb52ff527f58693f4cd84abe67a1.png', 'Greeting card dengan gaya foto polaroid dan memory wall.', 'uploads/templates/c8b05080cc15e09cf093b53dcd60b3ea.png', 'uploads/templates/f63a09673fe586f609c981088632516a.png', 'i/demo-greeting-polaroid', 9, 1, '2026-03-31 04:28:00'),
-	(10, 'Greeting Sunflower', 'greeting_sunflower', 'greeting_card', 'uploads/templates/322f0f22c271e2003c9964eb1ebd0774.png', 'Greeting card cerah dengan nuansa bunga matahari.', 'uploads/templates/38136c743acbce5079b8925dbe09b818.png', 'uploads/templates/d2f665247c30331bf04a50c6b2d25481.png', 'i/demo-greeting-sunflower', 10, 1, '2026-03-31 04:14:00'),
-	(11, 'Greeting Sunny Bunny', 'greeting_sunny_bunny', 'greeting_card', 'uploads/templates/d2c48039aa0abb1e0ed828bf77d2ba06.png', 'Greeting card bunny lucu dengan nuansa kuning ceria.', 'uploads/templates/b44bbec6ad8871f1f597df949cc8b7c9.png', 'uploads/templates/7b69bec15d72775a073506ad53fb252f.png', 'i/demo-greeting-sunny-bunny', 11, 1, '2026-03-31 04:18:00'),
-	(12, 'Graduation', 'graduation', 'invitation', 'uploads/templates/00d8f81d98fc275b9df60b8634374903.png', 'Tema invitation Graduation', 'uploads/templates/cbfea28c8bc23207047f2f6edde31958.png', 'uploads/templates/c33db673c0f832e88061642f3eb339ac.png', 'i/demo-graduation', 3, 1, '2026-05-16 03:32:01'),
-	(13, 'Greeting Claudy', 'greeting_claudy', 'greeting_card', 'uploads/templates/037670d927c4251954a9f1f72ae5d7a8.png', 'Greeting card Claudy dengan Awan-Awan manis.', 'uploads/templates/714fbe19a79781e09604402a3ba93c6a.png', 'uploads/templates/1dfcbfe76efca0e59729138cac823f7d.png', 'i/demo-greeting-claudy', 8, 1, '2026-05-16 05:57:03'),
-	(14, 'Doa Bersama', 'doa', 'invitation', 'uploads/templates/fb698b189859867f842931f48c0f2976.png', 'Tema invitation Doa Bersama, sopan, dan Minimalist.', 'uploads/templates/4d5eacc8efaa4099a323238a0e2e9b05.png', 'uploads/templates/7ef0900e07493ba3399edecd68a19df3.png', 'i/demo-doa', 5, 1, '2026-05-16 06:37:59'),
-	(16, 'Black', 'black', 'invitation', 'uploads/templates/a186bd470421a7dfad5e6f647c7003c2.png', 'Tema wedding elegan dengan pasangan, bunga, dan nuansa romantis.', 'uploads/templates/401ae3171b89c99bc1786e52aa8d155c.png', 'uploads/templates/5694b959273ccf1c26a1ae92306737b6.png', 'i/demo-black', 1, 1, '2026-05-16 06:39:03'),
-	(17, 'Minimalist', 'minimalist', 'invitation', 'uploads/templates/cb356702dc79fe337800e144c550fd86.png', 'Tema undangan keren untuk acara apapun.', 'uploads/templates/c6b55da645790935e2fed7f91e5c29a4.png', 'uploads/templates/8e050b91b26345c271d9dbc9b3a7eece.png', 'i/demo-minimalist', 2, 1, '2026-05-16 06:39:54');
-
--- Dumping structure for table ci3_invitation_business_v3.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(120) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(30) NOT NULL DEFAULT 'admin',
-  `photo` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `last_login_at` datetime DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ci3_invitation_business_v3.users: ~1 rows (approximately)
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`, `photo`, `is_active`, `last_login_at`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'admin', 'admin@example.com', '$2y$12$Mif.oYTiZ1LCKYtg73M/jOTEkdLNJS6WlzFbuXSQLHMX1toxPAt/6', 'super_admin', '', 1, '2026-05-16 02:39:57', '2026-03-31 08:00:00', '2026-03-31 08:00:00'),
-	(4, 'Indah', 'indah', 'indah@gmail.com', '$2y$10$lzWe64Ats4jMQ9U95TmdD.lAUmgg0mAXuZpd1V36MoUDWTxi3cLTa', 'super_admin', '', 1, '2026-05-17 03:56:22', '2026-04-12 10:32:08', '2026-05-17 03:55:57'),
-	(5, 'doni', 'doni', 'doniwicaksono27@gmail.com', '$2y$10$CPJ6H6qe1gX61N0Ufi4wm.BSNQ1phiuccJDaW.wFe.wGJyx8v/kMW', 'super_admin', '', 1, '2026-05-17 03:56:12', '2026-05-05 12:05:54', '2026-05-17 03:56:05');
-
 -- Dumping structure for table ci3_invitation_business_v3.wishes
 CREATE TABLE IF NOT EXISTS `wishes` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -441,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `wishes` (
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `wishes_project_fk` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table ci3_invitation_business_v3.wishes: ~14 rows (approximately)
 INSERT INTO `wishes` (`id`, `project_id`, `guest_name`, `message`, `status`, `is_approved`, `created_at`) VALUES
@@ -461,6 +403,64 @@ INSERT INTO `wishes` (`id`, `project_id`, `guest_name`, `message`, `status`, `is
 	(14, 11, 'Alya', 'Setiap detailnya kerasa personal, makasih ya sayang.', 'approved', 1, '2026-04-05 09:40:00'),
 	(15, 3, 'doni', 'selamta ya', 'approved', 1, '2026-04-11 05:09:12'),
 	(17, 5, 'Tamu Undangandsa', 'dsa', 'approved', 1, '2026-05-16 06:47:12');
+
+-- Dumping structure for table ci3_invitation_business_v3.activity_logs
+CREATE TABLE IF NOT EXISTS `activity_logs` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int unsigned DEFAULT NULL,
+  `module` varchar(80) DEFAULT NULL,
+  `action` varchar(80) DEFAULT NULL,
+  `description` text,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table ci3_invitation_business_v3.activity_logs: ~111 rows (approximately)
+INSERT INTO `activity_logs` (`id`, `user_id`, `module`, `action`, `description`, `created_at`) VALUES
+	(1, 1, 'templates', 'seed', 'Mengisi 11 template aktif sesuai folder tema yang tersedia.', '2026-04-05 12:41:00'),
+	(2, 1, 'customers', 'seed', 'Mengisi customer dummy realistis untuk demo project.', '2026-04-05 12:42:00'),
+	(3, 1, 'orders', 'seed', 'Mengisi 11 order berbayar agar otomatis punya project.', '2026-04-05 12:43:00'),
+	(4, 1, 'projects', 'seed', 'Mengisi 11 project untuk seluruh template.', '2026-04-05 12:44:00'),
+	(5, 1, 'guests', 'seed', 'Mengisi guest hanya untuk project invitation.', '2026-04-05 12:45:00'),
+	(186, 5, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:48:35'),
+	(187, 5, 'templates', 'update', 'Mengubah template #1', '2026-05-17 03:49:35'),
+	(188, 5, 'templates', 'update', 'Mengubah template #16', '2026-05-17 03:50:25'),
+	(189, 5, 'templates', 'update', 'Mengubah template #2', '2026-05-17 03:50:45'),
+	(190, 5, 'templates', 'update', 'Mengubah template #17', '2026-05-17 03:51:27'),
+	(191, 5, 'templates', 'update', 'Mengubah template #3', '2026-05-17 03:51:53'),
+	(192, 5, 'templates', 'update', 'Mengubah template #12', '2026-05-17 03:52:10'),
+	(193, 5, 'templates', 'update', 'Mengubah template #4', '2026-05-17 03:52:27'),
+	(194, 5, 'templates', 'update', 'Mengubah template #5', '2026-05-17 03:52:44'),
+	(195, 5, 'templates', 'update', 'Mengubah template #14', '2026-05-17 03:53:02'),
+	(196, 5, 'templates', 'update', 'Mengubah template #6', '2026-05-17 03:53:20'),
+	(197, 5, 'templates', 'update', 'Mengubah template #7', '2026-05-17 03:53:43'),
+	(198, 5, 'templates', 'update', 'Mengubah template #8', '2026-05-17 03:53:59'),
+	(199, 5, 'templates', 'update', 'Mengubah template #13', '2026-05-17 03:54:16'),
+	(200, 5, 'templates', 'update', 'Mengubah template #9', '2026-05-17 03:54:35'),
+	(201, 5, 'templates', 'update', 'Mengubah template #10', '2026-05-17 03:54:51'),
+	(202, 5, 'templates', 'update', 'Mengubah template #11', '2026-05-17 03:55:08'),
+	(203, 5, 'users', 'update', 'Mengubah admin user #4 (indah)', '2026-05-17 03:55:57'),
+	(204, 5, 'users', 'update', 'Mengubah admin user #5 (doni)', '2026-05-17 03:56:05'),
+	(205, 5, 'auth', 'logout', 'User logout dari admin panel', '2026-05-17 03:56:07'),
+	(206, 5, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:56:12'),
+	(207, 5, 'auth', 'logout', 'User logout dari admin panel', '2026-05-17 03:56:14'),
+	(208, 4, 'auth', 'login', 'User login ke admin panel', '2026-05-17 03:56:22');
+
+-- Dumping structure for table ci3_invitation_business_v3.settings
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `setting_key` varchar(100) NOT NULL,
+  `setting_value` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `setting_key` (`setting_key`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table ci3_invitation_business_v3.settings: ~3 rows (approximately)
+INSERT INTO `settings` (`id`, `setting_key`, `setting_value`) VALUES
+	(1, 'brand_name', 'My Simple Gift'),
+	(2, 'wa_number', '6281234567890'),
+	(3, 'auto_approve_wishes', '1');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
