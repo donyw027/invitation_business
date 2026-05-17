@@ -13,8 +13,8 @@ if (!function_exists('pretty_local_img')) {
     }
 }
 $local_gallery = array(
-    array('file' => 'jastip1', 'title' => 'Jastip Cafe Malang', 'tag' => 'Jastip Malang', 'desc' => 'Titip beli cafe, dessert, snack viral, dan local finds area Malang.'),
-    array('file' => 'jastip2', 'title' => 'Jastip Trawas Trip', 'tag' => 'Jastip Trawas', 'desc' => 'Request cafe, bakery, oleh-oleh, dan hidden local spot area Trawas.'),
+    array('file' => 'jastip1', 'title' => 'Jastip makanan Malang', 'tag' => 'Jastip Malang', 'desc' => 'Titip beli makanan, dessert, snack viral, dan local finds area Malang.'),
+    array('file' => 'jastip2', 'title' => 'Jastip Trawas Trip', 'tag' => 'Jastip Trawas', 'desc' => 'Request makanan, bakery, oleh-oleh, dan hidden local spot area Trawas.'),
     array('file' => 'jastip3', 'title' => 'Daily Local Request', 'tag' => 'Custom Request', 'desc' => 'Titip produk favorit sesuai request customer dan jadwal trip.'),
     array('file' => 'buket1', 'title' => 'Bouquet Gift', 'tag' => 'Bouquet', 'desc' => 'Bouquet manis untuk wisuda, birthday, anniversary, dan surprise.'),
     array('file' => 'buket2', 'title' => 'Pretty Bloom', 'tag' => 'Gift Aesthetic', 'desc' => 'Pilihan gift aesthetic dengan warna yang bisa disesuaikan.'),
@@ -52,7 +52,7 @@ $spreadsheet_previews = array(
                 <h2 class="section-title">Jastip Malang & Trawas</h2>
             </div>
             <div class="col-lg-4">
-                <p class="section-subtitle">Contoh request jastip cafe, dessert, oleh-oleh, dan local finds.</p>
+                <p class="section-subtitle">Contoh request jastip makanan, dessert, oleh-oleh, dan local finds.</p>
             </div>
         </div>
         <div class="local-photo-grid">

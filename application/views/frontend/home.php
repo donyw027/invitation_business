@@ -13,8 +13,8 @@ if (!function_exists('pretty_local_img')) {
     }
 }
 $local_gallery = array(
-    array('file' => 'jastip1', 'title' => 'Jastip Cafe Malang', 'tag' => 'Jastip', 'desc' => 'Titip beli cafe, dessert, dan local finds area Malang.'),
-    array('file' => 'jastip2', 'title' => 'Jastip Trawas Trip', 'tag' => 'Trawas', 'desc' => 'Request cafe, bakery, dan oleh-oleh area Trawas.'),
+    array('file' => 'jastip1', 'title' => 'Jastip makanan Malang', 'tag' => 'Jastip', 'desc' => 'Titip beli makanan, dessert, dan local finds area Malang.'),
+    array('file' => 'jastip2', 'title' => 'Jastip Trawas Trip', 'tag' => 'Trawas', 'desc' => 'Request makanan, bakery, dan oleh-oleh area Trawas.'),
     array('file' => 'jastip3', 'title' => 'Daily Local Request', 'tag' => 'Local Finds', 'desc' => 'Titip produk favorit sesuai request customer.'),
     array('file' => 'buket1', 'title' => 'Bouquet Gift', 'tag' => 'Bouquet', 'desc' => 'Bouquet manis untuk wisuda, birthday, dan surprise.'),
     array('file' => 'buket2', 'title' => 'Pretty Bloom', 'tag' => 'Gift', 'desc' => 'Pilihan gift aesthetic dengan warna yang bisa disesuaikan.'),
@@ -26,17 +26,17 @@ $local_gallery = array(
         <div class="hero-wrap">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <span class="kicker">📍 Openzzz jastip Malang • Batu • Trawas</span>
+                    <span class="kicker">📍 Openjastip Malang • Batu • Trawas</span>
                     <h1 class="hero-title">Pretty Local Finds,<br><span class="script">delivered with care.</span></h1>
                     <p class="hero-copy">
-                        Jastip Indah Aja bantu titip beli cafe hits, dessert, oleh-oleh, gift, dan hidden local finds area Malang & Trawas. Plus MySimpleGift untuk bouquet, greeting card, dan undangan digital yang lucu tapi tetap rapi.
+                        Jastip Indah Aja bantu titip beli makanan hits, dessert, oleh-oleh, gift, dan hidden local finds area Malang & Trawas. Plus MySimpleGift untuk bouquet, greeting card, dan undangan digital yang lucu tapi tetap rapi.
                     </p>
                     <div class="d-flex flex-wrap gap-3 mt-4">
                         <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau titip/order area Malang atau Trawas.'); ?>" class="btn btn-main btn-lg">Titip Sekarang ✨</a>
                         <a href="<?= site_url('review'); ?>" class="btn btn-soft btn-lg">Lihat Review</a>
                     </div>
                     <div class="hero-tags">
-                        <span class="pill">☕ Cafe & dessert</span>
+                        <span class="pill">☕ makanan & dessert</span>
                         <span class="pill">🎁 Gift aesthetic</span>
                         <span class="pill">🚗 Malang/Trawas trip</span>
                         <span class="pill">💌 Digital card</span>
@@ -69,7 +69,7 @@ $local_gallery = array(
         <div class="text-center mb-5">
             <span class="section-kicker">main services</span>
             <h2 class="section-title">Small things that feel special.</h2>
-            <p class="section-subtitle mx-auto">Dari titip beli cafe viral, bouquet manis, sampai template digital yang siap dipakai. Flow dibuat simple supaya customer langsung paham dan gampang order.</p>
+            <p class="section-subtitle mx-auto">Dari titip beli makanan viral, bouquet manis, sampai template digital yang siap dipakai. Flow dibuat simple supaya customer langsung paham dan gampang order.</p>
         </div>
         <div class="service-grid">
             <div class="card-pretty">
@@ -102,19 +102,19 @@ $local_gallery = array(
                 <h2 class="section-title">Jastip harian untuk Malang, Batu, dan Trawas.</h2>
             </div>
             <div class="col-lg-4">
-                <p class="section-subtitle">Titip beli cafe hits, dessert, oleh-oleh, local brand, dan request toko tertentu dengan alur order yang jelas dan fast response.</p>
+                <p class="section-subtitle">Titip beli makanan hits, dessert, oleh-oleh, local brand, dan request toko tertentu dengan alur order yang jelas dan fast response.</p>
             </div>
         </div>
         <div class="area-grid">
             <div class="card-pretty area-card">
                 <span class="pill">📍 Jastip Area Malang</span>
-                <h3 class="mt-3">Cafe, dessert, local brand.</h3>
-                <p>Titip beli area Malang untuk cafe hits, dessert viral, bakery, makanan, skincare, fashion, dan local finds yang sedang ramai.</p>
+                <h3 class="mt-3">makanan, dessert, local brand.</h3>
+                <p>Titip beli area Malang untuk makanan hits, dessert viral, bakery, makanan, skincare, fashion, dan local finds yang sedang ramai.</p>
             </div>
             <div class="card-pretty area-card">
                 <span class="pill">📍 Jastip Area Trawas</span>
-                <h3 class="mt-3">Hidden cafe & mountain finds.</h3>
-                <p>Special trip order dari cafe Trawas, hotel/resort, bakery aesthetic, produk lokal, dan oleh-oleh area pegunungan.</p>
+                <h3 class="mt-3">Hidden makanan & mountain finds.</h3>
+                <p>Special trip order dari makanan Trawas, hotel/resort, bakery aesthetic, produk lokal, dan oleh-oleh area pegunungan.</p>
             </div>
             <div class="card-pretty area-card">
                 <span class="pill">📍 Batu</span>
@@ -123,7 +123,7 @@ $local_gallery = array(
             </div>
             <div class="card-pretty area-card">
                 <span class="pill">✨ Popular request</span>
-                <h3 class="mt-3">Titip cafe Malang, titip dessert Trawas, dan request toko tertentu.</h3>
+                <h3 class="mt-3">Titip makanan Malang, titip dessert Trawas, dan request toko tertentu.</h3>
                 <p>Customer tinggal kirim nama produk, lokasi toko, foto referensi, dan deadline. Admin bantu cek ketersediaan, estimasi biaya, lalu proses jika sudah cocok.</p>
             </div>
         </div>
@@ -235,7 +235,7 @@ $local_gallery = array(
                     <div class="flow-card">
                         <div class="flow-no">1</div>
                         <h5>Send wishlist</h5>
-                        <p>Kirim produk, cafe, toko, foto, atau budget.</p>
+                        <p>Kirim produk, makanan, toko, foto, atau budget.</p>
                     </div>
                     <div class="flow-card">
                         <div class="flow-no">2</div>
@@ -265,8 +265,8 @@ $local_gallery = array(
                 <div class="col-lg-7">
                     <span class="section-kicker">SEO friendly</span>
                     <h2 class="section-title mb-3">Jastip & Bouquet</h2>
-                    <p>Open daily jastip service from Malang, Batu, and Trawas area. Helping customers buy trending cafe menus, desserts, souvenirs, gifts, local favorite products, and custom store requests with safe delivery.</p>
-                    <div class="seo-keywords"><span>jastip malang</span><span>jastip trawas</span><span>titip cafe malang</span><span>dessert trawas</span><span>oleh-oleh batu</span><span>personal shopper malang</span></div>
+                    <p>Open daily jastip service from Malang, Batu, and Trawas area. Helping customers buy trending makanan menus, desserts, souvenirs, gifts, local favorite products, and custom store requests with safe delivery.</p>
+                    <div class="seo-keywords"><span>jastip malang</span><span>jastip trawas</span><span>titip makanan malang</span><span>dessert trawas</span><span>oleh-oleh batu</span><span>personal shopper malang</span></div>
                 </div>
                 <div class="col-lg-5">
                     <div class="cta-panel">

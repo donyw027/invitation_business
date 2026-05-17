@@ -36,7 +36,7 @@
                         <div class="social-card">
                             <div class="icon-bubble">🛍️</div>
                             <h4>@jastip.indahaja_</h4>
-                            <p>Update jastip, produk titipan, cafe, dessert, dan local finds.</p>
+                            <p>Update jastip, produk titipan, makanan, dessert, dan local finds.</p>
                             <a href="https://instagram.com/jastip.indahaja_" target="_blank" class="btn btn-soft">Buka Instagram</a>
                         </div>
                     </div>

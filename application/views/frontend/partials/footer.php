@@ -20,7 +20,7 @@
         </div>
         <div class="d-flex flex-wrap justify-content-between gap-2 mt-4 pt-4 border-top">
             <small>© <?= date('Y'); ?> <?= html_escape($brand_name); ?>. Made with love.</small>
-            <small>Jastip & Bouquet • Titip cafe • Gift • Digital card</small>
+            <small>Jastip & Bouquet • Titip makanan • Gift • Digital card</small>
         </div>
     </div>
 </footer>
@@ -28,4 +28,5 @@
 <a class="sticky-wa" href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau titip/order dari website.'); ?>">💬 Titip Sekarang</a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

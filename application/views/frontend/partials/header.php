@@ -6,7 +6,7 @@
     <title><?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Jastip, bouquet, gift, undangan digital, greeting card, dan template aesthetic. Titip beli area Malang, Batu, Trawas dengan flow mudah dan fast response.">
-    <meta name="keywords" content="jastip malang, jastip trawas, titip beli malang, titip cafe trawas, jastip dessert malang, oleh-oleh malang, jastip batu, gift malang, bouquet malang, undangan digital malang">
+    <meta name="keywords" content="jastip malang, jastip trawas, titip beli malang, titip makanan trawas, jastip dessert malang, oleh-oleh malang, jastip batu, gift malang, bouquet malang, undangan digital malang">
     <meta property="og:title" content="<?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?>">
     <meta property="og:description" content="Cute local jastip, gift, digital invitation, and spreadsheet template service for Malang, Batu, and Trawas area.">
     <meta property="og:type" content="website">
