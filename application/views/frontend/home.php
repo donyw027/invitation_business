@@ -26,7 +26,7 @@ $local_gallery = array(
         <div class="hero-wrap">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <span class="kicker">📍 Open jastip Malang • Batu • Trawas</span>
+                    <span class="kicker">📍 Openzzz jastip Malang • Batu • Trawas</span>
                     <h1 class="hero-title">Pretty Local Finds,<br><span class="script">delivered with care.</span></h1>
                     <p class="hero-copy">
                         Jastip Indah Aja bantu titip beli cafe hits, dessert, oleh-oleh, gift, dan hidden local finds area Malang & Trawas. Plus MySimpleGift untuk bouquet, greeting card, dan undangan digital yang lucu tapi tetap rapi.
@@ -145,10 +145,22 @@ $local_gallery = array(
             </div>
             <div class="col-lg-7">
                 <div class="gallery-masonry">
-                    <div class="gallery-item"><div class="gallery-img" style="--h:320px"><span class="pill">Bouquet Gift</span></div><div class="gallery-body"><strong>Graduation Bouquet</strong><span>request warna & isi</span></div></div>
-                    <div class="gallery-item"><div class="gallery-img mint" style="--h:220px"><span class="pill">Gift Box</span></div><div class="gallery-body"><strong>Soft Hampers</strong><span>cute packaging</span></div></div>
-                    <div class="gallery-item"><div class="gallery-img dark" style="--h:280px"><span class="pill">Greeting Card</span></div><div class="gallery-body"><strong>Personal Note</strong><span>custom message</span></div></div>
-                    <div class="gallery-item"><div class="gallery-img" style="--h:190px"><span class="pill">Custom</span></div><div class="gallery-body"><strong>Budget Friendly</strong><span>sesuai kebutuhan</span></div></div>
+                    <div class="gallery-item">
+                        <div class="gallery-img" style="--h:320px"><span class="pill">Bouquet Gift</span></div>
+                        <div class="gallery-body"><strong>Graduation Bouquet</strong><span>request warna & isi</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img mint" style="--h:220px"><span class="pill">Gift Box</span></div>
+                        <div class="gallery-body"><strong>Soft Hampers</strong><span>cute packaging</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img dark" style="--h:280px"><span class="pill">Greeting Card</span></div>
+                        <div class="gallery-body"><strong>Personal Note</strong><span>custom message</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-img" style="--h:190px"><span class="pill">Custom</span></div>
+                        <div class="gallery-body"><strong>Budget Friendly</strong><span>sesuai kebutuhan</span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,7 +181,11 @@ $local_gallery = array(
                     <h3 class="mt-3">Bouquet & Gift</h3>
                     <div class="price">15K+</div>
                     <p>Untuk wisuda, ulang tahun, anniversary, dan surprise kecil yang personal.</p>
-                    <ul class="feature-list"><li>Request warna & tema</li><li>Greeting card add-on</li><li>Fleksibel sesuai budget</li></ul>
+                    <ul class="feature-list">
+                        <li>Request warna & tema</li>
+                        <li>Greeting card add-on</li>
+                        <li>Fleksibel sesuai budget</li>
+                    </ul>
                     <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau order Gift/Bouquet.'); ?>" class="btn btn-main w-100">Order Gift</a>
                 </div>
             </div>
@@ -179,7 +195,11 @@ $local_gallery = array(
                     <h3 class="mt-3">Undangan Digital</h3>
                     <div class="price">25K+</div>
                     <p>Simple, modern, dan gampang dibagikan lewat WhatsApp untuk berbagai acara.</p>
-                    <ul class="feature-list"><li>Custom nama & detail</li><li>Mobile friendly</li><li>Preview sebelum share</li></ul>
+                    <ul class="feature-list">
+                        <li>Custom nama & detail</li>
+                        <li>Mobile friendly</li>
+                        <li>Preview sebelum share</li>
+                    </ul>
                     <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau order Undangan Digital.'); ?>" class="btn btn-main w-100">Order Undangan</a>
                 </div>
             </div>
@@ -189,7 +209,11 @@ $local_gallery = array(
                     <h3 class="mt-3">Spreadsheet</h3>
                     <div class="price">Ready</div>
                     <p>Template tracking order, keuangan, dan penjualan untuk usaha kecil yang ingin rapi.</p>
-                    <ul class="feature-list"><li>Dashboard simple</li><li>Form input</li><li>Custom premium by request</li></ul>
+                    <ul class="feature-list">
+                        <li>Dashboard simple</li>
+                        <li>Form input</li>
+                        <li>Custom premium by request</li>
+                    </ul>
                     <a href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau tanya Spreadsheet Template.'); ?>" class="btn btn-main w-100">Tanya Template</a>
                 </div>
             </div>
@@ -208,10 +232,26 @@ $local_gallery = array(
             </div>
             <div class="col-lg-7">
                 <div class="flow-grid">
-                    <div class="flow-card"><div class="flow-no">1</div><h5>Send wishlist</h5><p>Kirim produk, cafe, toko, foto, atau budget.</p></div>
-                    <div class="flow-card"><div class="flow-no">2</div><h5>Admin cek</h5><p>Dicek ketersediaan, estimasi, dan ongkir.</p></div>
-                    <div class="flow-card"><div class="flow-no">3</div><h5>Confirm</h5><p>Kalau cocok, lanjut pembayaran sesuai arahan.</p></div>
-                    <div class="flow-card"><div class="flow-no">4</div><h5>Delivered</h5><p>Pesanan diproses, dikemas, dan dikirim aman.</p></div>
+                    <div class="flow-card">
+                        <div class="flow-no">1</div>
+                        <h5>Send wishlist</h5>
+                        <p>Kirim produk, cafe, toko, foto, atau budget.</p>
+                    </div>
+                    <div class="flow-card">
+                        <div class="flow-no">2</div>
+                        <h5>Admin cek</h5>
+                        <p>Dicek ketersediaan, estimasi, dan ongkir.</p>
+                    </div>
+                    <div class="flow-card">
+                        <div class="flow-no">3</div>
+                        <h5>Confirm</h5>
+                        <p>Kalau cocok, lanjut pembayaran sesuai arahan.</p>
+                    </div>
+                    <div class="flow-card">
+                        <div class="flow-no">4</div>
+                        <h5>Delivered</h5>
+                        <p>Pesanan diproses, dikemas, dan dikirim aman.</p>
+                    </div>
                 </div>
             </div>
         </div>
