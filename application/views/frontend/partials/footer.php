@@ -20,7 +20,7 @@
         </div>
         <div class="d-flex flex-wrap justify-content-between gap-2 mt-4 pt-4 border-top">
             <small>© <?= date('Y'); ?> <?= html_escape($brand_name); ?>. Made with love.</small>
-            <small>Jastip & Bouquet • Titip makanan • Gift • Digital card</small>
+            <small>Jastip && Bouquet • Titip makanan • Gift • Digital card</small>
         </div>
     </div>
 </footer>
