@@ -1149,23 +1149,124 @@
         </div>
     </div>
     <section class="hero"><img src="<?= html_escape($heroImage); ?>" alt="<?= html_escape($project->title ?? 'Pernikahan'); ?>">
-        <div class="hero-frame"><span class="eyebrow" style="font-size: 12pt;color:#d7b875">ومن كل شيء خلقنا زوجين لعلكم تذكرون
+        <div class="hero-frame"><span class="eyebrow" style="font-size: 11pt;color:#d7b875">ومن كل شيء خلقنا زوجين لعلكم تذكرون
                 <br> "Dan segala sesuatu Kami ciptakan berpasang-pasangan supaya kamu mengingat kebesaran Allah." <br>
                 QS. Adz - dzariyat</span>
             <!-- <h1><?= html_escape($project->title ?? 'Pernikahan Kami'); ?></h1> -->
             <!-- <p style="max-width:620px;margin:28px auto;color:rgba(255,255,255,.72);line-height:1.9"><?= !empty($project->subtitle) ? nl2br(html_escape($project->subtitle)) : 'Dua jiwa berjalan dalam restu, menyatukan janji di hadapan keluarga dan Yang Maha Kuasa.'; ?></p> -->
-            <div><?= html_escape($eventDateFormatted); ?> · <?= html_escape($eventTime); ?></div>
+            <!-- <div><?= html_escape($eventDateFormatted); ?> · <?= html_escape($eventTime); ?></div> -->
         </div>
     </section>
 
     <?php if (!empty($project->description)): ?><section class="section">
             <div class="shell">
                 <div class="procession reveal">
+
                     <article class="process-card">
+
+                        <div class="process-index"></div>
+
+                        <!-- PEMBUKA -->
+                        <div
+                            class="lead"
+                            style="
+            font-size:10pt;
+            line-height:1.9;
+        ">
+                            Dengan penuh rasa syukur, tanpa mengurangi rasa hormat,
+                            kami mengundang Bapak/Ibu/Saudara/i untuk hadir serta
+                            memberikan doa restu pada pernikahan putra-putri kami.
+                        </div>
+
+
+                        <!-- MEMPELAI WANITA -->
+                        <div style="
+        text-align:center;
+        margin:35px 0 15px;
+    ">
+
+                            <div style="
+            color:#d7b875;
+            font-size:13pt;
+            font-weight:500;
+            line-height:1.3;
+            margin-bottom:10px;
+        ">
+                                Dhahabah Yuni Pratiwi, S.Kom.
+                            </div>
+
+                            <div
+                                class="lead"
+                                style="
+                font-size:10pt;
+                line-height:1.7;
+            ">
+                                Putri kedua dari<br>
+                                Bapak Sucipto &amp; Almh. Ibu Lulus Eka Hidayati, S.Pd.
+                            </div>
+
+                        </div>
+
+
+                        <!-- DENGAN -->
+                        <div style="
+        text-align:center;
+        margin:28px 0;
+        font-size:11px;
+        letter-spacing:3px;
+        text-transform:uppercase;
+        opacity:.65;
+    ">
+                            dengan
+                        </div>
+
+
+                        <!-- MEMPELAI PRIA -->
+                        <div style="
+        text-align:center;
+        margin:15px 0 35px;
+    ">
+
+                            <div style="
+            color:#d7b875;
+            font-size:13pt;
+            font-weight:500;
+            line-height:1.3;
+            margin-bottom:10px;
+        ">
+                                Edo Pradana
+                            </div>
+
+                            <div
+                                class="lead"
+                                style="
+                font-size:10pt;
+                line-height:1.7;
+            ">
+                                Putra pertama dari<br>
+                                Bapak Suliadi &amp; Almh. Ibu Ninik Rahayu
+                            </div>
+
+                        </div>
+
+
+                        <!-- PENUTUP -->
+                        <div
+                            class="lead"
+                            style="
+            font-size:10pt;
+            line-height:1.9;
+        ">
+                            Merupakan suatu kehormatan dan kebahagiaan bagi kami
+                            atas kehadiran serta doa restu Bapak/Ibu/Saudara/i.
+                        </div>
+
+                    </article>
+                    <!-- <article class="process-card">
                         <div class="process-index"> </div><span class="eyebrow"></span>
                         <h2 class="display" style="font-size:clamp(42px,5vw,70px);line-height:1.05;margin:16px 0 24px"></h2>
                         <div class="lead" style="font-size: 10pt;"><?= nl2br(html_escape($project->description)); ?></div>
-                    </article>
+                    </article> -->
                     <!-- <article class="process-card">
                         <div class="process-index">02</div>
                         <div class="portrait mb-4"><img src="<?= html_escape($heroImage); ?>" alt="Potret pasangan"></div><span class="eyebrow">Pangestu</span>
@@ -1372,11 +1473,11 @@
     <?php endif; ?>
     <section class="section">
         <div class="shell split">
-            <div class="panel reveal"><span class="eyebrow">Bagikan Kebahagiaan</span>
+            <!-- <div class="panel reveal"><span class="eyebrow">Bagikan Kebahagiaan</span>
                 <h3 class="display mt-3" style="font-size:48px">Bagikan Undangan</h3>
                 <p class="lead">Bagikan hari bahagia ini kepada keluarga dan sahabat.</p>
                 <div class="input-group mt-4"><input id="inviteLink" class="form-control" value="<?= current_url(); ?>" readonly><button class="btn-sacred" type="button" onclick="copyInviteLink()">Salin</button></div>
-            </div>
+            </div> -->
             <?php if (!empty($project->gift_enabled)): ?>
 
                 <div class="panel reveal">
@@ -1392,7 +1493,40 @@
                     </div>
 
 
-                    <div style="margin-top:32px;">
+                    <!-- TOMBOL BUKA HADIAH -->
+                    <div style="margin-top:28px;">
+
+                        <button
+                            id="giftToggleButton"
+                            class="btn-sacred"
+                            type="button"
+                            onclick="toggleGiftDetail(this)">
+                            <i class="bi bi-gift"></i>
+                            <span>Klik di Sini</span>
+                        </button>
+
+                    </div>
+
+
+                    <!-- DETAIL HADIAH -->
+                    <div
+                        id="giftDetail"
+                        style="
+            display:none;
+            margin-top:30px;
+        ">
+
+                        <!-- TRANSFER REKENING -->
+                        <div style="
+            margin-bottom:10px;
+        ">
+
+                            <span class="eyebrow">
+                                Transfer Rekening
+                            </span>
+
+                        </div>
+
 
                         <!-- BRI -->
                         <div style="
@@ -1405,6 +1539,7 @@
         ">
 
                             <div>
+
                                 <div style="
                     font-size:10px;
                     letter-spacing:1.8px;
@@ -1421,12 +1556,21 @@
                 ">
                                     Dhahabah Yuni
                                 </strong>
+
                             </div>
+
 
                             <button
                                 class="btn-sacred"
                                 type="button"
-                                onclick="copyGift('640101011700532', this)">
+                                style="
+                    min-width:120px;
+                    text-align:center;
+                "
+                                onclick="copyGift(
+                    '640101011700532',
+                    this
+                )">
                                 <i class="bi bi-copy"></i>
                                 <span>Salin</span>
                             </button>
@@ -1445,6 +1589,7 @@
         ">
 
                             <div>
+
                                 <div style="
                     font-size:10px;
                     letter-spacing:1.8px;
@@ -1461,53 +1606,192 @@
                 ">
                                     Edo Pradana
                                 </strong>
+
                             </div>
+
 
                             <button
                                 class="btn-sacred"
                                 type="button"
-                                onclick="copyGift('7881045871', this)">
+                                style="
+                    min-width:120px;
+                    text-align:center;
+                "
+                                onclick="copyGift(
+                    '7881045871',
+                    this
+                )">
                                 <i class="bi bi-copy"></i>
                                 <span>Salin</span>
                             </button>
 
                         </div>
 
-                    </div>
 
-
-                    <!-- ALAMAT HADIAH -->
-                    <div style="
-        margin-top:30px;
-        padding-top:4px;
-    ">
-
-                        <span class="eyebrow">
-                            Pengiriman Hadiah
-                        </span>
-
+                        <!-- PENGIRIMAN HADIAH -->
                         <div style="
-            margin-top:12px;
-            font-size:14px;
-            line-height:1.8;
+            margin-top:32px;
         ">
-                            Dawuhan RT.11 RW.03,<br>
-                            Poncokusumo, Kab. Malang
-                        </div> <br>
 
-                        <a
-                            href="https://maps.app.goo.gl/sWAkPZSnPRxURNN98"
-                            target="_blank"
-                            rel="noopener"
-                            class="btn-sacred"
-                            style="margin-top:16px;">
-                            <i class="bi bi-geo-alt"></i>
-                            Buka Lokasi
-                        </a>
+                            <span class="eyebrow">
+                                Pengiriman Hadiah
+                            </span>
+
+
+                            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                gap:20px;
+                padding:16px 0;
+                border-bottom:1px solid rgba(0,0,0,.10);
+            ">
+
+                                <div style="
+                    font-size:14px;
+                    line-height:1.8;
+                ">
+                                    Dawuhan RT.11 RW.03,<br>
+                                    Poncokusumo, Kab. Malang
+                                </div>
+
+
+                                <button
+                                    class="btn-sacred"
+                                    type="button"
+                                    style="
+                        min-width:120px;
+                        text-align:center;
+                    "
+                                    onclick="copyGift(
+                        'Dawuhan RT.11 RW.03, Poncokusumo, Kab. Malang',
+                        this
+                    )">
+                                    <i class="bi bi-copy"></i>
+                                    <span>Salin</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PENUTUP -->
+                        <div style="
+            margin-top:28px;
+            font-size:13px;
+            line-height:1.8;
+            opacity:.75;
+        ">
+                            Terima kasih atas doa dan tanda kasih yang diberikan.
+                            Semoga segala kebaikan senantiasa berbalas keberkahan.
+                        </div>
 
                     </div>
 
                 </div>
+
+
+                <script>
+                    function toggleGiftDetail(button) {
+
+                        const detail =
+                            document.getElementById('giftDetail');
+
+                        const text =
+                            button.querySelector('span');
+
+                        const icon =
+                            button.querySelector('i');
+
+
+                        if (detail.style.display === 'none') {
+
+                            detail.style.display = 'block';
+
+                            text.innerText = 'Tutup';
+
+                            if (icon) {
+                                icon.className = 'bi bi-chevron-up';
+                            }
+
+                        } else {
+
+                            detail.style.display = 'none';
+
+                            text.innerText = 'Klik di Sini';
+
+                            if (icon) {
+                                icon.className = 'bi bi-gift';
+                            }
+
+                        }
+
+                    }
+
+
+                    function copyGift(value, button) {
+
+                        const span =
+                            button.querySelector('span');
+
+                        const original =
+                            span.innerText;
+
+
+                        // Clipboard modern
+                        if (
+                            navigator.clipboard &&
+                            window.isSecureContext
+                        ) {
+
+                            navigator.clipboard
+                                .writeText(value)
+                                .then(function() {
+
+                                    showCopied();
+
+                                });
+
+                        } else {
+
+                            // Fallback untuk browser tertentu / HTTP
+                            const textarea =
+                                document.createElement('textarea');
+
+                            textarea.value = value;
+
+                            textarea.style.position = 'fixed';
+                            textarea.style.opacity = '0';
+
+                            document.body.appendChild(textarea);
+
+                            textarea.focus();
+                            textarea.select();
+
+                            document.execCommand('copy');
+
+                            document.body.removeChild(textarea);
+
+                            showCopied();
+
+                        }
+
+
+                        function showCopied() {
+
+                            span.innerText = 'Tersalin';
+
+                            setTimeout(function() {
+
+                                span.innerText = original;
+
+                            }, 1600);
+
+                        }
+
+                    }
+                </script>
 
             <?php endif; ?>
         </div>
