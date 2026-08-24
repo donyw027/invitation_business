@@ -1104,7 +1104,7 @@
         </div>
     </div>
     <section class="hero"><img src="<?= html_escape($heroImage); ?>" alt="<?= html_escape($project->title ?? 'Pernikahan'); ?>">
-        <div class="hero-frame"><span class="eyebrow" style="color:#d7b875">Pawiwahan Jawa yang Penuh Makna</span>
+        <div class="hero-frame"><span class="eyebrow" style="color:#d7b875">~~~</span>
             <h1><?= html_escape($project->title ?? 'Pernikahan Kami'); ?></h1>
             <p style="max-width:620px;margin:28px auto;color:rgba(255,255,255,.72);line-height:1.9"><?= !empty($project->subtitle) ? nl2br(html_escape($project->subtitle)) : 'Dua jiwa berjalan dalam restu, menyatukan janji di hadapan keluarga dan Yang Maha Kuasa.'; ?></p>
             <div><?= html_escape($eventDateFormatted); ?> · <?= html_escape($eventTime); ?></div>
