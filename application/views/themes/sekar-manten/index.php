@@ -1140,8 +1140,8 @@
         </div>
     </section>
     <?php if ($eventTimestamp > 0): ?><section class="section dark">
-            <div class="shell reveal"><span class="eyebrow">Menghitung Hari Bahagia</span>
-                <h2 class="title">Menuju Janji<br>Suci Kami</h2>
+            <div class="shell reveal"><span class="eyebrow">Menuju Hari Bahagia</span>
+                <h2 class="title">Saat Dua Hati<br> Menjadi Satu</h2>
                 <div id="countdown" data-timestamp="<?= (int)$eventTimestamp; ?>" class="count-grid">
                     <div class="count-box"><b id="cdDays">00</b><span>Hari</span></div>
                     <div class="count-box"><b id="cdHours">00</b><span>Jam</span></div>
@@ -1153,7 +1153,7 @@
     <?php if (!empty($project->location_address) || !empty($project->map_embed)): ?><section class="section">
             <div class="shell split">
                 <div class="reveal"><span class="eyebrow">Tempat Berbahagia</span>
-                    <h2 class="title">Tempat Kasih<br>Bersemayam</h2>
+                    <h2 class="title">Tempat Berlangsungnya<br> Hari Bahagia</h2>
                     <p class="lead"><?= nl2br(html_escape($project->location_address ?? '')); ?></p>
                 </div>
                 <div class="map-frame reveal"><?php if (!empty($project->map_embed)) {
@@ -1165,17 +1165,38 @@
         <?php
         $galleryItems = array_values((array)$galleries);
         $galleryStoryDefaults = array(
-            array('eyebrow' => 'Babak Pertama', 'title' => 'Saat semesta mempertemukan.', 'text' => 'Setiap perjalanan besar bermula dari satu pertemuan sederhana. Dari sana, dua cerita perlahan menemukan arah yang sama.'),
-            array('eyebrow' => 'Babak Kedua', 'title' => 'Tumbuh dalam doa dan restu.', 'text' => 'Kasih tidak hanya dirayakan dalam kebahagiaan, tetapi juga dirawat melalui kesabaran, keyakinan, dan doa keluarga.'),
-            array('eyebrow' => 'Babak Ketiga', 'title' => 'Menuju satu janji selamanya.', 'text' => 'Hari ini kami memilih untuk berjalan berdampingan, menyatukan langkah dalam ikatan yang suci dan penuh makna.')
+            array(
+                'eyebrow' => 'Tentang Kita',
+                'title' => 'Dalam setiap tatap, ada cerita.',
+                'text' => 'Momen sederhana menjadi istimewa ketika dijalani bersama, meninggalkan kenangan yang selalu layak untuk disimpan.'
+            ),
+
+            array(
+                'eyebrow' => 'Dalam Bingkai',
+                'title' => 'Kenangan yang kami abadikan.',
+                'text' => 'Sepenggal waktu, senyum, dan kebersamaan yang menjadi bagian indah dari kisah kami.'
+            ),
+
+            array(
+                'eyebrow' => 'Menuju Selamanya',
+                'title' => 'Satu langkah menuju hari bahagia.',
+                'text' => 'Dengan cinta dan doa, kami menyambut lembaran baru untuk berjalan bersama dalam kisah yang sama.'
+            )
         );
         $galleryStoryCount = min(3, count($galleryItems));
         ?>
         <section class="story-gallery" id="gallery">
             <div class="shell" style="padding-top:110px;padding-bottom:65px">
-                <span class="eyebrow">Rangkaian Kisah Kami</span>
-                <h2 class="title">Kisah Kami,<br>Dalam Tiga Babak</h2>
-                <p class="lead" style="max-width:660px">Tiga potret utama disusun sebagai bagian dari perjalanan cerita. Setiap gambar mendapat ruang untuk bernapas, bukan sekadar menjadi isi galeri.</p>
+                <span class="eyebrow">Dalam Bingkai</span>
+
+                <h2 class="title">
+                    Kenangan yang Kami<br>
+                    Abadikan
+                </h2>
+
+                <p class="lead" style="max-width:660px">
+                    Sepenggal momen yang kami simpan, menjadi bagian indah dari kisah yang akan selalu kami kenang.
+                </p>
             </div>
             <?php for ($i = 0; $i < $galleryStoryCount; $i++): $g = $galleryItems[$i];
                 $story = $galleryStoryDefaults[$i]; ?>
@@ -1198,7 +1219,7 @@
                         <div><span class="eyebrow">Kenangan Lainnya</span>
                             <h3 class="display" style="font-size:clamp(48px,7vw,88px);line-height:.95;margin:15px 0 0">Galeri Kenangan</h3>
                         </div>
-                        <p class="lead" style="max-width:430px">Potret berikutnya ditampilkan dalam komposisi grid editorial yang rapi dan responsif.</p>
+
                     </div>
                     <div class="gallery-grid">
                         <?php for ($i = 3; $i < count($galleryItems); $i++): $g = $galleryItems[$i]; ?>
