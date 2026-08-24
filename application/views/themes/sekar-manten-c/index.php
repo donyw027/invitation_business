@@ -1187,7 +1187,7 @@
 
                             <div style="
             color:#d7b875;
-            font-size:13pt;
+            font-size:11pt;
             font-weight:500;
             line-height:1.3;
             margin-bottom:10px;
@@ -1229,7 +1229,7 @@
 
                             <div style="
             color:#d7b875;
-            font-size:13pt;
+            font-size:11pt;
             font-weight:500;
             line-height:1.3;
             margin-bottom:10px;
