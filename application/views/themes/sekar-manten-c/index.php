@@ -1149,7 +1149,7 @@
         </div>
     </div>
     <section class="hero"><img src="<?= html_escape($heroImage); ?>" alt="<?= html_escape($project->title ?? 'Pernikahan'); ?>">
-        <div class="hero-frame"><span class="eyebrow" style="font-size: 18pt;color:#d7b875">ومن كل شيء خلقنا زوجين لعلكم تذكرون
+        <div class="hero-frame"><span class="eyebrow" style="font-size: 12pt;color:#d7b875">ومن كل شيء خلقنا زوجين لعلكم تذكرون
                 <br> "Dan segala sesuatu Kami ciptakan berpasang-pasangan supaya kamu mengingat kebesaran Allah." <br>
                 QS. Adz - dzariyat</span>
             <!-- <h1><?= html_escape($project->title ?? 'Pernikahan Kami'); ?></h1> -->
