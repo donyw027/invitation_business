@@ -1,16 +1,4 @@
 ---
-# deployment:
-#   tasks:
-#     - export DEPLOYPATH=/home/mysp6916/public_html/
-#     - /bin/cp -R application/controllers $DEPLOYPATH/application/
-#     - /bin/cp -R application/models $DEPLOYPATH/application/
-#     - /bin/cp -R application/views $DEPLOYPATH/application/
-#     - /bin/cp -R application/helpers $DEPLOYPATH/application/
-#     - /bin/cp -R application/libraries $DEPLOYPATH/application/
-#     - /bin/cp -R assets $DEPLOYPATH
-#     - /bin/cp index.php $DEPLOYPATH
-
----
 deployment:
   tasks:
     - export DEPLOYPATH=/home/mysp6916/public_html/
@@ -19,9 +7,20 @@ deployment:
     - /bin/cp -R application/views $DEPLOYPATH/application/
     - /bin/cp -R application/helpers $DEPLOYPATH/application/
     - /bin/cp -R application/libraries $DEPLOYPATH/application/
-
-    # Tambahan khusus routes.php
-    - /bin/cp application/config/routes.php $DEPLOYPATH/application/config/routes.php
-
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp index.php $DEPLOYPATH
+---
+# deployment:
+#   tasks:
+#     - export DEPLOYPATH=/home/mysp6916/public_html/
+#     - /bin/cp -R application/controllers $DEPLOYPATH/application/
+#     - /bin/cp -R application/models $DEPLOYPATH/application/
+#     - /bin/cp -R application/views $DEPLOYPATH/application/
+#     - /bin/cp -R application/helpers $DEPLOYPATH/application/
+#     - /bin/cp -R application/libraries $DEPLOYPATH/application/
+
+#     # Tambahan khusus routes.php
+#     - /bin/cp application/config/routes.php $DEPLOYPATH/application/config/routes.php
+
+#     - /bin/cp -R assets $DEPLOYPATH
+#     - /bin/cp index.php $DEPLOYPATH
