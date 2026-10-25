@@ -33,73 +33,10 @@ class Public_page extends MY_Controller
         );
     }
 
-
-    /** SEO metadata untuk halaman marketing; tidak mengubah routing undangan dan transaksi. */
-    private function seo_for_view($view, $data)
-    {
-        $settings = array(
-            'home' => array(
-                'title' => 'MySimpleGift | Buket Murah Malang, Jastip & Undangan Digital',
-                'description' => 'Cari buket murah di Malang yang bisa custom sesuai budget? MySimpleGift juga melayani jastip Malang–Trawas, undangan digital, spreadsheet, dan website custom.'
-            ),
-            'mysimplegift' => array(
-                'title' => 'Buket Murah Malang & Custom Sesuai Budget | MySimpleGift',
-                'description' => 'Pesan buket murah di Malang untuk wisuda, ulang tahun, Hari Ibu, dan segala acara. Bisa custom warna, model dan budget, dengan pengiriman area Kota Malang sesuai kesepakatan.'
-            ),
-            'jastipindahaja' => array(
-                'title' => 'Jastip Murah Malang & Trawas, Event dan Promo | Jastip Indah Aja',
-                'description' => 'Jastip murah dan bersahabat dari Malang & Trawas. Titip skincare, fashion, makanan viral, event belanja, promo diskon, atau request pribadi. Bisa kirim ke berbagai daerah.'
-            ),
-            'spreadsheet' => array(
-                'title' => 'Jasa Spreadsheet & Template Custom Malang | MySimpleGift',
-                'description' => 'Butuh template Excel atau Google Sheets? Konsultasikan spreadsheet custom untuk order, stok, keuangan, dashboard, laporan, dan kebutuhan usaha maupun pribadi.'
-            ),
-            'web_development' => array(
-                'title' => 'Jasa Pembuatan Website & Sistem Web Malang | MySimpleGift',
-                'description' => 'Jasa pembuatan website company profile, landing page, dashboard, inventory, dan sistem berbasis web custom untuk usaha maupun operasional bisnis. Konsultasi kebutuhanmu.'
-            ),
-            'review' => array(
-                'title' => 'Galeri Buket Malang, Jastip & Preview Digital | MySimpleGift',
-                'description' => 'Lihat contoh buket custom, galeri jastip Malang dan Trawas, preview undangan digital, spreadsheet, serta website dan sistem berbasis web dari MySimpleGift.'
-            ),
-            'cara_order' => array(
-                'title' => 'Cara Order & Kontak | MySimpleGift Malang',
-                'description' => 'Cara pesan buket custom Malang, jastip Malang–Trawas, undangan digital, spreadsheet, dan jasa website. Konsultasi melalui WhatsApp atau DM Instagram.'
-            ),
-            'kontak' => array(
-                'title' => 'Kontak MySimpleGift & Jastip Indah Aja Malang',
-                'description' => 'Hubungi admin MySimpleGift untuk buket Malang, jastip Malang dan Trawas, undangan digital, spreadsheet, maupun website custom.'
-            ),
-            'faq' => array(
-                'title' => 'FAQ Pemesanan Buket, Jastip & Digital | MySimpleGift',
-                'description' => 'Pertanyaan umum tentang pemesanan buket custom, jastip, undangan digital, dan layanan MySimpleGift di Malang.'
-            ),
-            'local_area' => array(
-                'title' => 'Jastip Murah ' . (isset($data['area']) ? $data['area'] : 'Malang') . ' | Jastip Indah Aja',
-                'description' => 'Jasa titip harga bersahabat di ' . (isset($data['area']) ? $data['area'] : 'Malang') . ' untuk makanan, oleh-oleh, promo, skincare, dan beragam request belanja sesuai jadwal.'
-            ),
-        );
-        $seo = isset($settings[$view]) ? $settings[$view] : array(
-            'title' => (isset($data['page_title']) ? $data['page_title'] : 'MySimpleGift') . ' | MySimpleGift',
-            'description' => 'Buket custom Malang, jastip Malang–Trawas, undangan digital, template spreadsheet dan jasa website sesuai kebutuhan.'
-        );
-        $data['seo_title'] = $seo['title'];
-        $data['seo_description'] = $seo['description'];
-        $data['seo_canonical'] = current_url();
-        $data['seo_robots'] = 'index, follow';
-        $data['seo_brand'] = $view === 'jastipindahaja' || $view === 'local_area' ? 'Jastip Indah Aja' : 'MySimpleGift';
-        if ($view === 'jastipindahaja' || $view === 'local_area') {
-            $data['seo_image'] = is_file(FCPATH . 'assets/img/logojastip.jpg') ? base_url('assets/img/logojastip.jpg') : '';
-        } elseif ($view === 'mysimplegift' || $view === 'home') {
-            $data['seo_image'] = is_file(FCPATH . 'assets/img/buket1.jpg') ? base_url('assets/img/buket1.jpg') : '';
-        }
-        return $data;
-    }
-
     private function render($view, $data = array())
     {
         $base = $this->base_data();
-        $data = $this->seo_for_view($view, array_merge($base, $data));
+        $data = array_merge($base, $data);
 
         $this->load->view('frontend/partials/header', $data);
         $this->load->view('frontend/' . $view, $data);

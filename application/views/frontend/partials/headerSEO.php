@@ -1,16 +1,48 @@
+<?php
+// SEO untuk halaman publik. Nilai spesifik disiapkan oleh Public_page::render().
+$seo_title       = isset($seo_title) && $seo_title !== '' ? $seo_title : (isset($page_title) ? $page_title . ' | MySimpleGift' : 'MySimpleGift');
+$seo_description = isset($seo_description) && $seo_description !== '' ? $seo_description : 'MySimpleGift menyediakan buket custom harga bersahabat di Malang, jastip Malang dan Trawas, undangan digital, spreadsheet, serta jasa pembuatan website.';
+$seo_canonical   = isset($seo_canonical) && $seo_canonical !== '' ? $seo_canonical : current_url();
+$seo_robots      = isset($seo_robots) && $seo_robots !== '' ? $seo_robots : 'index, follow';
+$seo_brand       = isset($seo_brand) && $seo_brand !== '' ? $seo_brand : 'MySimpleGift';
+$seo_image       = isset($seo_image) ? $seo_image : '';
+if (!$seo_image) {
+    foreach (array('assets/img/logojastip.jpg', 'assets/img/logo.jpg', 'assets/img/Logo.JPG') as $rel) {
+        if (is_file(FCPATH . $rel)) { $seo_image = base_url($rel); break; }
+    }
+}
+$seo_schema = array(
+    '@context' => 'https://schema.org',
+    '@type' => 'WebSite',
+    'name' => 'MySimpleGift',
+    'url' => base_url(),
+    'inLanguage' => 'id-ID'
+);
+?>
 <!doctype html>
 <html lang="id">
 
 <head>
     <meta charset="utf-8">
-    <title><?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?></title>
+    <title><?= html_escape($seo_title); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Jastip, bouquet, gift, undangan digital, greeting card, dan template aesthetic. Titip beli area Malang, Batu, Trawas dengan flow mudah dan fast response.">
-    <meta name="keywords" content="jastip malang, jastip trawas, titip beli malang, titip makanan trawas, jastip dessert malang, oleh-oleh malang, jastip batu, gift malang, bouquet malang, undangan digital malang">
-    <meta property="og:title" content="<?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?>">
-    <meta property="og:description" content="Cute local jastip, gift, digital invitation, and spreadsheet template service for Malang, Batu, and Trawas area.">
+    <meta name="description" content="<?= html_escape($seo_description); ?>">
+    <meta name="robots" content="<?= html_escape($seo_robots); ?>">
+    <link rel="canonical" href="<?= html_escape($seo_canonical); ?>">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="MySimpleGift">
+    <meta property="og:title" content="<?= html_escape($seo_title); ?>">
+    <meta property="og:description" content="<?= html_escape($seo_description); ?>">
+    <meta property="og:url" content="<?= html_escape($seo_canonical); ?>">
+    <?php if ($seo_image): ?><meta property="og:image" content="<?= html_escape($seo_image); ?>"><?php endif; ?>
+    <meta name="twitter:card" content="<?= $seo_image ? 'summary_large_image' : 'summary'; ?>">
+    <meta name="twitter:title" content="<?= html_escape($seo_title); ?>">
+    <meta name="twitter:description" content="<?= html_escape($seo_description); ?>">
+    <?php if ($seo_image): ?><meta name="twitter:image" content="<?= html_escape($seo_image); ?>"><?php endif; ?>
     <meta name="theme-color" content="#fff8ec">
+    <script type="application/ld+json"><?= json_encode($seo_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?></script>
+
 
     <link rel="icon" href="<?= base_url('assets/img/logo.ico'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
