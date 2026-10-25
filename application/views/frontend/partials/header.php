@@ -1,16 +1,48 @@
+<?php
+// SEO untuk halaman publik. Nilai spesifik disiapkan oleh Public_page::render().
+$seo_title       = isset($seo_title) && $seo_title !== '' ? $seo_title : (isset($page_title) ? $page_title . ' | MySimpleGift' : 'MySimpleGift');
+$seo_description = isset($seo_description) && $seo_description !== '' ? $seo_description : 'MySimpleGift menyediakan buket custom harga bersahabat di Malang, jastip Malang dan Trawas, undangan digital, spreadsheet, serta jasa pembuatan website.';
+$seo_canonical   = isset($seo_canonical) && $seo_canonical !== '' ? $seo_canonical : current_url();
+$seo_robots      = isset($seo_robots) && $seo_robots !== '' ? $seo_robots : 'index, follow';
+$seo_brand       = isset($seo_brand) && $seo_brand !== '' ? $seo_brand : 'MySimpleGift';
+$seo_image       = isset($seo_image) ? $seo_image : '';
+if (!$seo_image) {
+    foreach (array('assets/img/logojastip.jpg', 'assets/img/logo.jpg', 'assets/img/Logo.JPG') as $rel) {
+        if (is_file(FCPATH . $rel)) { $seo_image = base_url($rel); break; }
+    }
+}
+$seo_schema = array(
+    '@context' => 'https://schema.org',
+    '@type' => 'WebSite',
+    'name' => 'MySimpleGift',
+    'url' => base_url(),
+    'inLanguage' => 'id-ID'
+);
+?>
 <!doctype html>
 <html lang="id">
 
 <head>
     <meta charset="utf-8">
-    <title><?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?></title>
+    <title><?= html_escape($seo_title); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Jastip, bouquet, gift, undangan digital, greeting card, dan template aesthetic. Titip beli area Malang, Batu, Trawas dengan flow mudah dan fast response.">
-    <meta name="keywords" content="jastip malang, jastip trawas, titip beli malang, titip makanan trawas, jastip dessert malang, oleh-oleh malang, jastip batu, gift malang, bouquet malang, undangan digital malang">
-    <meta property="og:title" content="<?= html_escape($page_title); ?> | <?= html_escape($brand_name); ?>">
-    <meta property="og:description" content="Cute local jastip, gift, digital invitation, and spreadsheet template service for Malang, Batu, and Trawas area.">
+    <meta name="description" content="<?= html_escape($seo_description); ?>">
+    <meta name="robots" content="<?= html_escape($seo_robots); ?>">
+    <link rel="canonical" href="<?= html_escape($seo_canonical); ?>">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="MySimpleGift">
+    <meta property="og:title" content="<?= html_escape($seo_title); ?>">
+    <meta property="og:description" content="<?= html_escape($seo_description); ?>">
+    <meta property="og:url" content="<?= html_escape($seo_canonical); ?>">
+    <?php if ($seo_image): ?><meta property="og:image" content="<?= html_escape($seo_image); ?>"><?php endif; ?>
+    <meta name="twitter:card" content="<?= $seo_image ? 'summary_large_image' : 'summary'; ?>">
+    <meta name="twitter:title" content="<?= html_escape($seo_title); ?>">
+    <meta name="twitter:description" content="<?= html_escape($seo_description); ?>">
+    <?php if ($seo_image): ?><meta name="twitter:image" content="<?= html_escape($seo_image); ?>"><?php endif; ?>
     <meta name="theme-color" content="#fff8ec">
+    <script type="application/ld+json"><?= json_encode($seo_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?></script>
+
 
     <link rel="icon" href="<?= base_url('assets/img/logo.ico'); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -468,28 +500,61 @@
             font-size: 13px;
             margin-top: 3px;
         }
+
+        /* MySimpleGift V2: restrained shared navigation */
+        .msg-brand-copy { display:flex;flex-direction:column;line-height:1.2;gap:3px; }
+        .msg-brand-copy small { font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.035em; }
+        .msg-brand-logo { width:40px;height:40px;object-fit:contain;border-radius:10px; }
+        .msg-nav-dropdown { border:1px solid rgba(63,46,36,.1);border-radius:18px;padding:10px;min-width:290px;box-shadow:0 18px 48px rgba(63,46,36,.12); }
+        .msg-nav-dropdown .dropdown-item { border-radius:12px;padding:10px 13px;white-space:normal;color:#3f2e24;font-weight:700; }
+        .msg-nav-dropdown .dropdown-item:hover,.msg-nav-dropdown .dropdown-item:focus { background:#fff8ec;color:#7f4f24; }
+        .msg-nav-dropdown .dropdown-item small { display:block;margin-top:3px;color:#8a7665;font-weight:500;font-size:12px; }
+        .msg-nav-dropdown .dropdown-item.active { background:#f8ead2;color:#7f4f24; }
+        .msg-nav-dropdown .dropdown-item.active small { color:#7f4f24; }
+        .pretty-nav .nav-link.msg-current { color:#8b5e34 !important; }
+        @media(max-width:991.98px) { .msg-nav-dropdown{min-width:0;box-shadow:none;margin:4px 0 12px;} .pretty-nav .navbar-collapse{max-height:calc(100vh - 95px);overflow-y:auto;padding-bottom:12px;} }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top pretty-nav">
+    <?php
+    $msgCurrent = isset($page_brand) ? $page_brand : '';
+    $msgSegment = $this->uri->segment(1);
+    $msgIsJastip = ($msgCurrent === 'jastip' || $msgSegment === 'jastipindahaja');
+    $msgJastipLogo = FCPATH . 'assets/img/logojastip.jpg';
+    $msgWa = preg_replace('/[^0-9]/', '', (string)$wa_number);
+    ?>
+    <nav class="navbar navbar-expand-lg fixed-top pretty-nav" aria-label="Navigasi utama">
         <div class="container">
-            <a class="navbar-brand brand-mark" href="<?= site_url(); ?>">
-                <span class="brand-dot">I</span>
-                <span><?= html_escape($brand_name); ?></span>
+            <a class="navbar-brand brand-mark d-flex align-items-center gap-2" href="<?= site_url($msgIsJastip ? 'jastipindahaja' : ''); ?>">
+                <?php if ($msgIsJastip && is_file($msgJastipLogo)): ?>
+                    <img src="<?= base_url('assets/img/logojastip.jpg'); ?>" class="msg-brand-logo" alt="Logo Jastip Indah Aja">
+                <?php else: ?>
+                    <span class="brand-dot">M</span>
+                <?php endif; ?>
+                <span class="msg-brand-copy">
+                    <span><?= $msgIsJastip ? 'Jastip Indah Aja' : 'MySimpleGift'; ?></span>
+                    <small><?= $msgIsJastip ? 'Titip apa aja, yuk!' : 'Creative & Digital Services'; ?></small>
+                </span>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Buka navigasi">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url(); ?>#services">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url(); ?>#jastip">Jastip</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url(); ?>#buket">Bouquet</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url('cara_order'); ?>">Cara Order</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url('review'); ?>">Galery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= site_url('kontak'); ?>">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link nav-cta" href="https://wa.me/<?= html_escape($wa_number); ?>?text=<?= rawurlencode('Halo kak, aku mau titip/order dari website.'); ?>">Titip Sekarang</a></li>
+                    <li class="nav-item"><a class="nav-link <?= !$msgSegment ? 'msg-current' : ''; ?>" href="<?= site_url(); ?>">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?= in_array($msgSegment, array('mysimplegift','jastipindahaja','spreadsheet','web-development'), TRUE) ? 'msg-current' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Layanan Kami</a>
+                        <ul class="dropdown-menu msg-nav-dropdown">
+                            <li><a class="dropdown-item <?= $msgSegment === 'mysimplegift' ? 'active' : ''; ?>" href="<?= site_url('mysimplegift'); ?>">MySimpleGift<small>Buket, hampers & kado spesial</small></a></li>
+                            <li><a class="dropdown-item <?= $msgIsJastip ? 'active' : ''; ?>" href="<?= site_url('jastipindahaja'); ?>">Jastip Indah Aja<small>Mau titip apa? Bisa banget!</small></a></li>
+                            <li><a class="dropdown-item <?= $msgSegment === 'spreadsheet' ? 'active' : ''; ?>" href="<?= site_url('spreadsheet'); ?>">Spreadsheet & Template<small>Biar catatan dan bisnis makin rapi</small></a></li>
+                            <li><a class="dropdown-item <?= $msgSegment === 'web-development' ? 'active' : ''; ?>" href="<?= site_url('web-development'); ?>">Jasa Website & Sistem<small>Bikin website dan sistem sesuai kebutuhan</small></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link <?= $msgSegment === 'review' ? 'msg-current' : ''; ?>" href="<?= site_url('review'); ?>">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link <?= in_array($msgSegment, array('cara_order', 'cara-order', 'kontak'), TRUE) ? 'msg-current' : ''; ?>" href="<?= site_url('cara_order'); ?>">Cara Order &amp; Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link nav-cta" href="https://wa.me/<?= html_escape($msgWa); ?>?text=<?= rawurlencode($msgIsJastip ? 'Halo kak, aku mau tanya jastip.' : 'Halo kak, aku mau tanya layanan dari website.'); ?>" target="_blank" rel="noopener noreferrer">Chat Yuk!</a></li>
                 </ul>
             </div>
         </div>

@@ -9,6 +9,11 @@ $route['review'] = 'public_page/review';
 $route['jastip-malang'] = 'public_page/jastip_malang';
 $route['jastip-trawas'] = 'public_page/jastip_trawas';
 
+$route['mysimplegift'] = 'public_page/mysimplegift';
+$route['jastipindahaja'] = 'public_page/jastipindahaja';
+$route['spreadsheet'] = 'public_page/spreadsheet';
+$route['web-development'] = 'public_page/web_development';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

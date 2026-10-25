@@ -9,24 +9,6 @@ class Public_page extends MY_Controller
         $this->load->model(array('Project_model', 'Wish_model', 'Rsvp_model', 'Guest_model', 'Template_model', 'Package_model', 'Product_type_model', 'Setting_model', 'Project_gallery_model'));
     }
 
-    // public function home()
-    // {
-    //     $product_types = $this->Product_type_model->active();
-    //     $package_groups = array();
-    //     $template_groups = array();
-    //     foreach ($product_types as $type) {
-    //         $package_groups[$type->code] = $this->Package_model->by_product($type->code);
-    //         $template_groups[$type->code] = $this->Template_model->active_by_product($type->code);
-    //     }
-
-    //     $data['page_title'] = 'Undangan Digital & Greeting Card';
-    //     $data['product_types'] = $product_types;
-    //     $data['package_groups'] = $package_groups;
-    //     $data['template_groups'] = $template_groups;
-    //     $data['wa_number'] = $this->Setting_model->get('wa_number', '6281234567890');
-    //     $data['brand_name'] = $this->Setting_model->get('brand_name', 'InviteBiz');
-    //     $this->load->view('frontend/home', $data);
-    // }
 
 
 
@@ -51,10 +33,73 @@ class Public_page extends MY_Controller
         );
     }
 
+
+    /** SEO metadata untuk halaman marketing; tidak mengubah routing undangan dan transaksi. */
+    private function seo_for_view($view, $data)
+    {
+        $settings = array(
+            'home' => array(
+                'title' => 'MySimpleGift | Buket Murah Malang, Jastip & Undangan Digital',
+                'description' => 'Cari buket murah di Malang yang bisa custom sesuai budget? MySimpleGift juga melayani jastip Malang–Trawas, undangan digital, spreadsheet, dan website custom.'
+            ),
+            'mysimplegift' => array(
+                'title' => 'Buket Murah Malang & Custom Sesuai Budget | MySimpleGift',
+                'description' => 'Pesan buket murah di Malang untuk wisuda, ulang tahun, Hari Ibu, dan segala acara. Bisa custom warna, model dan budget, dengan pengiriman area Kota Malang sesuai kesepakatan.'
+            ),
+            'jastipindahaja' => array(
+                'title' => 'Jastip Murah Malang & Trawas, Event dan Promo | Jastip Indah Aja',
+                'description' => 'Jastip murah dan bersahabat dari Malang & Trawas. Titip skincare, fashion, makanan viral, event belanja, promo diskon, atau request pribadi. Bisa kirim ke berbagai daerah.'
+            ),
+            'spreadsheet' => array(
+                'title' => 'Jasa Spreadsheet & Template Custom Malang | MySimpleGift',
+                'description' => 'Butuh template Excel atau Google Sheets? Konsultasikan spreadsheet custom untuk order, stok, keuangan, dashboard, laporan, dan kebutuhan usaha maupun pribadi.'
+            ),
+            'web_development' => array(
+                'title' => 'Jasa Pembuatan Website & Sistem Web Malang | MySimpleGift',
+                'description' => 'Jasa pembuatan website company profile, landing page, dashboard, inventory, dan sistem berbasis web custom untuk usaha maupun operasional bisnis. Konsultasi kebutuhanmu.'
+            ),
+            'review' => array(
+                'title' => 'Galeri Buket Malang, Jastip & Preview Digital | MySimpleGift',
+                'description' => 'Lihat contoh buket custom, galeri jastip Malang dan Trawas, preview undangan digital, spreadsheet, serta website dan sistem berbasis web dari MySimpleGift.'
+            ),
+            'cara_order' => array(
+                'title' => 'Cara Order & Kontak | MySimpleGift Malang',
+                'description' => 'Cara pesan buket custom Malang, jastip Malang–Trawas, undangan digital, spreadsheet, dan jasa website. Konsultasi melalui WhatsApp atau DM Instagram.'
+            ),
+            'kontak' => array(
+                'title' => 'Kontak MySimpleGift & Jastip Indah Aja Malang',
+                'description' => 'Hubungi admin MySimpleGift untuk buket Malang, jastip Malang dan Trawas, undangan digital, spreadsheet, maupun website custom.'
+            ),
+            'faq' => array(
+                'title' => 'FAQ Pemesanan Buket, Jastip & Digital | MySimpleGift',
+                'description' => 'Pertanyaan umum tentang pemesanan buket custom, jastip, undangan digital, dan layanan MySimpleGift di Malang.'
+            ),
+            'local_area' => array(
+                'title' => 'Jastip Murah ' . (isset($data['area']) ? $data['area'] : 'Malang') . ' | Jastip Indah Aja',
+                'description' => 'Jasa titip harga bersahabat di ' . (isset($data['area']) ? $data['area'] : 'Malang') . ' untuk makanan, oleh-oleh, promo, skincare, dan beragam request belanja sesuai jadwal.'
+            ),
+        );
+        $seo = isset($settings[$view]) ? $settings[$view] : array(
+            'title' => (isset($data['page_title']) ? $data['page_title'] : 'MySimpleGift') . ' | MySimpleGift',
+            'description' => 'Buket custom Malang, jastip Malang–Trawas, undangan digital, template spreadsheet dan jasa website sesuai kebutuhan.'
+        );
+        $data['seo_title'] = $seo['title'];
+        $data['seo_description'] = $seo['description'];
+        $data['seo_canonical'] = current_url();
+        $data['seo_robots'] = 'index, follow';
+        $data['seo_brand'] = $view === 'jastipindahaja' || $view === 'local_area' ? 'Jastip Indah Aja' : 'MySimpleGift';
+        if ($view === 'jastipindahaja' || $view === 'local_area') {
+            $data['seo_image'] = is_file(FCPATH . 'assets/img/logojastip.jpg') ? base_url('assets/img/logojastip.jpg') : '';
+        } elseif ($view === 'mysimplegift' || $view === 'home') {
+            $data['seo_image'] = is_file(FCPATH . 'assets/img/buket1.jpg') ? base_url('assets/img/buket1.jpg') : '';
+        }
+        return $data;
+    }
+
     private function render($view, $data = array())
     {
         $base = $this->base_data();
-        $data = array_merge($base, $data);
+        $data = $this->seo_for_view($view, array_merge($base, $data));
 
         $this->load->view('frontend/partials/header', $data);
         $this->load->view('frontend/' . $view, $data);
@@ -65,6 +110,27 @@ class Public_page extends MY_Controller
     {
         $data['page_title'] = 'Home';
         $this->render('home', $data);
+    }
+
+    // Brand/service landing pages; invitation system methods remain unchanged.
+    public function mysimplegift()
+    {
+        $this->render('mysimplegift', array('page_title' => 'MySimpleGift', 'page_brand' => 'mysimplegift'));
+    }
+
+    public function jastipindahaja()
+    {
+        $this->render('jastipindahaja', array('page_title' => 'Jastip Indah Aja', 'page_brand' => 'jastip'));
+    }
+
+    public function spreadsheet()
+    {
+        $this->render('spreadsheet', array('page_title' => 'Spreadsheet & Template', 'page_brand' => 'spreadsheet'));
+    }
+
+    public function web_development()
+    {
+        $this->render('web_development', array('page_title' => 'Jasa Website & Sistem', 'page_brand' => 'web'));
     }
 
     public function cara_order()
